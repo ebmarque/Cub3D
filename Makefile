@@ -6,14 +6,14 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/23 16:20:24 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/04/23 17:39:14 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Cub3D
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g #fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g fsanitize=address
 
 LIBFT_DIRECTORY = src/LIB/LIBFT
 LIBFT = $(LIBFT_DIRECTORY)/libft.a
@@ -23,40 +23,44 @@ MLX = $(MLX_DIRECTORY)/libmlx.a
 
 SRC_DIRECTORY = src
 
-SRCS = $(SRC_DIRECTORY)/erro/*.c \
-	$(SRC_DIRECTORY)/tools/*.c \
-	$(SRC_DIRECTORY)/core/*.c \
-	$(SRC_DIRECTORY)/parsing/*.c \
-	$(SRC_DIRECTORY)/raycasting/*.c \
+INCLUDES = includes/core.h
+
+SRCS = $(SRC_DIRECTORY)/tests/main.c
+	# $(SRC_DIRECTORY)/erro/*.c \
+	# $(SRC_DIRECTORY)/tools/*.c \
+	# $(SRC_DIRECTORY)/core/*.c \
+	# $(SRC_DIRECTORY)/parsing/*.c \
+	# $(SRC_DIRECTORY)/raycasting/*.c \
 
 OBJS = $(SRCS:.c=.o)
 
 UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Darwin)
-	MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+ifeq ($(UNAME_S), Darwin)
+	MLXFLAGS = -framework OpenGL -framework AppKit -L ./src/LIB/MLX -lmlx
 else
 	MLXFLAGS = -Lmlx -lmlx -lX11 -lbsd -lm
 endif
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(INCLUDES) $(LIBFT) $(MLX)
+$(NAME): $(LIBFT) $(MLX) $(OBJS) $(INCLUDES)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
 
 $(LIBFT):
 	@make -C $(LIBFT_DIRECTORY)
 
 $(MLX):
-	@make -C $(MLX_DIRECTORY)
+	@make -C $(MLX_DIRECTORY) 2> /dev/null
+
 
 clean:
-	@make clean -C mlx
-	@make clean -C src/LIBFT
+	@make clean -C $(MLX_DIRECTORY)
+	@make clean -C $(LIBFT_DIRECTORY)
 	@rm -f $(OBJS)
 
 fclean: clean
-	@make fclean -C mlx
-	@make fclean -C src/LIBFT
+	@make clean -C $(MLX_DIRECTORY)
+	@make fclean -C $(LIBFT_DIRECTORY)
 	@rm -f $(NAME)
 
 re: fclean all
