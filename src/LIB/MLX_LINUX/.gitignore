@@ -1,7 +1,20 @@
+## Mlx related
+Makefile.gen
+/test/mlx-test
+
+## Editor
+.vscode/*
+*~
+\#*\#
+
+## Other
+.DS_STORE
+
+
+
+## Template from https://github.com/github/gitignore
 # Prerequisites
 *.d
-.DS_Store
-.vscode
 
 # Object files
 *.o
@@ -37,7 +50,7 @@
 *.i*86
 *.x86_64
 *.hex
-Cub3D
+
 # Debug files
 *.dSYM/
 *.su

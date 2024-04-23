@@ -10,3 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/core.h"
+
+
+int main(int argc, char *argv[])
+{
+	// t_cub	cub;
+	_check_erros(argc, argv);
+	// init_data(argc, argv, &cub);
+	return (0);
+}
