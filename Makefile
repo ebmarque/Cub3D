@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/23 19:19:50 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/04/23 19:48:21 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,16 +56,16 @@ $(LIBFT):
 	@make -C $(LIBFT_DIRECTORY)
 
 $(MLX):
-	@make -C $(MLX_DIRECTORY) 2> /dev/null
+	@make -C $(MLX_DIRECTORY) > /dev/null 2> /dev/null
 
 
 clean:
-	@make clean -C $(MLX_DIRECTORY)
+	@make clean -C $(MLX_DIRECTORY) > /dev/null 2>/dev/null
 	@make clean -C $(LIBFT_DIRECTORY)
 	@rm -f $(OBJS)
 
 fclean: clean
-	@make clean -C $(MLX_DIRECTORY)
+	@make clean -C $(MLX_DIRECTORY) > /dev/null 2>/dev/null
 	@make fclean -C $(LIBFT_DIRECTORY)
 	@rm -f $(NAME)
 

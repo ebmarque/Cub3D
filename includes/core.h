@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/23 19:34:01 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:42:55 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_cub
 void	_check_erros(int argc, char **argv);
 void	_check_file_name(char *file);
 void	_check_file_permissions(char *file);
+void	_check_empty_file(char *file);
 
 
 # define WIDTH 1200
