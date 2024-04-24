@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 18:25:10 by ebmarque          #+#    #+#              #
-#    Updated: 2024/01/31 15:24:58 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/04/24 20:55:52 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isascii.c ft_isalnum.c ft_isprint.c \
 	ft_putchar_fd.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_split.c \
 	ft_is_space.c ft_count_words.c ft_free_split.c ft_word_length.c \
 	ft_strndup.c get_next_line.c ft_printf.c ft_print_char.c ft_print_int.c \
-	ft_print_lowhex.c ft_print_mem.c ft_print_percent.c \
+	ft_print_lowhex.c ft_print_mem.c ft_print_percent.c ft_atol.c \
 	ft_print_str.c ft_print_upperhex.c ft_print_usgdec.c ft_strncpy.c\
 
 OBJS = $(SRCS:.c=.o)

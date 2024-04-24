@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:50:40 by ebmarque          #+#    #+#             */
-/*   Updated: 2023/12/30 12:49:33 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/24 20:55:21 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <stdarg.h>
 
 int			ft_atoi(const char *nptr);
+long		ft_atol(const char *nptr);
 int			ft_is_space(char c);
 int			ft_count_words(char *str, char *sep);
 int			ft_word_length(char *str, char *sep);

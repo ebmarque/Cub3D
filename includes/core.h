@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/23 19:52:14 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/24 20:56:16 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 # define CYAN "\033[0;36m"
 # define WHITE "\033[0;37m"
 # define RESET "\033[0m"
+
+/*------------------------------ ERROR MESSAGES ------------------------------*/
+# define MEMORY_ERROR RED "ERROR: Fail to allocate memory" RESET
+# define INVALID_ARGC RED "ERROR: Wrong number of arguments." RESET
+# define INVALID_NAME RED "ERROR: Invalid map name." RESET
+# define NO_ACCESS RED "ERROR: File cannot be accessed." RESET
+# define NO_RIGHTS RED "ERROR: File (Permission for execution denided)." RESET
+# define EMPTY_MAP RED "ERROR: Empty map file." RESET
+# define WRONG_EXT RED "ERROR: Map file with wrong extension < .cub > ." RESET
+# define PARSING_ERROR RED "ERROR: Map file wrongly formated." RESET
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -80,18 +90,32 @@ typedef enum e_key
 	LEFT = 65361
 }		t_key;
 
-typedef enum e_mask
-{
-	KEY_MASK = (1L << 0),
-	CLOSE_MASK = (1L << 17)
-}	t_mask;
 
 # endif
+
+typedef struct s_rgb
+{
+	long	r;
+	long	b;
+	long	g;
+	bool	is_set;
+}				t_rgb;
+
+typedef struct s_file
+{
+	t_rgb	floor;
+	t_rgb	ceiling;
+	char	*no_t;
+	char	*so_t;
+	char	*ea_t;
+	char	*we_t;
+	char	**map;
+}				t_file;
 
 typedef struct s_cub
 {
 	char	*map_name;
-	char	**map_content;	
+	t_file	*content;
 }				t_cub;
 
 /*---------------------------------- ERROR -----------------------------------*/
@@ -100,6 +124,18 @@ void	_check_erros(int argc, char **argv);
 void	_check_file_name(char *file);
 void	_check_file_permissions(char *file);
 void	_check_empty_file(char *file);
+
+/*--------------------------------- TOOLS 1 ----------------------------------*/
+
+int		_ignore_spaces(char *line);
+int		_get_split_size(char **line);
+int		_is_element(char **split);
+int		_is_map_line(char **split);
+void	_exit_error(char *msg);
+
+/*--------------------------------- TOOLS 2 ----------------------------------*/
+
+void	_clean_content(t_file *content);
 
 # define WIDTH 1200
 # define HEIGHT 840

@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/23 19:48:21 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/04/24 20:51:36 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ SRC_DIRECTORY = src
 INCLUDES = includes/core.h
 
 SRCS = 	$(SRC_DIRECTORY)/core/main.c \
-		$(SRC_DIRECTORY)/error/error.c 
-		# $(SRC_DIRECTORY)/tools/*.c \
+		$(SRC_DIRECTORY)/error/error.c $(SRC_DIRECTORY)/error/content_error.c \
+		$(SRC_DIRECTORY)/tools/utils.c  $(SRC_DIRECTORY)/tools/utils2.c 
 		# $(SRC_DIRECTORY)/core/*.c \
 		# $(SRC_DIRECTORY)/parsing/*.c \
 		# $(SRC_DIRECTORY)/raycasting/*.c \
