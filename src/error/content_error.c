@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:34:03 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/25 20:18:06 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/25 20:50:39 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ void	_elements_validation(char *file, t_file *content)
 	}
 	free(line);
 	close(fd);
+	_print_content_variable(content);
 	_check_texture_files(content);
 }
 
@@ -214,7 +215,6 @@ t_file	*_check_map_content(char *file)
 		_exit_error(MEMORY_ERROR);
 	ft_bzero(content, sizeof(t_file));
 	_elements_validation(file, content);
-	_print_content_variable(content);
 	_clean_content(content);
 	return (content);
 }
