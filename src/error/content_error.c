@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:34:03 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/25 17:56:40 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:06:24 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	_save_element_data(char **split, t_file *content)
 		return (_set_ceiling(split, content));
 	else
 	{
-		if (!_all_elements_set(content))
+		if (!_all_elements_set(content) || _is_element(split[0]))
 			return (-1);
 	}
 	return (0);
