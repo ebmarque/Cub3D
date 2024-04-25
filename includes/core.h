@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/24 20:56:16 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:56:07 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,18 +124,23 @@ void	_check_erros(int argc, char **argv);
 void	_check_file_name(char *file);
 void	_check_file_permissions(char *file);
 void	_check_empty_file(char *file);
+t_file	*_check_map_content(char *file);
 
 /*--------------------------------- TOOLS 1 ----------------------------------*/
 
 int		_ignore_spaces(char *line);
 int		_get_split_size(char **line);
-int		_is_element(char **split);
+int		_is_element(char *line);
 int		_is_map_line(char **split);
 void	_exit_error(char *msg);
 
 /*--------------------------------- TOOLS 2 ----------------------------------*/
 
 void	_clean_content(t_file *content);
+void	_read_all_file(int fd);
+int		_all_elements_set(t_file *t);
+void	_print_content_variable(t_file *t);
+char	*_give_texture(char *line);
 
 # define WIDTH 1200
 # define HEIGHT 840

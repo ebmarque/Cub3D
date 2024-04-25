@@ -6,14 +6,14 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/24 20:51:36 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/04/25 15:56:46 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Cub3D
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-g fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g #fsanitize=address
 
 LIBFT_DIRECTORY = src/LIB/LIBFT
 LIBFT = $(LIBFT_DIRECTORY)/libft.a

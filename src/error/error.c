@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:29 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/24 18:22:31 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:42:39 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ void	_check_erros(int argc, char **argv)
 	_check_file_name(argv[1]);
 	_check_file_permissions(argv[1]);
 	_check_empty_file(argv[1]);
-	// _check_map_content(argv[1]);
+	_check_map_content(argv[1]);
 }

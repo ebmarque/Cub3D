@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque < ebmarque@student.42porto.com    +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 12:11:12 by ebmarque          #+#    #+#             */
-/*   Updated: 2023/06/20 19:42:55 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:01:41 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**ft_split(char *str, char *sep)
 		split[j] = ft_strndup(&str[i], ft_word_length(&str[i], sep));
 		if (split[j] == NULL)
 		{
-			ft_free_split(split, j, false);
+			ft_free_split(split);
 			return (NULL);
 		}
 		i += ft_word_length(&str[i], sep);

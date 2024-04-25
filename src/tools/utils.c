@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:36 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/24 18:21:08 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:27:09 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	_get_split_size(char **line)
 	return (i);
 }
 
-int	_is_element(char **split)
+int	_is_element(char *line)
 {
-	if (!split)
+	if (!line)
 		return (2);
-	if (!ft_strncmp(split[0], "NO", 3) || !ft_strncmp(split[0], "SO", 3) \
-		|| !ft_strncmp(split[0], "WE", 3) || !ft_strncmp(split[0], "EA", 3) \
-		|| !ft_strncmp(split[0], "F", 2) || !ft_strncmp(split[0], "C", 2))
+	if (!ft_strncmp(line, "NO", 3) || !ft_strncmp(line, "SO", 3) \
+		|| !ft_strncmp(line, "WE", 3) || !ft_strncmp(line, "EA", 3) \
+		|| !ft_strncmp(line, "F", 2) || !ft_strncmp(line, "C", 2))
 		return (1);
 	return (0);
 }
@@ -56,7 +56,7 @@ int	_is_map_line(char **split)
 {
 	if (!split)
 		return (2);
-	if (_is_element(split) == 1 && _get_split_size(split) > 1)
+	if (!_is_element(split[0]) && _get_split_size(split) > 1)
 		return (1);
 	return (0);
 }

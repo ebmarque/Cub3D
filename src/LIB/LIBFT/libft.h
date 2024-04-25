@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:50:40 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/24 20:55:21 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:00:34 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			ft_count_words(char *str, char *sep);
 int			ft_word_length(char *str, char *sep);
 char		*ft_strndup(const char *s, size_t n);
 char		**ft_split(char *str, char *sep);
-void		ft_free_split(char **array, int position, bool full);
+void		ft_free_split(char **array);
 void		ft_bzero(void *s, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
 int			ft_isalnum(int c);
