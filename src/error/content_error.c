@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:34:03 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/25 18:06:24 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/25 20:18:06 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,68 @@ int	_check_file_line(char *line, t_file *content)
 	return (0);
 }
 
+int	_check_t_file_permissions(char *file)
+{
+	int	fd;
+
+	fd = open(file, F_OK);
+	if (fd == -1)
+		return(1);
+	close(fd);
+	fd = open(file, X_OK);
+	if (fd == -1)
+		return(2);
+	close(fd);
+	return(0);
+}
+
+int	_check_t_empty_file(char *file)
+{
+	char	*line;
+	int		fd;
+
+	fd = open(file, O_RDONLY);
+	line = get_next_line(fd);
+	if (!line || !*line)
+		return (1);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	close(fd);
+	return(0);
+}
+
+void	_check_texture_files(t_file *content)
+{
+	if (_check_t_file_permissions(content->no_t) == 1 \
+		|| _check_t_file_permissions(content->so_t) == 1 \
+		|| _check_t_file_permissions(content->we_t) == 1 \
+		|| _check_t_file_permissions(content->ea_t) == 1)
+	{
+		_clean_content(content);
+		_exit_error(NO_TEXTURE_ACCESS);
+	}
+	if (_check_t_file_permissions(content->no_t) == 2 \
+		|| _check_t_file_permissions(content->so_t) == 2 \
+		|| _check_t_file_permissions(content->we_t) == 2 \
+		|| _check_t_file_permissions(content->ea_t) == 2)
+	{
+		_clean_content(content);
+		_exit_error(NO_TEXTURE_RIGHTS);
+	}
+	if (_check_t_empty_file(content->no_t) \
+		|| _check_t_empty_file(content->so_t) \
+		|| _check_t_empty_file(content->we_t) \
+		|| _check_t_empty_file(content->ea_t))
+	{
+		_clean_content(content);
+		_exit_error(EMPTY_TEXTURE);
+	}
+}
+
 void	_elements_validation(char *file, t_file *content)
 {
 	char	*line;
@@ -138,6 +200,7 @@ void	_elements_validation(char *file, t_file *content)
 	}
 	free(line);
 	close(fd);
+	_check_texture_files(content);
 }
 
 

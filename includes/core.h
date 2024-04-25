@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/25 17:56:07 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/25 20:16:56 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,13 @@
 # define INVALID_NAME RED "ERROR: Invalid map name." RESET
 # define NO_ACCESS RED "ERROR: File cannot be accessed." RESET
 # define NO_RIGHTS RED "ERROR: File (Permission for execution denided)." RESET
+# define NO_TEXTURE_ACCESS RED "ERROR: Texture file cannot be accessed." RESET
+# define NO_TEXTURE_RIGHTS RED \
+	"ERROR: Texture file (Permission for execution denided)." RESET
 # define EMPTY_MAP RED "ERROR: Empty map file." RESET
 # define WRONG_EXT RED "ERROR: Map file with wrong extension < .cub > ." RESET
 # define PARSING_ERROR RED "ERROR: Map file wrongly formated." RESET
+# define EMPTY_TEXTURE RED "ERROR: Empty texture file." RESET
 
 # include <stdio.h>
 # include <stdlib.h>
