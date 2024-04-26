@@ -6,29 +6,18 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:36 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/25 17:27:09 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:07:03 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
 
-int	_ignore_spaces(char *line)
-{
-	int	i;
-
-	i = 0;
-	if (!line)
-		return (0);
-	while (line[i])
-	{
-		if (ft_is_space(line[i]))
-			i++;
-		else
-			return(i);
-	}
-	return (i);
-}
-
+/**
+ * Calculates the size of a string array.
+ *
+ * @param line The string array.
+ * @return The size of the string array.
+ */
 int	_get_split_size(char **line)
 {
 	int	i;
@@ -41,6 +30,13 @@ int	_get_split_size(char **line)
 	return (i);
 }
 
+/**
+ * Checks if a given line is an element identifier.
+ *
+ * @param line The line to check.
+ * @return 1 if the line is an element identifier, 0 otherwise.
+ *         Returns 2 if the line is NULL.
+ */
 int	_is_element(char *line)
 {
 	if (!line)
@@ -52,6 +48,13 @@ int	_is_element(char *line)
 	return (0);
 }
 
+/**
+ * Checks if a given line in the map is valid.
+ * 
+ * @param split - The array of strings representing the line split by spaces.
+ * @return 0 if the line is a valid map line, 1 if it is not a valid map line
+ * but has more than one element, 2 if the split array is NULL.
+ */
 int	_is_map_line(char **split)
 {
 	if (!split)
@@ -61,6 +64,11 @@ int	_is_map_line(char **split)
 	return (0);
 }
 
+/**
+ * Exits the program with an error message.
+ * 
+ * @param msg The error message to display.
+ */
 void	_exit_error(char *msg)
 {
 	ft_putstr_fd(msg, 2);

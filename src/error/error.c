@@ -6,12 +6,17 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:29 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/25 15:42:39 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:17:00 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
 
+/**
+ * Checks if the file name is valid and has the correct extension.
+ * 
+ * @param file The file name to be checked.
+ */
 void	_check_file_name(char *file)
 {
 	char	*name;
@@ -23,6 +28,13 @@ void	_check_file_name(char *file)
 		_exit_error(WRONG_EXT);
 }
 
+/**
+ * Checks the file permissions of the given file.
+ * If the file does not exist or cannot be accessed, it exits with an error.
+ * If the file does not have execute permissions, it exits with an error.
+ *
+ * @param file The path to the file to check permissions for.
+ */
 void	_check_file_permissions(char *file)
 {
 	int	fd;
@@ -37,6 +49,12 @@ void	_check_file_permissions(char *file)
 	close(fd);
 }
 
+/**
+ * Checks if a file is empty by reading its contents line by line.
+ * If the file is empty, it exits the program with an error message.
+ *
+ * @param file The path to the file to be checked.
+ */
 void	_check_empty_file(char *file)
 {
 	char	*line;
@@ -55,7 +73,13 @@ void	_check_empty_file(char *file)
 	close(fd);
 }
 
-void	_check_erros(int argc, char **argv)
+/**
+ * Checks for errors in the command line arguments and the input file.
+ *
+ * @param argc The number of command line arguments.
+ * @param argv An array of strings containing the command line arguments.
+ */
+void	_check_errors(int argc, char **argv)
 {
 	if (argc != 2)
 		_exit_error(INVALID_ARGC);
