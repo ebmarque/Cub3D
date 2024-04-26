@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/25 15:56:46 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/04/26 13:25:20 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,22 @@ SRC_DIRECTORY = src
 
 INCLUDES = includes/core.h
 
-SRCS = 	$(SRC_DIRECTORY)/core/main.c \
-		$(SRC_DIRECTORY)/error/error.c $(SRC_DIRECTORY)/error/content_error.c \
-		$(SRC_DIRECTORY)/tools/utils.c  $(SRC_DIRECTORY)/tools/utils2.c 
-		# $(SRC_DIRECTORY)/core/*.c \
-		# $(SRC_DIRECTORY)/parsing/*.c \
-		# $(SRC_DIRECTORY)/raycasting/*.c \
+ERROR_DIRECTORY = src/error
+
+TOOLS_DIRECTORY = src/tools
+
+CORE_DIRECTORY = src/core
+
+RAYCASTING_DIRECTORY = src/raycaster
+
+ERROR = $(ERROR_DIRECTORY)/error.c $(ERROR_DIRECTORY)/content_error.c
+
+TOOLS = $(TOOLS_DIRECTORY)/utils1.c $(TOOLS_DIRECTORY)/utils2.c \
+		$(TOOLS_DIRECTORY)/utils3.c
+
+CORE = $(CORE_DIRECTORY)/main.c
+
+SRCS = $(ERROR) $(TOOLS) $(CORE)
 
 OBJS = $(SRCS:.c=.o)
 
