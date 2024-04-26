@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/26 13:55:06 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/04/26 14:28:18 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,9 @@ LIBFT = $(LIBFT_DIRECTORY)/libft.a
 
 MLX_DIRECTORY = src/LIB/MLX_MAC
 MLX = $(MLX_DIRECTORY)/libmlx.a
+
+OBJDIR = OBJS
+OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
 SRC_DIRECTORY = src
 
@@ -42,7 +45,7 @@ CORE = $(CORE_DIRECTORY)/main.c
 
 SRCS = $(ERROR) $(TOOLS) $(CORE)
 
-OBJS = $(SRCS:.c=.o)
+# OBJS = $(SRCS:.c=.o)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Darwin)
@@ -76,10 +79,14 @@ $(MLX):
 	@make -s -C $(MLX_DIRECTORY) > /dev/null 2> /dev/null
 	@echo "$(GREEN)[MLX]: compiled successfully!$(NC)"
 
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
 	@make -s clean -C $(MLX_DIRECTORY) > /dev/null 2>/dev/null
 	@make -s clean -C $(LIBFT_DIRECTORY)
-	@rm -f $(OBJS)
+	@rm -rf $(OBJDIR)
 	@echo "$(YELLOW)Cleaned object files!$(NC)"
 
 fclean: clean
@@ -91,4 +98,5 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-.SILENT:
+
+
