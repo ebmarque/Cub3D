@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:32:35 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/26 19:03:46 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:39:34 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,19 @@ int	_find_map_start_line(char *file, int i, int fd)
 	line = get_next_line(fd);
 	return (i);
 }
-void	_check_map_empty_lines(char *file, t_file *content, int i, int fd)
+
+/**
+ * Checks for empty lines in the map.
+ * 
+ * @param file The path to the file containing the map.
+ * @param content The structure containing the file content.
+ * @param i The current line index.
+ * @param fd The file descriptor.
+ */
+void _check_map_empty_lines(char *file, t_file *content, int i, int fd)
 {
-	char	*line;
-	bool	empty_line;
+	char *line;
+	bool empty_line;
 
 	empty_line = false;
 	fd = open(file, O_RDONLY);
