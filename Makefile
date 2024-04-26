@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/26 13:25:20 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/04/26 13:55:06 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,9 +46,9 @@ OBJS = $(SRCS:.c=.o)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Darwin)
-		CC = cc
-		MLX_DIRECTORY = src/LIB/MLX_MAC
-		MLXFLAGS = -framework OpenGL -framework AppKit -L ./$(MLX_DIRECTORY) -lmlx
+	CC = cc
+	MLX_DIRECTORY = src/LIB/MLX_MAC
+	MLXFLAGS = -framework OpenGL -framework AppKit -L ./$(MLX_DIRECTORY) -lmlx
 else ifeq ($(UNAME), FreeBSD) 
 	CC = clang
 else 
@@ -57,28 +57,38 @@ else
 	MLXFLAGS = -L ./$(MLX_DIRECTORY) -lmlx -Ilmlx -lXext -lX11 -lm
 endif
 
+# Color codes for messages
+GREEN = \033[0;32m
+YELLOW = \033[0;33m
+NC = \033[0m
+
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS) $(INCLUDES)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
+	@echo "$(GREEN)[$(NAME)]: compiled successfully!$(NC)"
 
 $(LIBFT):
-	@make -C $(LIBFT_DIRECTORY)
+	@make -s -C $(LIBFT_DIRECTORY)
+	@echo "$(GREEN)[LIBFT]: compiled successfully!$(NC)"
 
 $(MLX):
-	@make -C $(MLX_DIRECTORY) > /dev/null 2> /dev/null
-
+	@make -s -C $(MLX_DIRECTORY) > /dev/null 2> /dev/null
+	@echo "$(GREEN)[MLX]: compiled successfully!$(NC)"
 
 clean:
-	@make clean -C $(MLX_DIRECTORY) > /dev/null 2>/dev/null
-	@make clean -C $(LIBFT_DIRECTORY)
+	@make -s clean -C $(MLX_DIRECTORY) > /dev/null 2>/dev/null
+	@make -s clean -C $(LIBFT_DIRECTORY)
 	@rm -f $(OBJS)
+	@echo "$(YELLOW)Cleaned object files!$(NC)"
 
 fclean: clean
-	@make clean -C $(MLX_DIRECTORY) > /dev/null 2>/dev/null
-	@make fclean -C $(LIBFT_DIRECTORY)
+	@make -s clean -C $(MLX_DIRECTORY) > /dev/null 2>/dev/null
+	@make -s fclean -C $(LIBFT_DIRECTORY)
 	@rm -f $(NAME)
+	@echo "$(YELLOW)Cleaned $(NAME) executable!$(NC)"
 
 re: fclean all
 
 .PHONY: all clean fclean re
+.SILENT:

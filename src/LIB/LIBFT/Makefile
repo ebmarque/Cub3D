@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 18:25:10 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/24 20:55:52 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/04/26 13:34:07 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,3 +55,5 @@ re: fclean all
 
 bonus: $(BONUS_OBJS)
 	@ar rc $(NAME) $(BONUS_OBJS)
+
+.SILENT:
