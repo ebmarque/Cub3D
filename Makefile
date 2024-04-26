@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/26 14:28:18 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/04/26 19:11:06 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ CORE_DIRECTORY = src/core
 
 RAYCASTING_DIRECTORY = src/raycaster
 
-ERROR = $(ERROR_DIRECTORY)/error.c $(ERROR_DIRECTORY)/content_error.c
+ERROR = $(ERROR_DIRECTORY)/error.c $(ERROR_DIRECTORY)/content_error.c \
+		$(ERROR_DIRECTORY)/map_validation.c
 
 TOOLS = $(TOOLS_DIRECTORY)/utils1.c $(TOOLS_DIRECTORY)/utils2.c \
 		$(TOOLS_DIRECTORY)/utils3.c
@@ -81,7 +82,7 @@ $(MLX):
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ -I ./includes
 
 clean:
 	@make -s clean -C $(MLX_DIRECTORY) > /dev/null 2>/dev/null

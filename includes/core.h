@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/26 13:17:29 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:02:06 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@
 # define WRONG_EXT RED "ERROR: Map file with wrong extension < .cub > ." RESET
 # define PARSING_ERROR RED "ERROR: Map file wrongly formated." RESET
 # define EMPTY_TEXTURE RED "ERROR: Empty texture file." RESET
+# define INVALID_MAP_LINE RED "ERROR: Map contain invalid characters" RESET
+# define EMPTY_MAP_LINE RED "ERROR: Map contain empty line" RESET
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -129,6 +131,8 @@ typedef struct s_file
 	char	*so_t;
 	char	*ea_t;
 	char	*we_t;
+	int		map_start_line;
+	int		map_end_line;
 	char	**map;
 }				t_file;
 
@@ -139,20 +143,28 @@ typedef struct s_cub
 }				t_cub;
 
 /*---------------------------------- ERRORS -----------------------------------*/
-
 /*---------------------------------- ERROR -----------------------------------*/
+
 void	_check_errors(int argc, char **argv);
 void	_check_file_name(char *file);
 void	_check_file_permissions(char *file);
 void	_check_empty_file(char *file);
 t_file	*_check_map_content(char *file);
 
-/*---------------------------------- TOOLS -----------------------------------*/
+/*------------------------------ MAP VALIDATION ------------------------------*/
 
+void	_check_valid_map_char(char *file, int start, int fd, t_file *content);
+void	_check_and_parse_map(t_file *content, char *file);
+int		_find_map_start_line(char *file, int i, int fd);
+int		_is_valid_map_line(char *line);
+
+
+/*---------------------------------- TOOLS -----------------------------------*/
 /*--------------------------------- UTILS 1 ----------------------------------*/
+
 int		_get_split_size(char **line);
 int		_is_element(char *line);
-int		_is_map_line(char **split);
+int		_is_map_line(char *line);
 void	_exit_error(char *msg);
 
 /*--------------------------------- UTILS 2 ----------------------------------*/

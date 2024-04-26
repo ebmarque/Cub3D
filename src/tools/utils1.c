@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:36 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/26 13:07:03 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:23:27 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,24 @@ int	_is_element(char *line)
  * @return 0 if the line is a valid map line, 1 if it is not a valid map line
  * but has more than one element, 2 if the split array is NULL.
  */
-int	_is_map_line(char **split)
+int	_is_map_line(char *line)
 {
-	if (!split)
-		return (2);
-	if (!_is_element(split[0]) && _get_split_size(split) > 1)
+	char	**split;
+
+	if (!line || !*line || !ft_strncmp(line, "\n", 2))
+		return (0);
+	split = ft_split(line, " ");
+	if (!split[0] || !*split[0] || !ft_strncmp(split[0], "\n", 2))
+	{
+		ft_free_split(split);		
+		return (0);
+	}
+	if (!_is_element(split[0]))
+	{
+		ft_free_split(split);
 		return (1);
+	}
+	ft_free_split(split);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:34:03 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/26 13:27:02 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:24:19 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ int	_check_file_line(char *line, t_file *content)
 {
 	char	**split;
 
-	if (!line || !*line || !ft_strncmp(line, "\n", 2))
+	if (!line || !*line || !ft_strncmp(line, "\n", 2) \
+		|| _all_elements_set(content))
 		return (0);
 	split = ft_split(line, " ");
 	if (!split[0] || !*split[0] || !ft_strncmp(split[0], "\n", 2))
@@ -232,6 +233,7 @@ t_file	*_check_map_content(char *file)
 		_exit_error(MEMORY_ERROR);
 	ft_bzero(content, sizeof(t_file));
 	_elements_validation(file, content);
+	_check_and_parse_map(content, file);
 	_clean_content(content);
 	return (content);
 }
