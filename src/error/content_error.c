@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:34:03 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/27 11:25:13 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/27 19:18:20 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int	_check_file_line(char *line, t_file *content)
 	if (!line || !*line || !ft_strncmp(line, "\n", 2) \
 		|| _all_elements_set(content))
 		return (0);
-	split = ft_split(line, " \t\r\v\f\a\b");
+	split = ft_split(line, " \t\r\v\f\a\b\n");
 	if (!split[0] || !*split[0] || !ft_strncmp(split[0], "\n", 2))
 	{
 		ft_free_split(split);

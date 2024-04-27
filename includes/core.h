@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/26 19:02:06 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/27 19:45:30 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
  * the error messages for better visibility.
  */
 
+# define EMPTY_SPACES " \t\v\b\a\r\f\n"
 # define MEMORY_ERROR RED "ERROR: Fail to allocate memory" RESET
 # define INVALID_ARGC RED "ERROR: Wrong number of arguments." RESET
 # define INVALID_NAME RED "ERROR: Invalid map name." RESET
@@ -133,6 +134,7 @@ typedef struct s_file
 	char	*we_t;
 	int		map_start_line;
 	int		map_end_line;
+	int		map_width;
 	char	**map;
 }				t_file;
 
@@ -155,7 +157,7 @@ t_file	*_check_map_content(char *file);
 
 void	_check_valid_map_char(char *file, int start, int fd, t_file *content);
 void	_check_and_parse_map(t_file *content, char *file);
-int		_find_map_start_line(char *file, int i, int fd);
+void	_check_valid_map_char(char *file, int start, int fd, t_file *content);
 int		_is_valid_map_line(char *line);
 
 
