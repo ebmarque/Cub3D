@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:32:35 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/26 19:39:34 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/27 12:33:41 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	_is_valid_map_line(char *line)
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'E' \
 			&& line[i] != 'W' && line[i] != 'N' && line[i] != 'S' \
-			&& line[i] != ' ' && line[i] != '\n')
+			&& !ft_is_space(line[i]) && line[i] != '\n')
 		{
 			printf("IN LINE: %s\n", line);
 			printf("Caracter: %c --> is not valid\n", line[i]);
