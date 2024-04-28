@@ -6,12 +6,17 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:55:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/28 16:52:22 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:16:54 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
 
+/**
+ * Frees the memory allocated for the map in the t_file structure.
+ * 
+ * @param t A pointer to the t_file structure.
+ */
 void	_free_map(t_file *t)
 {
 	int	i;
@@ -40,7 +45,8 @@ void	_clean_content(t_file *content)
 		free(content->we_t);
 	if (content->ea_t != NULL)
 		free(content->ea_t);
-	w
+	if (content->map)
+		_free_map(content);
 	if (content)
 		free(content);
 }

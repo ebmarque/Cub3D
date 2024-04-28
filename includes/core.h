@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/28 15:35:59 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:00:55 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,9 @@ char	*_give_texture(char *line);
 
 int		_check_t_file_permissions(char *file);
 int		_check_t_empty_file(char *file);
+char	*_tab_into_spaces(char *source);
+void	_fill_tabs(const char *source, char *new_string);
+size_t	_count_tabs(const char *source);
 
 
 void	_get_map(t_file *content, char *file);

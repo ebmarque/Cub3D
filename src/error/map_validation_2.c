@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:17:33 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/28 16:52:25 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:00:40 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	_fill_map(t_file *content, char *file, int i, int fd)
 
 	j = 0;
 	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
+	line = _tab_into_spaces(get_next_line(fd));
 	while (line && ++i <= content->map_end_line)
 	{
 		if (i >= content->map_start_line && i <= content->map_end_line)
@@ -62,7 +62,7 @@ void	_fill_map(t_file *content, char *file, int i, int fd)
 			j++;
 		}
 		free(line);
-		line = get_next_line(fd);
+		line = _tab_into_spaces(get_next_line(fd));
 	}
 	if (line)
 		free(line);
@@ -77,6 +77,8 @@ void	_print_map(t_file *t)
 	matrix_hight = t->map_end_line - t->map_start_line + 1;
 	
 	printf("MAP:\n\n");
+	printf("----------------------------------------\n\n");
+
 	for (int i = 0; i < matrix_hight; i++)
 	{
 		for (int j = 0; j < t->map_width; j++)
@@ -85,7 +87,7 @@ void	_print_map(t_file *t)
 		}
 		printf("\n");
 	}
-	printf("----------------------------------------\n\n");;
+	printf("----------------------------------------\n\n");
 }
 
 void	_get_map(t_file *content, char *file)

@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:32:35 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/28 16:48:41 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:01:33 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	_find_map_start_line(char *file, int i, int fd, t_file *content)
 	char	*line;
 
 	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
+	line = _tab_into_spaces(get_next_line(fd));
 	while (line && !_all_dimension_set(content))
 	{
 		if (_is_map_line(line) && !content->map_start_line)
@@ -124,7 +124,7 @@ void	_find_map_start_line(char *file, int i, int fd, t_file *content)
 			return ;
 		}
 		free(line);
-		line = get_next_line(fd);
+		line = _tab_into_spaces(get_next_line(fd));
 		i++;
 	}
 	_read_all_file(fd);
@@ -147,11 +147,11 @@ void	_check_map_empty_lines(char *file, t_file *content, int i, int fd)
 
 	empty_line = false;
 	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
+	line = _tab_into_spaces(get_next_line(fd));
 	while (line && ++i < content->map_start_line)
 	{
 		free(line);
-		line = get_next_line(fd);
+		line = _tab_into_spaces( get_next_line(fd));
 	}
 	while (line)
 	{
@@ -165,7 +165,7 @@ void	_check_map_empty_lines(char *file, t_file *content, int i, int fd)
 			_exit_error(EMPTY_MAP_LINE);
 		}
 		free(line);
-		line = get_next_line(fd);
+		line = _tab_into_spaces( get_next_line(fd));
 	}
 }
 
@@ -176,13 +176,13 @@ void	_get_map_width(t_file *content, char *file, int fd)
 
 	i = 1;
 	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
+	line = _tab_into_spaces(get_next_line(fd));
 	while (line && i++)
 	{
 		if (i >= content->map_start_line && i <= content->map_end_line)
 			_update_map_width(content, line);
 		free(line);
-		line = get_next_line(fd);
+		line = _tab_into_spaces( get_next_line(fd));
 	}
 	free(line);
 	close(fd);
