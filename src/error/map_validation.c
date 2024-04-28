@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:32:35 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/27 20:06:59 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:48:41 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,19 @@ void	_update_map_width(t_file *content, char *line)
 
 	size = ft_strlen(line);
 	if (size > content->map_width)
-		content->map_width = size;
+	{
+		if (line[size] == '\n')
+			content->map_width = size - 1;
+		else
+			content->map_width = size;
+	}
+}
+
+bool	_all_dimension_set(t_file *t)
+{
+	if (t->map_start_line && t->map_end_line && t->map_width)
+		return (true);
+	return (false);
 }
 
 /**
@@ -99,11 +111,10 @@ void	_find_map_start_line(char *file, int i, int fd, t_file *content)
 
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
-	while (line)
+	while (line && !_all_dimension_set(content))
 	{
 		if (_is_map_line(line) && !content->map_start_line)
 			content->map_start_line = i;
-		
 		if ((!line || !*line || !ft_strncmp("\n", line, 2)) && \
 			content->map_start_line != 0)
 		{
@@ -116,6 +127,7 @@ void	_find_map_start_line(char *file, int i, int fd, t_file *content)
 		line = get_next_line(fd);
 		i++;
 	}
+	_read_all_file(fd);
 	free(line);
 	close(fd);
 }
@@ -128,10 +140,10 @@ void	_find_map_start_line(char *file, int i, int fd, t_file *content)
  * @param i The current line index.
  * @param fd The file descriptor.
  */
-void _check_map_empty_lines(char *file, t_file *content, int i, int fd)
+void	_check_map_empty_lines(char *file, t_file *content, int i, int fd)
 {
-	char *line;
-	bool empty_line;
+	char	*line;
+	bool	empty_line;
 
 	empty_line = false;
 	fd = open(file, O_RDONLY);
@@ -188,6 +200,7 @@ void	_check_and_parse_map(t_file *content, char *file)
 	_get_map_width(content, file, 1);
 	_check_valid_map_char(file, content->map_start_line, 0, content);
 	_check_map_empty_lines(file, content, -1, 0);
-	printf("map starts at: %d\n map finishes at: %d\n map width: %d\n"\
+	printf("\n\nmap starts at: %d\n map finishes at: %d\n map width: %d\n\n\n"\
 	, content->map_start_line, content->map_end_line, content->map_width);
+	_get_map(content, file);
 }

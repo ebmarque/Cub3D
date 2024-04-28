@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:08 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/04/25 21:25:55 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/04/28 15:26:41 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_point
 {
 	double			x;
 	double			y;
+	double			teta;
 }				t_pos;
 
 typedef struct  s_ray

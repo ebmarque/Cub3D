@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:34:03 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/27 19:18:20 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/27 20:34:03 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ void	_elements_validation(char *file, t_file *content)
 
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
-	while (line)
+	while (line && !_all_elements_set(content))
 	{
 		if (_check_file_line(line, content) == -1)
 		{
@@ -214,6 +214,7 @@ void	_elements_validation(char *file, t_file *content)
 		line = get_next_line(fd);
 	}
 	free(line);
+	_read_all_file(fd);
 	close(fd);
 	_check_texture_files(content);
 }

@@ -6,11 +6,25 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:55:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/26 13:07:49 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:52:22 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
+
+void	_free_map(t_file *t)
+{
+	int	i;
+	int	matrix_hight;
+
+	matrix_hight = t->map_end_line - t->map_start_line + 1;
+	i = -1;
+	while (++i < matrix_hight)
+		if (t->map[i])
+			free(t->map[i]);
+	if (t->map)
+		free(t->map);
+}
 
 /**
  * Frees the memory allocated for the content of a file structure.
@@ -26,8 +40,7 @@ void	_clean_content(t_file *content)
 		free(content->we_t);
 	if (content->ea_t != NULL)
 		free(content->ea_t);
-	if (content->map)
-		ft_free_split(content->map);
+	w
 	if (content)
 		free(content);
 }

@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/27 19:45:30 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 15:35:59 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,13 @@ typedef enum e_key
 
 # endif
 
+typedef struct s_point
+{
+	double			x;
+	double			y;
+	double			teta;
+}				t_pos;
+
 typedef struct s_rgb
 {
 	long	r;
@@ -132,10 +139,11 @@ typedef struct s_file
 	char	*so_t;
 	char	*ea_t;
 	char	*we_t;
+	int		**map;
 	int		map_start_line;
 	int		map_end_line;
 	int		map_width;
-	char	**map;
+	t_pos	p_position;
 }				t_file;
 
 typedef struct s_cub
@@ -181,5 +189,12 @@ char	*_give_texture(char *line);
 
 int		_check_t_file_permissions(char *file);
 int		_check_t_empty_file(char *file);
+
+
+void	_get_map(t_file *content, char *file);
+void	_print_map(t_file *t);
+void	_fill_map(t_file *content, char *file, int i, int fd);
+void	_fill_map_line(t_file *t, int i, int width, char *line);
+bool	_is_player_char(char c);
 
 #endif
