@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 13:08:07 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/28 18:03:08 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 19:45:31 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,17 @@ char	*_tab_into_spaces(char *source)
 	_fill_tabs(source, new_string);
 	free(source);
 	return (new_string);
+}
+
+void	_print_map(t_file *t)
+{
+	for (int i = 0; i < t->matrix_dimensions.y; i++)
+	{
+		for (int j = 0; j < t->matrix_dimensions.x; j++)
+		{
+			printf("%d", t->map[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n\n");
 }

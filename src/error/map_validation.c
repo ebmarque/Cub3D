@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:32:35 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/28 18:01:33 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 20:52:44 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,20 +115,15 @@ void	_find_map_start_line(char *file, int i, int fd, t_file *content)
 	{
 		if (_is_map_line(line) && !content->map_start_line)
 			content->map_start_line = i;
-		if ((!line || !*line || !ft_strncmp("\n", line, 2)) && \
-			content->map_start_line != 0)
-		{
-			free(line);
-			_read_all_file(fd);
-			content->map_end_line = i -1;
-			return ;
-		}
+		if (!ft_strncmp("\n", line, 2) && content->map_start_line != 0)
+			break ;
 		free(line);
 		line = _tab_into_spaces(get_next_line(fd));
 		i++;
 	}
-	_read_all_file(fd);
+	content->map_end_line = i - 1;
 	free(line);
+	_read_all_file(fd);
 	close(fd);
 }
 
@@ -200,7 +195,6 @@ void	_check_and_parse_map(t_file *content, char *file)
 	_get_map_width(content, file, 1);
 	_check_valid_map_char(file, content->map_start_line, 0, content);
 	_check_map_empty_lines(file, content, -1, 0);
-	printf("\n\nmap starts at: %d\n map finishes at: %d\n map width: %d\n\n\n"\
-	, content->map_start_line, content->map_end_line, content->map_width);
 	_get_map(content, file);
+	_check_map_rules(content);
 }

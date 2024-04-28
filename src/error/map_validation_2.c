@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:17:33 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/28 18:00:40 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 19:13:27 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	_fill_map_line(t_file *t, int i, int width, char *line)
 				t->p_position.x = (double)j;
 				t->p_position.y = (double)i;
 				t->map[i][j] = (int)line[j];
+				t->p_position.is_set = true;
 			}
 			else
 				t->map[i][j] = 0;
@@ -68,26 +69,11 @@ void	_fill_map(t_file *content, char *file, int i, int fd)
 		free(line);
 	_read_all_file(fd);
 	close(fd);
-}
-
-void	_print_map(t_file *t)
-{
-	int	matrix_hight;
-
-	matrix_hight = t->map_end_line - t->map_start_line + 1;
-	
-	printf("MAP:\n\n");
-	printf("----------------------------------------\n\n");
-
-	for (int i = 0; i < matrix_hight; i++)
+	if (content->p_position.is_set == false)
 	{
-		for (int j = 0; j < t->map_width; j++)
-		{
-			printf("%d ", t->map[i][j]);
-		}
-		printf("\n");
+		_clean_content(content);
+		_exit_error(NO_PLAYER);
 	}
-	printf("----------------------------------------\n\n");
 }
 
 void	_get_map(t_file *content, char *file)
@@ -113,5 +99,4 @@ void	_get_map(t_file *content, char *file)
 		}
 	}
 	_fill_map(content, file, 0, 0);
-	_print_map(content);
 }

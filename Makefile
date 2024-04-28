@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/28 15:36:16 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/04/28 19:34:51 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,9 @@ CORE_DIRECTORY = src/core
 RAYCASTING_DIRECTORY = src/raycaster
 
 ERROR = $(ERROR_DIRECTORY)/error.c $(ERROR_DIRECTORY)/content_error.c \
-		$(ERROR_DIRECTORY)/map_validation.c $(ERROR_DIRECTORY)/map_validation_2.c
+		$(ERROR_DIRECTORY)/map_validation.c \
+		$(ERROR_DIRECTORY)/map_validation_2.c \
+		$(ERROR_DIRECTORY)/map_rules.c
 
 TOOLS = $(TOOLS_DIRECTORY)/utils1.c $(TOOLS_DIRECTORY)/utils2.c \
 		$(TOOLS_DIRECTORY)/utils3.c

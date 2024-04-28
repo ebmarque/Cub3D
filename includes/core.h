@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/28 18:00:55 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 21:09:32 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,13 @@
 # define WRONG_EXT RED "ERROR: Map file with wrong extension < .cub > ." RESET
 # define PARSING_ERROR RED "ERROR: Map file wrongly formated." RESET
 # define EMPTY_TEXTURE RED "ERROR: Empty texture file." RESET
-# define INVALID_MAP_LINE RED "ERROR: Map contain invalid characters" RESET
-# define EMPTY_MAP_LINE RED "ERROR: Map contain empty line" RESET
+# define INVALID_MAP_LINE RED "ERROR: Map contain invalid characters." RESET
+# define EMPTY_MAP_LINE RED "ERROR: Map contain empty line." RESET
+# define PLAYER_ON_EDGE RED "ERROR: Player is on edge of the map." RESET
+# define DUPLICATED_PLAYER RED "ERROR: More than one player on map" RESET
+# define NO_PLAYER RED "ERROR: Player start position not found." RESET
+# define OPEN_WALLS RED "ERROR: Player is not sorrounded by walls." RESET
+# define SMALL_MAP RED "ERROR: Map dimensions are too small." RESET
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -116,11 +121,19 @@ typedef enum e_key
 
 # endif
 
+typedef struct s_Point
+{
+	int	x;
+	int	y;
+}				t_point;
+
+
 typedef struct s_point
 {
 	double			x;
 	double			y;
 	double			teta;
+	bool			is_set;
 }				t_pos;
 
 typedef struct s_rgb
@@ -133,17 +146,20 @@ typedef struct s_rgb
 
 typedef struct s_file
 {
-	t_rgb	floor;
-	t_rgb	ceiling;
 	char	*no_t;
 	char	*so_t;
 	char	*ea_t;
 	char	*we_t;
 	int		**map;
-	int		map_start_line;
-	int		map_end_line;
+	t_point begin;
+	t_rgb	floor;
+	t_rgb	ceiling;
+	bool	open_map;
 	int		map_width;
 	t_pos	p_position;
+	int		map_end_line;
+	int		map_start_line;
+	t_point	matrix_dimensions;
 }				t_file;
 
 typedef struct s_cub
@@ -199,5 +215,10 @@ void	_print_map(t_file *t);
 void	_fill_map(t_file *content, char *file, int i, int fd);
 void	_fill_map_line(t_file *t, int i, int width, char *line);
 bool	_is_player_char(char c);
+
+
+
+void	_check_map_rules(t_file *t);
+
 
 #endif
