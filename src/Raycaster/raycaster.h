@@ -3,31 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:08 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/04/28 15:26:41 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 21:18:39 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYCASTER_H
 # define RAYCASTER_H
 
-
 //Screen width;
 # define SCREEN_W 50
 # define SCREEN_H 25
-# include "test.h"
 //For the absolute value function (fabs);
 #include <math.h>
 #include <stdbool.h>
+#include "../includes/core.h"
+
+typedef enum e_text_index
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST,
+}	t_text_index;
 
 typedef struct s_point
 {
 	double			x;
 	double			y;
-	double			teta;
 }				t_pos;
+
+typedef struct s_player
+{
+	t_pos			pos;
+	t_pos			dir;
+	t_pos			plane;
+}				t_player;
+
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		width;
+	int		height;
+}				t_texture;
+
+
+typedef struct s_text_info
+{
+	double		pos;
+	int			x;
+	int			y;
+	double		step;
+	
+}				t_text_info;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bbp;
+	int		line_length;
+	int		endian;
+}				t_img;
 
 typedef struct  s_ray
 {
@@ -49,5 +92,13 @@ typedef struct  s_ray
 	int			end;
 }   t_ray;
 
+typedef struct s_mx_var
+{
+	void		*mlx;
+	void		*win;
+	void		*img;
+	t_img		screen_buffer;
+}				t_mx_var;
 
+t_cub	*cubed(void);
 #endif

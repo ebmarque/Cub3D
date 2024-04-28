@@ -6,11 +6,12 @@
 /*   By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/04/25 21:34:16 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/04/28 21:20:49 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycaster.h"
+
 
 void	init_ray(t_ray *ray, int x_cord)
 {
@@ -19,7 +20,7 @@ void	init_ray(t_ray *ray, int x_cord)
 	//Struct with data regarding the player;
 	t_player	p;
 
-	p = /*******/;
+	p = cubed()->player->pos;
 	x_cam = 2 * x_cord / (double)SCREEN_W - 1;
 	ray->pos = p.pos;
 	ray->dir.x = p.dir.x + p.plane.x * x_cam;
@@ -77,7 +78,7 @@ void	perform_dda(t_ray *ray)
 			ray->side = 1;
 		}
 		//Is sufficient to check the map wall?
-		if (worldMap[(int)ray->pos.x][(int)ray->pos.y] > 0)
+		if (cubed()->conten->map[(int)ray->pos.x][(int)ray->pos.y] > 0)
 			hit = true;
 	}
 }
@@ -86,7 +87,7 @@ void	wall_placement(t_ray *ray)
 {
 	t_pos	curr;
 
-	curr = /*Player position*/
+	curr = cubed()->player->pos;
 	if (!ray->side)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
@@ -104,6 +105,63 @@ void	wall_placement(t_ray *ray)
 		ray->wall_x = curr.y + ray->wall_dist * ray->dir.y;
 	else
 		ray->wall_x = curr.x + ray->wall_dist * ray->dir.x;
+	//Floor is a C function that returns the largest integer value not greater than x;
+	//this allows to get the non integer part of the wall_x;
+	ray->wall_x -= floor(ray->wall_x);
+}
+
+t_text_info	*get_text_info(t_ray *ray)
+{
+	t_text_info	*text;
+
+	if (!ray->side)
+	{
+		if (ray->dir.x < 0)
+			text = cubed()->texture[WEST];
+		else
+			text = cubed()->texture[EAST];
+	}
+	else
+	{
+		if (ray->dir.y < 0)
+			text = cubed()->texture[NORTH];
+		else
+			text = cubed()->texture[SOUTH];
+	}
+	return (text);
+}
+
+void	render_pixel(t_pos pos, int color)
+{
+	char	*dst;
+	t_img	img;
+
+	img = cubed()->mlx->screen_buffer;
+	dst = (char *)img.addr + ((int)pos.y * img.line_length + (int)pos.x
+			* (img.bbp / 8));
+	*(unsigned int *)dst = color;
+}
+
+void	texture_render(t_ray *ray, int x_cord)
+{
+	int	y;
+	t_text_info	*text;
+	t_texture	*text_info;
+	int	color;
+
+	y = ray->start;
+	text_info = get_text_info(ray);
+	text->x = (int)(ray->wall_x * (double)text_info->width);
+	text->step = text_info->height / ray->line_height;
+	text->pos = (ray->start - SCREEN_H / 2 + ray->line_height / 2) * text->step;
+	while (y < ray->end)
+	{
+		text->y = (int)text->pos & (text_info->height - 1);
+		text->pos += text->step;
+		color = /*Get from array containing colors with index text_info*/;
+		render_pixel((t_pos){x_cord, y}, color);
+		y++;
+	}
 }
 
 void	raycaster(void)
@@ -118,7 +176,7 @@ void	raycaster(void)
 		get_side_dist(&ray);
 		perform_dda(&ray);
 		wall_placement(&ray);
-		/*render texture*/
+		texture_render(&ray, x);
 		x++;
     }
 }
