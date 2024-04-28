@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 13:08:07 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/28 19:45:31 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 21:40:25 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,10 @@ void	_print_map(t_file *t)
 	{
 		for (int j = 0; j < t->matrix_dimensions.x; j++)
 		{
-			printf("%d", t->map[i][j]);
+			if (t->map[i][j] == 0)
+				printf(GREEN"%d"RESET, t->map[i][j]);
+			else
+				printf(RED"%d"RESET, t->map[i][j]);
 		}
 		printf("\n");
 	}

@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 18:15:27 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/28 21:09:05 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/28 21:31:14 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	_fill(t_file *t, t_point size, t_point current, int p)
     _fill(t, size, (t_point){current.x + 1, current.y}, p);
     _fill(t, size, (t_point){current.x, current.y - 1}, p);
     _fill(t, size, (t_point){current.x, current.y + 1}, p);
-    // _fill(t, size, (t_point){current.x + 1, current.y + 1}, p);
-    // _fill(t, size, (t_point){current.x - 1, current.y - 1}, p);
-    // _fill(t, size, (t_point){current.x + 1, current.y - 1}, p);
-    // _fill(t, size, (t_point){current.x - 1, current.y + 1}, p);
+    _fill(t, size, (t_point){current.x + 1, current.y + 1}, p);
+    _fill(t, size, (t_point){current.x - 1, current.y - 1}, p);
+    _fill(t, size, (t_point){current.x + 1, current.y - 1}, p);
+    _fill(t, size, (t_point){current.x - 1, current.y + 1}, p);
 }
 
 void	_flood_fill(t_file *t)
@@ -43,9 +43,8 @@ void	_flood_fill(t_file *t)
 	t->begin.x = (int)t->p_position.x;
 	t->begin.y = (int)t->p_position.y;
     _fill(t, size, t->begin, t->map[t->begin.y][t->begin.x]);
-	printf("BEGINIG POSITION: %d, %d\n", t->begin.x, t->begin.y);
-	printf("Dimensoes da Matrix: %d : %d\n", size.y, size.x);
-	_print_map(t);
+	printf("\n\nBEGINIG POSITION: %d, %d\n", t->begin.x, t->begin.y);
+	printf("MATRIX DIMENSION: %d : %d\n\n\n", size.y, size.x);
 	if (t->open_map)
 	{
 		_clean_content(t);
@@ -118,4 +117,5 @@ void	_check_map_rules(t_file *t)
 	}
 	_flood_fill(t);
 	_recover_matrix(t);
+	_print_map(t);
 }
