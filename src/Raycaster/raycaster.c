@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/04/28 21:20:49 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/04/29 20:05:10 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	init_ray(t_ray *ray, int x_cord)
 	//Struct with data regarding the player;
 	t_player	p;
 
-	p = cubed()->player->pos;
+	//??
+	p = *(cubed())->player;
 	x_cam = 2 * x_cord / (double)SCREEN_W - 1;
 	ray->pos = p.pos;
 	ray->dir.x = p.dir.x + p.plane.x * x_cam;
@@ -78,7 +79,7 @@ void	perform_dda(t_ray *ray)
 			ray->side = 1;
 		}
 		//Is sufficient to check the map wall?
-		if (cubed()->conten->map[(int)ray->pos.x][(int)ray->pos.y] > 0)
+		if (cubed()->content->map[(int)ray->pos.x][(int)ray->pos.y] > 0)
 			hit = true;
 	}
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
+#    By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/28 19:34:51 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/04/28 21:27:01 by tmoutinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ CFLAGS = -Wall -Wextra -Werror -g #fsanitize=address
 LIBFT_DIRECTORY = src/LIB/LIBFT
 LIBFT = $(LIBFT_DIRECTORY)/libft.a
 
-MLX_DIRECTORY = src/LIB/MLX_MAC
-MLX = $(MLX_DIRECTORY)/libmlx.a
+#MLX_DIRECTORY = src/LIB/MLX_MAC
+#MLX = $(MLX_DIRECTORY)/libmlx.a
 
 OBJDIR = OBJS
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
@@ -53,14 +53,14 @@ SRCS = $(ERROR) $(TOOLS) $(CORE)
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Darwin)
 	CC = cc
-	MLX_DIRECTORY = src/LIB/MLX_MAC
-	MLXFLAGS = -framework OpenGL -framework AppKit -L ./$(MLX_DIRECTORY) -lmlx
+#	MLX_DIRECTORY = src/LIB/MLX_MAC
+#	MLXFLAGS = -framework OpenGL -framework AppKit -L ./$(MLX_DIRECTORY) -lmlx
 else ifeq ($(UNAME), FreeBSD) 
 	CC = clang
 else 
 	CC = cc
-	MLX_DIRECTORY = src/LIB/MLX_LINUX
-	MLXFLAGS = -L ./$(MLX_DIRECTORY) -lmlx -Ilmlx -lXext -lX11 -lm
+#	MLX_DIRECTORY = src/LIB/MLX_LINUX
+#	MLXFLAGS = -L ./$(MLX_DIRECTORY) -lmlx -Ilmlx -lXext -lX11 -lm
 endif
 
 # Color codes for messages

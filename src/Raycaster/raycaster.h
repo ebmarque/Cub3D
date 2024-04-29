@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:08 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/04/28 21:18:39 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/04/29 20:13:17 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 //For the absolute value function (fabs);
 #include <math.h>
 #include <stdbool.h>
-#include "../includes/core.h"
+#include "../includes/core_t.h"
 
 typedef enum e_text_index
 {
