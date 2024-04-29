@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:32:35 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/28 20:52:44 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:55:40 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,14 @@ void	_check_valid_map_char(char *file, int start, int fd, t_file *content)
 
 void	_update_map_width(t_file *content, char *line)
 {
-	int	size;
+	int		size;
+	char	*nl;
 
-	size = ft_strlen(line);
+	nl = ft_strtrim(line, "\n");
+	size = ft_strlen(nl);
 	if (size > content->map_width)
-	{
-		if (line[size] == '\n')
-			content->map_width = size - 1;
-		else
-			content->map_width = size;
-	}
+		content->map_width = size;
+	free(nl);
 }
 
 bool	_all_dimension_set(t_file *t)

@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:17:33 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/28 19:13:27 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:24:18 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	_fill_map_line(t_file *t, int i, int width, char *line)
 	{
 		if (j < line_size)
 		{
-			if (line[j] != '0' && !_is_player_char(line[j]))
+			if (line[j] == '1')
 				t->map[i][j] = 1;
 			else if (_is_player_char(line[j]))
 			{
@@ -43,8 +43,9 @@ void	_fill_map_line(t_file *t, int i, int width, char *line)
 				t->map[i][j] = 0;
 		}
 		else
-			t->map[i][j] = 1;
+			t->map[i][j] = 0;
 	}
+	free(line);
 }
 
 void	_fill_map(t_file *content, char *file, int i, int fd)
@@ -59,7 +60,7 @@ void	_fill_map(t_file *content, char *file, int i, int fd)
 	{
 		if (i >= content->map_start_line && i <= content->map_end_line)
 		{
-			_fill_map_line(content, j, content->map_width, line);
+			_fill_map_line(content, j, content->map_width, ft_strtrim(line, "\n"));
 			j++;
 		}
 		free(line);
