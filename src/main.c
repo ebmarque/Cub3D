@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/04/29 20:13:56 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/04/29 20:21:07 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_cub	*cubed(void)
 	return (&cub);
 }
 
-void	game_sequence()
+void	mx_var_init()
 {
 	t_img	screen_buff;
 
@@ -34,6 +34,11 @@ void	game_sequence()
 			&screen_buff.bbp, &screen_buff.line_length,
 			&screen_buff.endian);
 	cubed()->mx_var->screen_buffer = screen_buff;
+}
+
+void	game_sequence()
+{
+	mx_var_init();
 }
 
 int	main(int argc, char**argv)
