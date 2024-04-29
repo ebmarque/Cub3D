@@ -49,6 +49,8 @@
 # define NO_PLAYER RED "ERROR: Player start position not found." RESET
 # define OPEN_WALLS RED "ERROR: Player is not sorrounded by walls." RESET
 # define SMALL_MAP RED "ERROR: Map dimensions are too small." RESET
+# define WIN_DESTROY 17
+# define DESTROY_MASK (1L << 17)
 
 # include <stdio.h>
 # include <stdlib.h>

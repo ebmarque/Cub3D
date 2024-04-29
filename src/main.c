@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/04/29 20:21:07 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/04/29 21:52:15 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,31 @@ void	mx_var_init()
 	cubed()->mx_var->screen_buffer = screen_buff;
 }
 
+void	destroy_game()
+{
+	if (cubed()->mx_var->screen_buffer.img)
+		mlx_destroy_image(cubed()->mx_var->mlx, cubed()->mx_var->screen_buffer.img);
+	if (cubed()->mx_var->img)
+		mlx_destroy_image(cubed()->mx_var->mlx, cubed()->mx_var->img);
+	if (cubed()->mx_var->win)
+		mlx_destroy_window(cubed()->mx_var->mlx, cubed()->mx_var->win);
+	if (cubed()->mx_var->mlx)
+	{	
+		mlx_destroy_display(cubed()->mx_var->mlx);
+		free(cubed()->mx_var->mlx);
+	}
+}
+
+void	quit_game(void)
+{
+	/*Bene tens algum sanitize ja pronto?*/
+	destroy_game();
+}
+
 void	game_sequence()
 {
 	mx_var_init();
+	mlx_hook (cubed()->mx_var->win, WIN_DESTROY, DESTROY_MASK, quit_game, NULL);
 }
 
 int	main(int argc, char**argv)
