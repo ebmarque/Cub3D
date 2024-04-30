@@ -3,12 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+         #
+#    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/28 21:27:01 by tmoutinh         ###   ########.fr        #
+#    Updated: 2024/04/30 13:55:34 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# Colors
+GREEN = \033[0;32m
+YELLOW = \033[0;33m
+NC = \033[0m
 
 NAME = Cub3D
 
@@ -18,8 +23,8 @@ CFLAGS = -Wall -Wextra -Werror -g #fsanitize=address
 LIBFT_DIRECTORY = src/LIB/LIBFT
 LIBFT = $(LIBFT_DIRECTORY)/libft.a
 
-#MLX_DIRECTORY = src/LIB/MLX_MAC
-#MLX = $(MLX_DIRECTORY)/libmlx.a
+MLX_DIRECTORY = src/LIB/MLX_MAC
+MLX = $(MLX_DIRECTORY)/libmlx.a
 
 OBJDIR = OBJS
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
@@ -44,7 +49,7 @@ ERROR = $(ERROR_DIRECTORY)/error.c $(ERROR_DIRECTORY)/content_error.c \
 TOOLS = $(TOOLS_DIRECTORY)/utils1.c $(TOOLS_DIRECTORY)/utils2.c \
 		$(TOOLS_DIRECTORY)/utils3.c
 
-CORE = $(CORE_DIRECTORY)/main.c
+CORE = src/tests/main.c  #$(CORE_DIRECTORY)/main.c
 
 SRCS = $(ERROR) $(TOOLS) $(CORE)
 
@@ -53,20 +58,16 @@ SRCS = $(ERROR) $(TOOLS) $(CORE)
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Darwin)
 	CC = cc
-#	MLX_DIRECTORY = src/LIB/MLX_MAC
-#	MLXFLAGS = -framework OpenGL -framework AppKit -L ./$(MLX_DIRECTORY) -lmlx
+	MLX_DIRECTORY = src/LIB/MLX_MAC
+	MLXFLAGS = -framework OpenGL -framework AppKit -L ./$(MLX_DIRECTORY) -lmlx
 else ifeq ($(UNAME), FreeBSD) 
 	CC = clang
 else 
 	CC = cc
-#	MLX_DIRECTORY = src/LIB/MLX_LINUX
-#	MLXFLAGS = -L ./$(MLX_DIRECTORY) -lmlx -Ilmlx -lXext -lX11 -lm
+	MLX_DIRECTORY = src/LIB/MLX_LINUX
+	MLXFLAGS = -L ./$(MLX_DIRECTORY) -lmlx -Ilmlx -lXext -lX11 -lm
 endif
 
-# Color codes for messages
-GREEN = \033[0;32m
-YELLOW = \033[0;33m
-NC = \033[0m
 
 all: $(NAME)
 

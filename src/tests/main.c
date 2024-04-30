@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:01:00 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/23 18:14:48 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:49:47 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 int	main(void)
 {
+	int wd;
+	int gh;
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
-
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "Hello world!");
-	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	mlx_get_screen_size(mlx, &wd, &gh);
+	mlx_win = mlx_new_window(mlx, wd, gh, "Hello world!");
+	img.img = mlx_new_image(mlx, wd, gh);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
 	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
