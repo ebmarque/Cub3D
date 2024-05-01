@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/30 13:55:34 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/05/01 13:24:43 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,14 @@ CORE_DIRECTORY = src/core
 
 RAYCASTING_DIRECTORY = src/raycaster
 
+TESTS_DIRECTORY = src/tests
+
+TESTS = $(TESTS_DIRECTORY)/main.c \
+		$(TESTS_DIRECTORY)/draw.c \
+		$(TESTS_DIRECTORY)/utils.c \
+		$(TESTS_DIRECTORY)/movements.c \
+		$(TESTS_DIRECTORY)/event.c
+
 ERROR = $(ERROR_DIRECTORY)/error.c $(ERROR_DIRECTORY)/content_error.c \
 		$(ERROR_DIRECTORY)/map_validation.c \
 		$(ERROR_DIRECTORY)/map_validation_2.c \
@@ -49,7 +57,7 @@ ERROR = $(ERROR_DIRECTORY)/error.c $(ERROR_DIRECTORY)/content_error.c \
 TOOLS = $(TOOLS_DIRECTORY)/utils1.c $(TOOLS_DIRECTORY)/utils2.c \
 		$(TOOLS_DIRECTORY)/utils3.c
 
-CORE = src/tests/main.c  #$(CORE_DIRECTORY)/main.c
+CORE = $(TESTS)  #$(CORE_DIRECTORY)/main.c
 
 SRCS = $(ERROR) $(TOOLS) $(CORE)
 
