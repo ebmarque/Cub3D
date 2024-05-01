@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/04/29 21:52:15 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:37:13 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Raycaster/raycaster.h"
-#include "../includes/core_t.h"
+#include "../includes/core.h"
 
 t_cub	*cubed(void)
 {
@@ -24,13 +23,14 @@ void	mx_var_init()
 {
 	t_img	screen_buff;
 
+	cubed()->mx_var = ft_calloc(1, sizeof(t_mx_var));
 	cubed()->mx_var->mlx = mlx_init();
 	cubed()->mx_var->win = mlx_new_window(\
-		cubed()->mx_var->mlx, SCREEN_W, SCREEN_H, "Cub3D");
+		cubed()->mx_var->mlx, WIDTH, HEIGHT, "Cub3D");
 	cubed()->mx_var->img = mlx_new_image(cubed()->mx_var->mlx, \
-		SCREEN_W, SCREEN_H);
-	screen_buff.img = mlx_new_image(cubed()->mx_var->mlx, SCREEN_H, SCREEN_W);
-	screen_buff.addr = (int *)mlx_get_data_addr(screen_buff.img,
+		WIDTH, HEIGHT);
+	screen_buff.img = mlx_new_image(cubed()->mx_var->mlx, HEIGHT - 1, WIDTH - 1);
+	screen_buff.addr = mlx_get_data_addr(screen_buff.img,
 			&screen_buff.bbp, &screen_buff.line_length,
 			&screen_buff.endian);
 	cubed()->mx_var->screen_buffer = screen_buff;
@@ -51,22 +51,26 @@ void	destroy_game()
 	}
 }
 
-void	quit_game(void)
+int	quit_game(void)
 {
 	/*Bene tens algum sanitize ja pronto?*/
 	destroy_game();
+	exit(EXIT_SUCCESS);
 }
+
 
 void	game_sequence()
 {
 	mx_var_init();
 	mlx_hook (cubed()->mx_var->win, WIN_DESTROY, DESTROY_MASK, quit_game, NULL);
+	mlx_loop_hook(cubed()->mx_var->mlx, raycaster, NULL);
+	mlx_loop(cubed()->mx_var->mlx);
 }
 
 int	main(int argc, char**argv)
 {
-	if (argc != 2)
-		_exit_error("Error\nInvalid number of arguments\n");
+	_check_errors(argc, argv);
 	game_sequence();
+	_clean_content(cubed()->content);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:29 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/26 13:17:00 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:15:06 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,5 @@ void	_check_errors(int argc, char **argv)
 	_check_file_name(argv[1]);
 	_check_file_permissions(argv[1]);
 	_check_empty_file(argv[1]);
-	_check_map_content(argv[1]);
+	cubed()->content = _check_map_content(argv[1]);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/04/29 20:05:10 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:48:57 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raycaster.h"
+#include "../includes/core.h"
 
 
 void	init_ray(t_ray *ray, int x_cord)
@@ -22,7 +22,7 @@ void	init_ray(t_ray *ray, int x_cord)
 
 	//??
 	p = *(cubed())->player;
-	x_cam = 2 * x_cord / (double)SCREEN_W - 1;
+	x_cam = 2 * x_cord / (double)WIDTH - 1;
 	ray->pos = p.pos;
 	ray->dir.x = p.dir.x + p.plane.x * x_cam;
 	ray->dir.y = p.dir.y + p.plane.y * x_cam;
@@ -93,13 +93,13 @@ void	wall_placement(t_ray *ray)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
 		ray->wall_dist = ray->side_dist.y - ray->delta_dist.y;
-	ray->line_height = (int)(SCREEN_H / ray->wall_dist);
-	ray->start = -ray->line_height / 2 + SCREEN_H / 2;
+	ray->line_height = (int)(HEIGHT / ray->wall_dist);
+	ray->start = -ray->line_height / 2 + HEIGHT / 2;
 	if (ray->start < 0)
 		ray->start = 0;
-	ray->end = ray->line_height / 2 + SCREEN_H / 2;
-	if (ray->end >= SCREEN_H)
-		ray->end = SCREEN_H - 1;
+	ray->end = ray->line_height / 2 + HEIGHT / 2;
+	if (ray->end >= HEIGHT)
+		ray->end = HEIGHT - 1;
 	//The value wall_X represents the exact Y value where the wall was hit,
 	//not just the integer coordinates of the wall
 	if (!ray->side)
@@ -137,7 +137,7 @@ void	render_pixel(t_pos pos, int color)
 	char	*dst;
 	t_img	img;
 
-	img = cubed()->mlx->screen_buffer;
+	img = cubed()->mx_var->screen_buffer;
 	dst = (char *)img.addr + ((int)pos.y * img.line_length + (int)pos.x
 			* (img.bbp / 8));
 	*(unsigned int *)dst = color;
@@ -154,24 +154,24 @@ void	texture_render(t_ray *ray, int x_cord)
 	text_info = get_text_info(ray);
 	text->x = (int)(ray->wall_x * (double)text_info->width);
 	text->step = text_info->height / ray->line_height;
-	text->pos = (ray->start - SCREEN_H / 2 + ray->line_height / 2) * text->step;
+	text->pos = (ray->start - HEIGHT / 2 + ray->line_height / 2) * text->step;
 	while (y < ray->end)
 	{
 		text->y = (int)text->pos & (text_info->height - 1);
 		text->pos += text->step;
 		color = /*Get from array containing colors with index text_info*/;
-		render_pixel((t_pos){x_cord, y}, color);
+		render_pixel((t_pos){x_cord, y, 0}, color);
 		y++;
 	}
 }
 
-void	raycaster(void)
+int	raycaster(void)
 {
     t_ray	ray;
     int		x;
 
     x = 0;
-    while(x < SCREEN_W)
+    while(x < WIDTH)
     {
         init_ray(&ray, x);
 		get_side_dist(&ray);
@@ -180,4 +180,5 @@ void	raycaster(void)
 		texture_render(&ray, x);
 		x++;
     }
+	return(EXIT_SUCCESS);
 }

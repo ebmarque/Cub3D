@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   content_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:34:03 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/27 20:34:03 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:27:18 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,5 @@ t_file	*_check_map_content(char *file)
 	ft_bzero(content, sizeof(t_file));
 	_elements_validation(file, content);
 	_check_and_parse_map(content, file);
-	_clean_content(content);
 	return (content);
 }

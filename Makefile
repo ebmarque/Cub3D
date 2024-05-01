@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
+#    By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/04/30 13:55:34 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/05/01 15:48:24 by tmoutinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ ERROR = $(ERROR_DIRECTORY)/error.c $(ERROR_DIRECTORY)/content_error.c \
 TOOLS = $(TOOLS_DIRECTORY)/utils1.c $(TOOLS_DIRECTORY)/utils2.c \
 		$(TOOLS_DIRECTORY)/utils3.c
 
-CORE = src/tests/main.c  #$(CORE_DIRECTORY)/main.c
+CORE = src/main.c src/Raycaster/raycaster.c #$(CORE_DIRECTORY)/main.c
 
 SRCS = $(ERROR) $(TOOLS) $(CORE)
 

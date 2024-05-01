@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_rules.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 18:15:27 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/29 15:50:07 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:58:11 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	_fill(t_file *t, t_point size, t_point current, int p)
 {
-	system("clear");
-	printf(BLUE"\n\n\t\t\tVALIDATING IF PLAYING IS SORROUNDED BY WALLS...\n\n"RESET);
+	//system("clear");
+	//printf(BLUE"\n\n\t\t\tVALIDATING IF PLAYING IS SORROUNDED BY WALLS...\n\n"RESET);
 	if (current.x < 0 || current.y < 0 || current.x > size.x - 1\
 		|| current.y > size.y - 1)
 		return ;
@@ -30,8 +30,8 @@ void	_fill(t_file *t, t_point size, t_point current, int p)
 	}
 	if (t->map[current.y][current.x] != p)
 		t->map[current.y][current.x] = 3;
-	_print_map(t);
-	usleep(60000);
+	//_print_map(t);
+	//usleep(60000);
     _fill(t, size, (t_point){current.x - 1, current.y}, p);
     _fill(t, size, (t_point){current.x + 1, current.y}, p);
     _fill(t, size, (t_point){current.x, current.y - 1}, p);

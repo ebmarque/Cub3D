@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/29 14:58:21 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:15:13 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@
 # define NO_PLAYER RED "ERROR: Player start position not found." RESET
 # define OPEN_WALLS RED "ERROR: Player is not sorrounded by walls." RESET
 # define SMALL_MAP RED "ERROR: Map dimensions are too small." RESET
+# define WIN_DESTROY 17
+# define DESTROY_MASK (1L << 17)
+
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -70,6 +73,7 @@
 # include <math.h>
 # include <time.h>
 # include "../src/LIB/LIBFT/libft.h"
+# include "structs.h"
 
 # ifdef __APPLE__
 
@@ -122,52 +126,7 @@ typedef enum e_key
 
 # endif
 
-typedef struct s_Point
-{
-	int	x;
-	int	y;
-}				t_point;
 
-
-typedef struct s_point
-{
-	double			x;
-	double			y;
-	double			teta;
-	bool			is_set;
-}				t_pos;
-
-typedef struct s_rgb
-{
-	long	r;
-	long	b;
-	long	g;
-	bool	is_set;
-}				t_rgb;
-
-typedef struct s_file
-{
-	char	*no_t;
-	char	*so_t;
-	char	*ea_t;
-	char	*we_t;
-	int		**map;
-	t_point begin;
-	t_rgb	floor;
-	t_rgb	ceiling;
-	bool	open_map;
-	int		map_width;
-	t_pos	p_position;
-	int		map_end_line;
-	int		map_start_line;
-	t_point	matrix_dimensions;
-}				t_file;
-
-typedef struct s_cub
-{
-	char	*map_name;
-	t_file	*content;
-}				t_cub;
 
 /*---------------------------------- ERRORS -----------------------------------*/
 /*---------------------------------- ERROR -----------------------------------*/
@@ -187,6 +146,8 @@ int		_is_valid_map_line(char *line);
 
 
 /*---------------------------------- TOOLS -----------------------------------*/
+int	raycaster(void);
+
 /*--------------------------------- UTILS 1 ----------------------------------*/
 
 int		_get_split_size(char **line);
@@ -195,7 +156,7 @@ int		_is_map_line(char *line);
 void	_exit_error(char *msg);
 
 /*--------------------------------- UTILS 2 ----------------------------------*/
-
+t_cub	*cubed(void);
 void	_clean_content(t_file *content);
 void	_read_all_file(int fd);
 int		_all_elements_set(t_file *t);
@@ -220,6 +181,5 @@ bool	_is_player_char(char c);
 
 
 void	_check_map_rules(t_file *t);
-
 
 #endif
