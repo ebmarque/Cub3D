@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/01 16:50:46 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:01:07 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ void	wall_placement(t_ray *ray)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-t_text_info	*get_text_info(t_ray *ray)
+t_texture	*get_text_info(t_ray *ray)
 {
-	t_text_info	*text;
+	t_texture	*text;
 
 	if (!ray->side)
 	{
@@ -142,6 +142,12 @@ void	render_pixel(t_pos pos, int color)
 	*(unsigned int *)dst = color;
 }
 
+int	_get_img_pixel(t_texture *mlx, int x, int y)
+{
+	return (*(unsigned int *)(mlx->addr + \
+		(y * mlx->line_len) + (x * (mlx->bpp / 8))));
+}
+
 void	texture_render(t_ray *ray, int x_cord)
 {
 	int	y;
@@ -151,6 +157,7 @@ void	texture_render(t_ray *ray, int x_cord)
 
 	y = ray->start;
 	text_info = get_text_info(ray);
+	text = ft_calloc(1, sizeof(t_text_info));
 	text->x = (int)(ray->wall_x * (double)text_info->width);
 	text->step = text_info->height / ray->line_height;
 	text->pos = (ray->start - HEIGHT / 2 + ray->line_height / 2) * text->step;
@@ -158,8 +165,8 @@ void	texture_render(t_ray *ray, int x_cord)
 	{
 		text->y = (int)text->pos & (text_info->height - 1);
 		text->pos += text->step;
-		color = /*Get from array containing colors with index text_info*/;
-		render_pixel((t_pos){x_cord, y, 0}, color);
+		color = _get_img_pixel(cubed()->texture[NORTH],ray->pos.x, y);
+		render_pixel((t_pos){x_cord, y, 0, 0}, color);
 		y++;
 	}
 }

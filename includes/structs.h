@@ -119,7 +119,7 @@ typedef struct s_cub
 	t_file		*content;
     t_player	*player;
     t_mx_var	*mx_var;
-	t_texture	*texture[4];
+	t_texture	**texture;
 	
 }				t_cub;
 
