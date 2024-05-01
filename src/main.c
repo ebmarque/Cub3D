@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/01 15:37:13 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/01 17:29:23 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,27 @@ int	quit_game(void)
 	exit(EXIT_SUCCESS);
 }
 
+void	_upload_texture(t_texture *text, char *path)
+{
+
+}
+
+void	_load_textures(void)
+{
+	_upload_texture(cubed()->map_name[NORTH],\
+	cubed()->content->no_t);
+	_upload_texture(cubed()->map_name[SOUTH],\
+	cubed()->content->so_t);
+	_upload_texture(cubed()->map_name[EAST],\
+	cubed()->content->ea_t);
+	_upload_texture(cubed()->map_name[WEST],\
+	cubed()->content->we_t);
+}
 
 void	game_sequence()
 {
 	mx_var_init();
+	_load_textures();
 	mlx_hook (cubed()->mx_var->win, WIN_DESTROY, DESTROY_MASK, quit_game, NULL);
 	mlx_loop_hook(cubed()->mx_var->mlx, raycaster, NULL);
 	mlx_loop(cubed()->mx_var->mlx);

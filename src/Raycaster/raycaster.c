@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/01 15:48:57 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:50:46 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	init_ray(t_ray *ray, int x_cord)
 	//Struct with data regarding the player;
 	t_player	p;
 
-	//??
 	p = *(cubed())->player;
 	x_cam = 2 * x_cord / (double)WIDTH - 1;
 	ray->pos = p.pos;
