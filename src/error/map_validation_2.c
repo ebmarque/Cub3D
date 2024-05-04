@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:17:33 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/29 15:24:18 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/04 16:57:48 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ bool	_is_player_char(char c)
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		return (true);
 	return (false);
+}
+static void	_set_player(t_file *t, int x, int y, char *line)
+{
+	t->p_position.x = (double)x;
+	t->p_position.y = (double)y;
+	t->map[y][x] = (int)line[x];
+	t->p_position.is_set = true;
 }
 
 void	_fill_map_line(t_file *t, int i, int width, char *line)
@@ -33,17 +40,14 @@ void	_fill_map_line(t_file *t, int i, int width, char *line)
 			if (line[j] == '1')
 				t->map[i][j] = 1;
 			else if (_is_player_char(line[j]))
-			{
-				t->p_position.x = (double)j;
-				t->p_position.y = (double)i;
-				t->map[i][j] = (int)line[j];
-				t->p_position.is_set = true;
-			}
-			else
+				_set_player(t, j, i, line);
+			else if (line[j] == '0')
 				t->map[i][j] = 0;
+			else
+				t->map[i][j] = 'x';
 		}
 		else
-			t->map[i][j] = 0;
+			t->map[i][j] = 'x';
 	}
 	free(line);
 }
