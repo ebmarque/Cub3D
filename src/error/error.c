@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:29 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/01 15:15:06 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:39:16 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * 
  * @param file The file name to be checked.
  */
-void	_check_file_name(char *file)
+static void	_check_file_name(char *file)
 {
 	char	*name;
 
@@ -35,7 +35,7 @@ void	_check_file_name(char *file)
  *
  * @param file The path to the file to check permissions for.
  */
-void	_check_file_permissions(char *file)
+static void	_check_file_permissions(char *file)
 {
 	int	fd;
 
@@ -55,7 +55,7 @@ void	_check_file_permissions(char *file)
  *
  * @param file The path to the file to be checked.
  */
-void	_check_empty_file(char *file)
+static void	_check_empty_file(char *file)
 {
 	char	*line;
 	int		fd;
@@ -74,6 +74,33 @@ void	_check_empty_file(char *file)
 }
 
 /**
+ * Initializes and returns a player struct with the initial 
+ * orientation based on the map.
+ * 
+ * @param t The file struct containing the map.
+ * @return A pointer to the initialized player struct.
+ */
+static t_player *_player_initial_orientation(t_file *t)
+{
+	t_player	*p;
+	int			**map;
+	char		ori;
+
+	p = ft_calloc(1, sizeof(t_player));
+	map = t->map;
+	ori = map[t->begin.x][t->begin.y];
+	if (ori == (int)'N')
+		p->dir.teta = PI / 2;
+	else if (ori == (int)'S')
+		p->dir.teta = 3 * (PI / 2);
+	else if (ori == (int)'W')
+		p->dir.teta = PI;
+	else if (ori == (int)'E')
+		p->dir.teta = 0;
+	return (p);
+}
+
+/**
  * Checks for errors in the command line arguments and the input file.
  *
  * @param argc The number of command line arguments.
@@ -87,4 +114,5 @@ void	_check_errors(int argc, char **argv)
 	_check_file_permissions(argv[1]);
 	_check_empty_file(argv[1]);
 	cubed()->content = _check_map_content(argv[1]);
+	cubed()->player = _player_initial_orientation(cubed()->content);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/01 17:29:23 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/03 20:26:12 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ t_cub	*cubed(void)
 void	mx_var_init()
 {
 	t_img	screen_buff;
-
 	cubed()->mx_var = ft_calloc(1, sizeof(t_mx_var));
 	cubed()->mx_var->mlx = mlx_init();
 	cubed()->mx_var->win = mlx_new_window(\
 		cubed()->mx_var->mlx, WIDTH, HEIGHT, "Cub3D");
 	cubed()->mx_var->img = mlx_new_image(cubed()->mx_var->mlx, \
 		WIDTH, HEIGHT);
-	screen_buff.img = mlx_new_image(cubed()->mx_var->mlx, HEIGHT - 1, WIDTH - 1);
+	screen_buff.img = mlx_new_image(cubed()->mx_var->mlx, \
+		HEIGHT - 1, WIDTH - 1);
 	screen_buff.addr = mlx_get_data_addr(screen_buff.img,
 			&screen_buff.bbp, &screen_buff.line_length,
 			&screen_buff.endian);
