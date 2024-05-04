@@ -6,11 +6,11 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/03 12:35:12 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/04 19:32:10 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/core.h"
+#include "../../includes/core.h"
 
 
 void	init_ray(t_ray *ray, int x_cord)
@@ -20,7 +20,7 @@ void	init_ray(t_ray *ray, int x_cord)
 	//Struct with data regarding the player;
 	t_player	p;
 
-	p = *(cubed())->player;
+	p = *(cubed()->player);
 	x_cam = 2 * x_cord / (double)WIDTH - 1;
 	ray->pos = p.pos;
 	ray->dir.x = p.dir.x + p.plane.x * x_cam;
@@ -92,13 +92,13 @@ void	wall_placement(t_ray *ray)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
 		ray->wall_dist = ray->side_dist.y - ray->delta_dist.y;
-	ray->line_height = (int)(HEIGHT / ray->wall_dist);
-	ray->start = -ray->line_height / 2 + HEIGHT / 2;
+	ray->line_height = (int)(WIDTH / ray->wall_dist);
+	ray->start = -ray->line_height / 2 + WIDTH / 2;
 	if (ray->start < 0)
 		ray->start = 0;
-	ray->end = ray->line_height / 2 + HEIGHT / 2;
-	if (ray->end >= HEIGHT)
-		ray->end = HEIGHT - 1;
+	ray->end = ray->line_height / 2 + WIDTH / 2;
+	if (ray->end >= WIDTH)
+		ray->end = WIDTH - 1;
 	//The value wall_X represents the exact Y value where the wall was hit,
 	//not just the integer coordinates of the wall
 	if (!ray->side)
@@ -110,9 +110,9 @@ void	wall_placement(t_ray *ray)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-t_text_info	*get_text_info(t_ray *ray)
+t_texture	*get_text_info(t_ray *ray)
 {
-	t_text_info	*text;
+	t_texture	*text;
 
 	if (!ray->side)
 	{
@@ -139,7 +139,22 @@ void	render_pixel(t_pos pos, int color)
 	img = cubed()->mx_var->screen_buffer;
 	dst = (char *)img.addr + ((int)pos.y * img.line_length + (int)pos.x
 			* (img.bbp / 8));
+	printf("%X\n", color);
 	*(unsigned int *)dst = color;
+}
+
+
+int	gen_trgb(int opacity, t_rgb color)
+{
+	if (opacity > 255 || color.r > 255 || color.g > 255 || color.b > 255)
+		return (0);
+	return (opacity << 24 | color.r << 16 | color.g << 8 | color.b);
+}
+
+int	_get_img_pixel(t_texture *mlx, int x, int y)
+{
+	return (*(unsigned int *)(mlx->addr + \
+		(y * mlx->line_len) + (x * (mlx->bpp / 8))));
 }
 
 void	texture_render(t_ray *ray, int x_cord)
@@ -151,20 +166,23 @@ void	texture_render(t_ray *ray, int x_cord)
 
 	y = ray->start;
 	text_info = get_text_info(ray);
+	text = ft_calloc(1, sizeof(t_text_info));
 	text->x = (int)(ray->wall_x * (double)text_info->width);
 	text->step = text_info->height / ray->line_height;
-	text->pos = (ray->start - HEIGHT / 2 + ray->line_height / 2) * text->step;
+	text->pos = (ray->start - WIDTH / 2 + ray->line_height / 2) * text->step;
 	while (y < ray->end)
 	{
 		text->y = (int)text->pos & (text_info->height - 1);
 		text->pos += text->step;
-		color = 0/*Get from array containing colors with index text_info*/;
-		render_pixel((t_pos){x_cord, y, 0}, color);
+		color = _get_img_pixel(cubed()->texture[NORTH], ray->wall_x * (double)text_info->height, text->y);
+		//color = _get_img_pixel(cubed()->texture[NORTH], ray->pos.x, y);
+		//color = gen_trgb(255, cubed()->content->floor);
+		render_pixel((t_pos){x_cord, y, 0, 0}, color);
 		y++;
 	}
 }
 
-int	raycaster(void)
+void	raycaster(void)
 {
     t_ray	ray;
     int		x;
@@ -179,5 +197,12 @@ int	raycaster(void)
 		texture_render(&ray, x);
 		x++;
     }
+}
+
+int	render_screen(void)
+{
+	raycaster();
+	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
+	
 	return(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/04 16:59:20 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/04 16:41:59 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,10 @@ int		_is_valid_map_line(char *line);
 
 
 /*---------------------------------- TOOLS -----------------------------------*/
-int		raycaster(void);
+void	raycaster(void);
+int	render_screen(void);
 t_cub	*cubed(void);
+
 
 /*--------------------------------- UTILS 1 ----------------------------------*/
 
