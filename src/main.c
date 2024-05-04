@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/01 19:48:27 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/04 16:40:53 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	mx_var_init()
 			&screen_buff.bbp, &screen_buff.line_length,
 			&screen_buff.endian);
 	cubed()->mx_var->screen_buffer = screen_buff;
+	cubed()->player = ft_calloc(1, sizeof(t_mx_var));
+	cubed()->player->dir.x = cubed()->content->p_position.x;
+	cubed()->player->dir.y = cubed()->content->p_position.y;
 }
 
 void	destroy_game()
@@ -58,26 +61,25 @@ int	quit_game(void)
 	exit(EXIT_SUCCESS);
 }
 
-void	_upload_texture(t_texture *text, char *path)
+t_texture	*_upload_texture(char *path)
 {
-	printf("%s\nok\n", path);
+	t_texture	*text;
+	
+	text = ft_calloc(1 ,sizeof(t_texture));
 	text->img = mlx_xpm_file_to_image(cubed()->mx_var->mlx, path,
 			&(text->width), &(text->height));
 	text->addr = mlx_get_data_addr(text->img, &text->bpp, &text->line_len,
 			&text->endian);
+	return (text);
 }
 
 void	_load_textures(void)
 {
-	cubed()->texture = ft_calloc(4 ,sizeof(t_texture));
-	_upload_texture(cubed()->texture[NORTH],\
-	cubed()->content->no_t);
-	_upload_texture(cubed()->texture[SOUTH],\
-	cubed()->content->so_t);
-	_upload_texture(cubed()->texture[EAST],\
-	cubed()->content->ea_t);
-	_upload_texture(cubed()->texture[WEST],\
-	cubed()->content->we_t);
+	cubed()->texture = ft_calloc(5 ,sizeof(t_texture));
+	cubed()->texture[NORTH] = _upload_texture(cubed()->content->no_t);
+	cubed()->texture[SOUTH] = _upload_texture(cubed()->content->so_t);
+	cubed()->texture[EAST] = _upload_texture(cubed()->content->ea_t);
+	cubed()->texture[WEST] = _upload_texture(cubed()->content->we_t);
 }
 
 void	game_sequence()
@@ -85,7 +87,7 @@ void	game_sequence()
 	mx_var_init();
 	_load_textures();
 	mlx_hook (cubed()->mx_var->win, WIN_DESTROY, DESTROY_MASK, quit_game, NULL);
-	mlx_loop_hook(cubed()->mx_var->mlx, raycaster, NULL);
+	mlx_loop_hook(cubed()->mx_var->mlx, render_screen, NULL);
 	mlx_loop(cubed()->mx_var->mlx);
 }
 
