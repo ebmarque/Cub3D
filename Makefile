@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+         #
+#    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/05/01 15:48:24 by tmoutinh         ###   ########.fr        #
+#    Updated: 2024/05/03 12:38:49 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,19 +41,16 @@ CORE_DIRECTORY = src/core
 
 RAYCASTING_DIRECTORY = src/raycaster
 
-ERROR = $(ERROR_DIRECTORY)/error.c $(ERROR_DIRECTORY)/content_error.c \
-		$(ERROR_DIRECTORY)/map_validation.c \
-		$(ERROR_DIRECTORY)/map_validation_2.c \
-		$(ERROR_DIRECTORY)/map_rules.c
+ERROR = $(addprefix $(ERROR_DIRECTORY)/, \
+		error.c content_error.c map_validation.c \
+		map_validation_2.c map_rules.c)
 
-TOOLS = $(TOOLS_DIRECTORY)/utils1.c $(TOOLS_DIRECTORY)/utils2.c \
-		$(TOOLS_DIRECTORY)/utils3.c
+TOOLS = $(addprefix $(TOOLS_DIRECTORY)/, \
+		utils1.c utils2.c utils3.c)
 
-CORE = src/main.c src/Raycaster/raycaster.c #$(CORE_DIRECTORY)/main.c
+CORE = $(addprefix $(CORE_DIRECTORY)/, main.c)
 
 SRCS = $(ERROR) $(TOOLS) $(CORE)
-
-# OBJS = $(SRCS:.c=.o)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Darwin)

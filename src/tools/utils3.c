@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 13:08:07 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/29 15:30:42 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/04 19:10:09 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,20 +124,31 @@ char	*_tab_into_spaces(char *source)
 
 void	_print_map(t_file *t)
 {
-	for (int i = 0; i < t->matrix_dimensions.y; i++)
+	int i = 0;
+	while (i < t->matrix_dimensions.y)
 	{
-		for (int j = 0; j < t->matrix_dimensions.x; j++)
+		int j = 0;
+		while (j < t->matrix_dimensions.x)
 		{
-			if (t->map[i][j] == 0)
-				printf(INVISIBLE"%d"RESET, t->map[i][j]);
+			if (t->map[i][j] == 0 || t->map[i][j] == 'x')
+				printf(INVISIBLE" "RESET);
+			else if (_is_player_char(t->map[i][j]))
+				printf(BLUE"%c"RESET, t->map[i][j]);
 			else if (t->map[i][j] == 3)
 				printf(GREEN"x"RESET);
-			else if (t->map[i][j] > 20)
-				printf(BLUE"P"RESET);
 			else
 				printf(RED"%d"RESET, t->map[i][j]);
+			j++;
 		}
 		printf("\n");
+		i++;
 	}
 	printf("\n\n");
+}
+
+t_cub	*cubed(void)
+{
+	static t_cub	cub;
+
+	return (&cub);
 }
