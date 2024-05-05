@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 18:15:27 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/04 19:12:57 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/05 16:50:58 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	_fill(t_file *t, t_point size, t_point current, int p)
 void	_flood_fill(t_file *t)
 {
 	t_point	size;
+	t_point c;
 
 	size.x = t->matrix_dimensions.x;
 	size.y = t->matrix_dimensions.y;
 	t->begin.x = (int)t->p_position.x;
 	t->begin.y = (int)t->p_position.y;
-	t_point c;
 	c.y = -1;
 	while (++c.y < size.y)
 	{

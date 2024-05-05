@@ -25,14 +25,14 @@ typedef enum e_text_index
 
 typedef struct s_player
 {
-	bool			w;
-	bool			s;
-	bool			d;
-	bool			a;
-	bool			r_w;
-	bool			r_s;
-	bool			r_a;
-	bool			r_d;
+	int				w;
+	int				s;
+	int				d;
+	int				a;
+	int				r_w;
+	int				r_s;
+	int				r_a;
+	int				r_d;
 	t_pos			pos;
 	t_pos			dir;
 	t_pos			plane;
