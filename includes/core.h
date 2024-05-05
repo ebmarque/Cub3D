@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/04 16:59:20 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:32:50 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@
 # define DESTROY_MASK (1L << 17)
 # define KEY_P_MASK (1L << 0)
 # define KEY_R_MASK (1L << 1)
+
+# define P_SPEED 5
+# define R_SPEED 0.05
 
 /*-----------------MATH--------------------*/
 #define PI 3.1415926
@@ -196,8 +199,24 @@ void	_fill_map(t_file *content, char *file, int i, int fd);
 void	_fill_map_line(t_file *t, int i, int width, char *line);
 bool	_is_player_char(char c);
 
+/*-------------------------------- MOVEMENTS ---------------------------------*/
 
+bool	_inside_y_limits(int y);
+bool	_inside_x_limits(int x);
 
 void	_check_map_rules(t_file *t);
+void	_draw_player(t_player *p, t_mx_var *m);
+int		_key_pressed(int k, void *data);
+int		_key_release(int k, void *data);
+int		_raycasting_loop(void);
+void	_handle_input(t_player *p);
+void	_print_p_inf(t_player *p);
+
+
+void	_linear_movement(t_player *p, int orientation);
+void	_strafe_movement(t_player *p, int orientation);
+void	_spin(t_player *p, int wise);
+
+void	_black_window(t_mx_var *m);
 
 #endif

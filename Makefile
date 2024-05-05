@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/05/03 12:38:49 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/05/05 15:45:52 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ INCLUDES = includes/core.h
 
 ERROR_DIRECTORY = src/error
 
+EVENTS_DIRECTORY = src/events
+
 TOOLS_DIRECTORY = src/tools
 
 CORE_DIRECTORY = src/core
@@ -45,12 +47,16 @@ ERROR = $(addprefix $(ERROR_DIRECTORY)/, \
 		error.c content_error.c map_validation.c \
 		map_validation_2.c map_rules.c)
 
+EVENTS = $(addprefix $(EVENTS_DIRECTORY)/, \
+		draw.c hooks.c movements.c \
+		movements_utils.c)
+
 TOOLS = $(addprefix $(TOOLS_DIRECTORY)/, \
 		utils1.c utils2.c utils3.c)
 
 CORE = $(addprefix $(CORE_DIRECTORY)/, main.c)
 
-SRCS = $(ERROR) $(TOOLS) $(CORE)
+SRCS = $(ERROR) $(TOOLS) $(CORE) $(EVENTS)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Darwin)
