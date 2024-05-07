@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/04 16:41:59 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/07 20:18:12 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ int		_is_valid_map_line(char *line);
 void	raycaster(void);
 int	render_screen(void);
 t_cub	*cubed(void);
+t_pos	to_screen_pos(t_pos pos);
 
 
 /*--------------------------------- UTILS 1 ----------------------------------*/
@@ -176,7 +177,6 @@ int		_is_map_line(char *line);
 void	_exit_error(char *msg);
 
 /*--------------------------------- UTILS 2 ----------------------------------*/
-t_cub	*cubed(void);
 void	_clean_content(t_file *content);
 void	_read_all_file(int fd);
 int		_all_elements_set(t_file *t);

@@ -3,30 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/04 19:32:10 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/07 23:18:21 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
 
+t_pos	to_screen_pos(t_pos pos)
+{
+	t_pos	screen_pos;
+
+	screen_pos.x = 50 + (10 * pos.x) + ((double)10 / 2);//MAP_POS + (TILE_SIZE * pos.x) + ((double)TILE_SIZE / 2);
+	screen_pos.y = 50 + (10 * pos.y) + ((double)10 / 2);//MAP_POS + (TILE_SIZE * pos.y) + ((double)TILE_SIZE / 2);
+	return (screen_pos);
+}
+
+t_pos	to_map_pos(t_pos screen_pos)
+{
+	t_pos	map_pos;
+
+	map_pos.x = (screen_pos.x - 50)/10/*MAP_POS) / TILE_SIZE*/;
+	map_pos.y = (screen_pos.y - 50)/10/*MAP_POS) / TILE_SIZE*/;
+	return (map_pos);
+}
 
 void	init_ray(t_ray *ray, int x_cord)
 {
 	//X coordinate of the camera plane;
 	double		x_cam;
 	//Struct with data regarding the player;
-	t_player	p;
+	t_player	*p;
 
-	p = *(cubed()->player);
+	p = (cubed()->player);
 	x_cam = 2 * x_cord / (double)WIDTH - 1;
-	ray->pos = p.pos;
-	ray->dir.x = p.dir.x + p.plane.x * x_cam;
-	ray->dir.y = p.dir.y + p.plane.y * x_cam;
+	ray->pos = to_map_pos(p->pos);
+	ray->dir.x = p->dir.x + p->plane.x * x_cam;
+	ray->dir.y = p->dir.y + p->plane.y * x_cam;
 	ray->delta_dist.x = fabs(1 / ray->dir.x);
 	ray->delta_dist.y = fabs(1 / ray->dir.y);
+	printf("%f %f\n", p->dir.x, p->dir.y);
 }
 //Gets distance from one x or y side to the next x or y side;
 void	get_side_dist(t_ray *ray)
@@ -77,7 +95,7 @@ void	perform_dda(t_ray *ray)
 			ray->pos.y += ray->step.y;
 			ray->side = 1;
 		}
-		//Is sufficient to check the map wall?
+		//Is sufficient to check the map wall
 		if (cubed()->content->map[(int)ray->pos.x][(int)ray->pos.y] > 0)
 			hit = true;
 	}
@@ -87,13 +105,15 @@ void	wall_placement(t_ray *ray)
 {
 	t_pos	curr;
 
-	curr = cubed()->player->pos;
+	curr = to_map_pos(cubed()->player->pos);
+	printf("%f %f \n", curr.x, curr.y);
 	if (!ray->side)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
 		ray->wall_dist = ray->side_dist.y - ray->delta_dist.y;
 	ray->line_height = (int)(WIDTH / ray->wall_dist);
 	ray->start = -ray->line_height / 2 + WIDTH / 2;
+	//printf("%d %d \n", ray->start, ray->end);
 	if (ray->start < 0)
 		ray->start = 0;
 	ray->end = ray->line_height / 2 + WIDTH / 2;
@@ -131,15 +151,14 @@ t_texture	*get_text_info(t_ray *ray)
 	return (text);
 }
 
-void	render_pixel(t_pos pos, int color)
+void	render_pixel(int x, int y, int color)
 {
 	char	*dst;
 	t_img	img;
 
 	img = cubed()->mx_var->screen_buffer;
-	dst = (char *)img.addr + ((int)pos.y * img.line_length + (int)pos.x
+	dst = (char *)img.addr + (y * img.line_length + x
 			* (img.bbp / 8));
-	printf("%X\n", color);
 	*(unsigned int *)dst = color;
 }
 
@@ -174,10 +193,11 @@ void	texture_render(t_ray *ray, int x_cord)
 	{
 		text->y = (int)text->pos & (text_info->height - 1);
 		text->pos += text->step;
-		color = _get_img_pixel(cubed()->texture[NORTH], ray->wall_x * (double)text_info->height, text->y);
+		color = _get_img_pixel(text_info, ray->wall_x, text->y);
 		//color = _get_img_pixel(cubed()->texture[NORTH], ray->pos.x, y);
 		//color = gen_trgb(255, cubed()->content->floor);
-		render_pixel((t_pos){x_cord, y, 0, 0}, color);
+		//printf("%X\n", color);
+		render_pixel(x_cord, y, color);
 		y++;
 	}
 }
