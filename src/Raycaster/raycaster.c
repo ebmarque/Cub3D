@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/07 23:18:21 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/08 23:22:34 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,18 @@ t_pos	to_screen_pos(t_pos pos)
 {
 	t_pos	screen_pos;
 
-	screen_pos.x = 50 + (10 * pos.x) + ((double)10 / 2);//MAP_POS + (TILE_SIZE * pos.x) + ((double)TILE_SIZE / 2);
-	screen_pos.y = 50 + (10 * pos.y) + ((double)10 / 2);//MAP_POS + (TILE_SIZE * pos.y) + ((double)TILE_SIZE / 2);
+	screen_pos = pos;
+	//screen_pos.x = 50 + (10 * pos.x) + ((double)10 / 2);//MAP_POS + (TILE_SIZE * pos.x) + ((double)TILE_SIZE / 2);
+	//screen_pos.y = 50 + (10 * pos.y) + ((double)10 / 2);//MAP_POS + (TILE_SIZE * pos.y) + ((double)TILE_SIZE / 2);
 	return (screen_pos);
 }
 
 t_pos	to_map_pos(t_pos screen_pos)
 {
 	t_pos	map_pos;
-
-	map_pos.x = (screen_pos.x - 50)/10/*MAP_POS) / TILE_SIZE*/;
-	map_pos.y = (screen_pos.y - 50)/10/*MAP_POS) / TILE_SIZE*/;
+	map_pos = screen_pos;
+	//map_pos.x = (screen_pos.x - 50)/10/*MAP_POS) / TILE_SIZE*/;
+	//map_pos.y = (screen_pos.y - 50)/10/*MAP_POS) / TILE_SIZE*/;
 	return (map_pos);
 }
 
@@ -111,6 +112,7 @@ void	wall_placement(t_ray *ray)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
 		ray->wall_dist = ray->side_dist.y - ray->delta_dist.y;
+	printf("%f \n", ray->wall_dist);
 	ray->line_height = (int)(WIDTH / ray->wall_dist);
 	ray->start = -ray->line_height / 2 + WIDTH / 2;
 	//printf("%d %d \n", ray->start, ray->end);
@@ -194,6 +196,7 @@ void	texture_render(t_ray *ray, int x_cord)
 		text->y = (int)text->pos & (text_info->height - 1);
 		text->pos += text->step;
 		color = _get_img_pixel(text_info, ray->wall_x, text->y);
+		printf("%f\n", ray->wall_x);
 		//color = _get_img_pixel(cubed()->texture[NORTH], ray->pos.x, y);
 		//color = gen_trgb(255, cubed()->content->floor);
 		//printf("%X\n", color);

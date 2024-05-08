@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:29 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/07 23:05:33 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/08 20:33:20 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ static t_player *_player_initial_orientation(t_file *t)
 		p->dir.teta = PI;
 	else if (ori == (int)'E')
 		p->dir.teta = 0;
-	printf("%f\n", p->dir.teta);
 	return (p);
 }
 
