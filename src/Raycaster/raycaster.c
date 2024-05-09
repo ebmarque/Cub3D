@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/08 23:22:34 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/09 20:36:17 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void	perform_dda(t_ray *ray)
 	}
 }
 
+
+//changed WIDTH for HEIGHT
 void	wall_placement(t_ray *ray)
 {
 	t_pos	curr;
@@ -113,14 +115,14 @@ void	wall_placement(t_ray *ray)
 	else
 		ray->wall_dist = ray->side_dist.y - ray->delta_dist.y;
 	printf("%f \n", ray->wall_dist);
-	ray->line_height = (int)(WIDTH / ray->wall_dist);
-	ray->start = -ray->line_height / 2 + WIDTH / 2;
+	ray->line_height = (int)(HEIGHT / ray->wall_dist);
+	ray->start = -ray->line_height / 2 + HEIGHT / 2;
 	//printf("%d %d \n", ray->start, ray->end);
 	if (ray->start < 0)
 		ray->start = 0;
-	ray->end = ray->line_height / 2 + WIDTH / 2;
-	if (ray->end >= WIDTH)
-		ray->end = WIDTH - 1;
+	ray->end = ray->line_height / 2 + HEIGHT / 2;
+	if (ray->end >= HEIGHT)
+		ray->end = HEIGHT - 1;
 	//The value wall_X represents the exact Y value where the wall was hit,
 	//not just the integer coordinates of the wall
 	if (!ray->side)
@@ -139,16 +141,16 @@ t_texture	*get_text_info(t_ray *ray)
 	if (!ray->side)
 	{
 		if (ray->dir.x < 0)
-			text = cubed()->texture[WEST];
+			text = cubed()->texture[SOUTH];
 		else
-			text = cubed()->texture[EAST];
+			text = cubed()->texture[NORTH];
 	}
 	else
 	{
 		if (ray->dir.y < 0)
-			text = cubed()->texture[NORTH];
+			text = cubed()->texture[WEST];
 		else
-			text = cubed()->texture[SOUTH];
+			text = cubed()->texture[EAST];
 	}
 	return (text);
 }
