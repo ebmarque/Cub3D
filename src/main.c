@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/09 20:30:57 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/09 23:57:18 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	mx_var_init()
 			&screen_buff.bbp, &screen_buff.line_length,
 			&screen_buff.endian);
 	cubed()->mx_var->screen_buffer = screen_buff;
+	double	swtc;
+	swtc = cubed()->player->pos.x;
 	cubed()->player->pos.x = cubed()->content->p_position.y;
-	cubed()->player->pos.y = cubed()->content->p_position.x;
+	cubed()->player->pos.y = swtc;
 	cubed()->player->pos = to_screen_pos(cubed()->player->pos);
 	//printf("%f   %f\n", cubed()->content->p_position.x, cubed()->content->p_position.y);
 	//printf("%d\n", cubed()->content->map[(int)cubed()->content->p_position.y][(int)cubed()->content->p_position.x]);
@@ -43,23 +45,23 @@ void	mx_var_init()
 	//exit(1);
 	if (cubed()->player->dir.teta == PI/2)
 	{
-		cubed()->player->dir = (t_pos) {-1,0,0,0};
-		cubed()->player->plane = (t_pos) {0,0.66,0,0};
-	}
-	else if (cubed()->player->dir.teta == 3 * (PI/2))
-	{
 		cubed()->player->dir = (t_pos) {1,0,0,0};
 		cubed()->player->plane = (t_pos) {0,-0.66,0,0};
 	}
-	else if (cubed()->player->dir.teta == PI)
+	else if (cubed()->player->dir.teta == 3 * (PI/2))
 	{
-		cubed()->player->dir = (t_pos) {0,-1,0,0};
-		cubed()->player->plane = (t_pos) {0.66,0,0,0};
+		cubed()->player->dir = (t_pos) {-1,0,0,0};
+		cubed()->player->plane = (t_pos) {0,0.66,0,0};
 	}
-	else if (cubed()->player->dir.teta == 0)
+	else if (cubed()->player->dir.teta == PI)
 	{
 		cubed()->player->dir = (t_pos) {0,1,0,0};
 		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
+	}
+	else if (cubed()->player->dir.teta == 0)
+	{
+		cubed()->player->dir = (t_pos) {0,-1,0,0};
+		cubed()->player->plane = (t_pos) {0.66,0,0,0};
 	}
 }
 
