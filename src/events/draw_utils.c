@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:35:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/08 19:39:48 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:26:51 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,45 +50,38 @@ void	_draw_map_square(t_img *img, int x, int y, int color)
 	int	i;
 	int	j;
 
-	i = x;
-	while (x < i + BLOCK_SIDE)
+	i = y;
+	j = x;
+	while (y < i + BLOCK_SIDE)
 	{
-		j = y;
-		while (y < j + BLOCK_SIDE)
+		x = j;
+		while (x < j + BLOCK_SIDE)
 		{
 			my_mlx_pixel_put(img, x, y, color);
-			j++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 }
-t_point	_get_minimap_beggin(t_player *p, t_gmap *map)
-{
-	t_point	counter;
 
-	counter.x = (int)round(p->pos.x);
-	counter.y = (int)round(p->pos.y);
-	return (counter);
-}
-
-void	_draw_map(t_player *p, t_gmap *map, t_img *img)
+void	_draw_map(t_file *t, t_img *img)
 {
-	t_point	block;
-	int		x_ref;
-	block = _get_minimap_beggin(p, map);
-	x_ref = block.x;
-	while (++block.y < (map->blk_y * 10))
+	int	y;
+	int	x;
+
+	y = -1;
+	while (++y < t->matrix_dimensions.y)
 	{
-		block.x = x_ref;
-		while (++block.x < (map->blk_x * 10))
+		x = -1;
+		while (++x < t->matrix_dimensions.x)
 		{
-			if (block.y < 0)
-				break ;
-			if (block.x < 0)
-				continue;
-			if (map->map[block.y][block.x] == 1)
-				_draw_wall(block.y, block.x, 0xFFFF0000, img);
+			if (t->map[y][x] == 1)
+				_draw_map_square(img, x * BLOCK_SIDE, y * BLOCK_SIDE, RED_BLOCK);
+			else if (t->map[y][x] == 0)
+				_draw_map_square(img, x * BLOCK_SIDE, y * BLOCK_SIDE, WHITE_BLOCK);
+			else
+				_draw_map_square(img, x * BLOCK_SIDE, y * BLOCK_SIDE, INVISIBLE_BLOCK);
 		}
 	}
-	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
+	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
 }

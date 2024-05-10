@@ -6,24 +6,20 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:45:19 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/05 19:30:41 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:16:41 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
 
-void	_print_p_inf(t_player *p)
-{
-	printf("PLAYER X: %0.3f\n", p->pos.x);
-	printf("PLAYER Y: %0.3f\n", p->pos.y);
-	printf("PLAYER ORIENTATION: %0.3f\n", p->dir.teta);
-}
 
 int	_key_pressed(int k, void *data)
 {
 	t_player	*p;
 
 	p = (t_player *)data;
+	if (k == ESC)
+		exit(0);
 	if (k == W)
 		p->w = 1;
 	if (k == S)
@@ -50,6 +46,8 @@ int	_key_release(int k, void *data)
 	t_player	*p;
 
 	p = (t_player *)data;
+	if (k == ESC)
+		exit(0);
 	if (k == W)
 		p->w = 0;
 	if (k == S)
@@ -73,7 +71,6 @@ int	_key_release(int k, void *data)
 int	_raycasting_loop(void)
 {
 	t_player *p;
-	_black_window(cubed()->mx_var);
 	p = cubed()->player;
 	if (p->w)
 		_linear_movement(p, -1);
@@ -87,6 +84,5 @@ int	_raycasting_loop(void)
 		_spin(p, -1);
 	if (p->r_d)
 		_spin(p, +1);
-	_draw_player(p, cubed()->mx_var);
 	return (0);
 }
