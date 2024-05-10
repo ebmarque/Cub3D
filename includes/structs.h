@@ -58,8 +58,16 @@ typedef struct s_text_info
 	
 }				t_text_info;
 
+/**
+ * @brief Adicionei um ponteiro para a conexao com a mlx, a ideia aqui e poder
+ * trabalhar com diferentes imagens, causando uma sobreposicao de imagens,
+ * basicamente uma ideia de 'layers; ex: jogo -> mini_map -> mini->player.
+ * 
+ */
 typedef struct s_img
 {
+	void	*mlx;
+	void	*win;
 	void	*img;
 	char	*addr;
 	int		bbp;
@@ -120,6 +128,16 @@ typedef struct s_file
 	int		map_start_line;
 	t_point	matrix_dimensions;
 }				t_file;
+
+typedef struct s_gmap
+{
+	int	max_x;
+	int	max_y;
+	int	blk_x;
+	int	blk_y;
+	int	**map;
+}				t_gmap;
+
 
 typedef struct s_cub
 {

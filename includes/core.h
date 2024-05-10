@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/05 18:32:50 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/08 17:07:26 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@
 # define KEY_P_MASK (1L << 0)
 # define KEY_R_MASK (1L << 1)
 
-# define P_SPEED 5
+# define P_SPEED 0.02
 # define R_SPEED 0.05
-
+# define BLOCK_SIDE 10
 /*-----------------MATH--------------------*/
 #define PI 3.1415926
 
@@ -218,5 +218,13 @@ void	_strafe_movement(t_player *p, int orientation);
 void	_spin(t_player *p, int wise);
 
 void	_black_window(t_mx_var *m);
+
+/*--------------------------------- COLOR U ----------------------------------*/
+
+int		gen_trgb(int opacity, t_rgb color);
+int		get_opacity(int trgb);
+int		get_r(int trgb);
+int		get_g(int trgb);
+int		get_b(int trgb);
 
 #endif

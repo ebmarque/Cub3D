@@ -6,19 +6,13 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 18:34:20 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/05 20:33:45 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/08 14:56:36 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
 
-static void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
-{
-	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bbp / 8));
-	*(unsigned int*)dst = color;
-}
 
 static void	_draw_dir(t_pos p1, t_img *img, double teta)
 {
@@ -62,53 +56,8 @@ static void	_draw_dir(t_pos p1, t_img *img, double teta)
     }
 }
 
-void	_black_window(t_mx_var *m)
-{
-	
-	for (int i = 0; i < HEIGHT; i++)
-	{
-		for (int j = 0; j < WIDTH; j++)
-		{
-			my_mlx_pixel_put(&m->screen_buffer, j, i, 0);
-		}
-	}
-	mlx_put_image_to_window(m->mlx, m->win, m->screen_buffer.img, 0, 0);
-} 
 
 
 
-static bool	_insede_p_square(t_player *p, int y, int x)
-{
-	int	px;
-	int	py;
 
-	px = (int)(round(p->pos.x));
-	py = (int)(round(p->pos.y));
-	if (x >= px - 5 && x <= px + 5)
-	{
-		if (y >= py - 5 && y <= py + 5)
-			return true;
-	}
-	return false;
-}
 
-void	_draw_player(t_player *p, t_mx_var *m)
-{
-	int	i;
-	int	j;
-	double f;
-
-	f = cubed()->player->dir.teta;
-	_draw_dir(p->pos, &m->screen_buffer, f);
-	i = -1;
-	while (++i < HEIGHT)
-	{
-		j = -1;
-		while (++j < WIDTH)
-		{
-			if (_insede_p_square(p, i, j))
-				my_mlx_pixel_put(&m->screen_buffer, j, i, 0xFFFF0000);
-		}
-	}
-	mlx_put_image_to_window(m->mlx, m->win, m->screen_buffer.img, 0, 0);
-}
