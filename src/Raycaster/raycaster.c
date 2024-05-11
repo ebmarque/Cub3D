@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/11 14:30:22 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/11 18:15:40 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	init_ray(t_ray *ray, int x_cord)
 	ray->dir.y = p->dir.y + p->plane.y * x_cam;
 	ray->delta_dist.x = fabs(1 / ray->dir.x);
 	ray->delta_dist.y = fabs(1 / ray->dir.y);
-	printf("%f %f\n", p->dir.x, p->dir.y);
+	printf("x_cam %f\n", x_cam);
+	printf("p->dir %f %f\n", p->dir.x, p->dir.y);
+	printf("p->plane %f %f\n", p->plane.x, p->plane.y);
+	printf("ray->pos %f %f\n", ray->pos.x, ray->pos.y);
 }
 //Gets distance from one x or y side to the next x or y side;
 void	get_side_dist(t_ray *ray)
@@ -110,13 +113,14 @@ void	wall_placement(t_ray *ray)
 	t_pos	curr;
 
 	curr = to_map_pos(cubed()->player->pos);
-	printf("%f %f \n", cubed()->player->pos.x, cubed()->player->pos.y);
+	printf("wall placement %f %f \n", cubed()->player->pos.x, cubed()->player->pos.y);
 	if (!ray->side)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
 		ray->wall_dist = ray->side_dist.y - ray->delta_dist.y;
 	printf("%f \n", ray->wall_dist);
 	ray->line_height = (int)(HEIGHT / ray->wall_dist);
+	printf("ray->line_height %d \n", ray->line_height);
 	ray->start = HEIGHT/2 - ray->line_height / 2;
 	//printf("%d %d \n", ray->start, ray->end);
 	if (ray->start < 0)
@@ -191,9 +195,9 @@ void	texture_render(t_ray *ray, int x_cord)
 	y = ray->start;
 	text_info = get_text_info(ray);
 	text = ft_calloc(1, sizeof(t_text_info));
-	text->x = (int)(ray->wall_x * (double)text_info->width);
-	text->step = text_info->height / ray->line_height;
-	text->pos = (ray->start - WIDTH / 2 + (double)ray->line_height / 2 * text->step);
+	text->x = (ray->wall_x * (double)text_info->width);
+	text->step = (double) text_info->height / ray->line_height;
+	text->pos = (double)(ray->start - WIDTH / 2 + ray->line_height / 2 * text->step);
 	while (y < ray->end)
 	{
 		text->y = (int)text->pos & (text_info->height - 1);

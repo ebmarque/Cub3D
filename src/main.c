@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/11 14:39:33 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/11 17:12:36 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,23 @@ void	mx_var_init()
 	//exit(1);
 	if (cubed()->player->dir.teta == PI/2)
 	{
-		cubed()->player->dir = (t_pos) {1,0,0,0};
-		cubed()->player->plane = (t_pos) {0,-0.66,0,0};
-	}
-	else if (cubed()->player->dir.teta == 3 * (PI/2))
-	{
 		cubed()->player->dir = (t_pos) {-1,0,0,0};
 		cubed()->player->plane = (t_pos) {0,0.66,0,0};
 	}
-	else if (cubed()->player->dir.teta == PI)
+	else if (cubed()->player->dir.teta == 3 * (PI/2))
 	{
-		cubed()->player->dir = (t_pos) {0,1,0,0};
-		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
+		cubed()->player->dir = (t_pos) {1,0,0,0};
+		cubed()->player->plane = (t_pos) {0,-0.66,0,0};
 	}
-	else if (cubed()->player->dir.teta == 0)
+	else if (cubed()->player->dir.teta == PI)
 	{
 		cubed()->player->dir = (t_pos) {0,-1,0,0};
 		cubed()->player->plane = (t_pos) {0.66,0,0,0};
+	}
+	else if (cubed()->player->dir.teta == 0)
+	{
+		cubed()->player->dir = (t_pos) {0,1,0,0};
+		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
 	}
 }
 
