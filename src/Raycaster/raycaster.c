@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/11 18:15:40 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/11 19:25:19 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,8 +196,8 @@ void	texture_render(t_ray *ray, int x_cord)
 	text_info = get_text_info(ray);
 	text = ft_calloc(1, sizeof(t_text_info));
 	text->x = (ray->wall_x * (double)text_info->width);
-	text->step = (double) text_info->height / ray->line_height;
-	text->pos = (double)(ray->start - WIDTH / 2 + ray->line_height / 2 * text->step);
+	text->step = (double)text_info->height / ray->line_height;
+	text->pos = (ray->start - (double)WIDTH / 2 + (double)ray->line_height / 2 * text->step);
 	while (y < ray->end)
 	{
 		text->y = (int)text->pos & (text_info->height - 1);
