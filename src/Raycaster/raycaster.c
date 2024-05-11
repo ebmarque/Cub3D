@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/09 23:59:02 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/11 14:30:22 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	wall_placement(t_ray *ray)
 	t_pos	curr;
 
 	curr = to_map_pos(cubed()->player->pos);
-	printf("%f %f \n", curr.x, curr.y);
+	printf("%f %f \n", cubed()->player->pos.x, cubed()->player->pos.y);
 	if (!ray->side)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
@@ -198,8 +198,8 @@ void	texture_render(t_ray *ray, int x_cord)
 	{
 		text->y = (int)text->pos & (text_info->height - 1);
 		text->pos += text->step;
-		color = _get_img_pixel(text_info, text_info->width - text->x - 1, text->y);
-		printf("%f\n", ray->wall_x);
+		color = _get_img_pixel(text_info, text->x, text->y);
+		//printf("%f\n", ray->wall_x);
 		//color = _get_img_pixel(cubed()->texture[NORTH], ray->pos.x, y);
 		//color = gen_trgb(255, cubed()->content->floor);
 		//printf("%X\n", color);
