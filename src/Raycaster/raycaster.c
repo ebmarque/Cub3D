@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/11 19:25:19 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/12 15:58:27 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ void	wall_placement(t_ray *ray)
 	else
 		ray->wall_dist = ray->side_dist.y - ray->delta_dist.y;
 	printf("%f \n", ray->wall_dist);
-	ray->line_height = (int)(HEIGHT / ray->wall_dist);
-	printf("ray->line_height %d \n", ray->line_height);
+	ray->line_height = (double)(HEIGHT / ray->wall_dist);
+	//printf("ray->line_height %d \n", ray->line_height);
 	ray->start = HEIGHT/2 - ray->line_height / 2;
 	//printf("%d %d \n", ray->start, ray->end);
 	if (ray->start < 0)
@@ -202,7 +202,7 @@ void	texture_render(t_ray *ray, int x_cord)
 	{
 		text->y = (int)text->pos & (text_info->height - 1);
 		text->pos += text->step;
-		color = _get_img_pixel(text_info, text->x, text->y);
+		color = _get_img_pixel(text_info, text_info->height - text->x - 1, text->y);
 		//printf("%f\n", ray->wall_x);
 		//color = _get_img_pixel(cubed()->texture[NORTH], ray->pos.x, y);
 		//color = gen_trgb(255, cubed()->content->floor);
