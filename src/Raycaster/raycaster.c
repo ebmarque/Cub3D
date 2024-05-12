@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/12 15:58:27 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/12 17:44:15 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ void	raycaster(void)
     int		x;
 
     x = 0;
+	_black_window(&cubed()->mx_var->screen_buffer);
     while(x < WIDTH)
     {
         init_ray(&ray, x);
@@ -231,7 +232,9 @@ void	raycaster(void)
 
 int	render_screen(void)
 {
+	_raycasting_loop();
 	raycaster();
+	
 	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
 	
 	return(EXIT_SUCCESS);

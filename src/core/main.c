@@ -12,6 +12,13 @@
 
 #include "../../includes/core.h"
 
+t_cub	*cubed(void)
+{
+	static t_cub	cub;
+
+	return (&cub);
+}
+
 int quit_game(void)
 {
 	exit(EXIT_SUCCESS);

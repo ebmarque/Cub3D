@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:35:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/12 16:02:02 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/12 18:49:51 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,21 @@ void	_draw_map_square(t_img *img, int x, int y, int color)
 
 void	_draw_p_square(t_img *img, int x, int y, int color)
 {
-	int	i;
-	int	j;
+	t_point	center;
+	// float	block_y = (HEIGHT / cubed()->content->matrix_dimensions.y);
+	// float	block_x = (WIDTH / cubed()->content->matrix_dimensions.x);
 
-	i = y;
-	j = x;
-	int	block_y = (int)round(((HEIGHT / cubed()->content->matrix_dimensions.y) * 0.98));
-	int	block_x = (int)round(((WIDTH / cubed()->content->matrix_dimensions.x) * 0.98));
-	while (y < i + block_y)
+	center.x = x /* * block_x */;
+	center.y = y/*  * block_y */;
+	y = -1;
+	while (++y < HEIGHT)
 	{
-		x = j;
-		while (x < j + block_x)
+		x = -1;
+		while (++x < WIDTH)
 		{
-			my_mlx_pixel_put(img, x, y, color);
-			x++;
+			if (_insede_p_square(x, y, P_SIZE, center))
+				my_mlx_pixel_put(img, x, y, color);
 		}
-		y++;
 	}
 }
 
@@ -94,13 +93,11 @@ void	_draw_player(t_player *p, t_file *t, t_img *img)
 
 	y = (int)(round(p->pos.y));
 	x = (int)(round(p->pos.x));
-	int	block_y = (int)round(((HEIGHT / cubed()->content->matrix_dimensions.y)));
-	int	block_x = (int)round(((WIDTH / cubed()->content->matrix_dimensions.x)));
 	(void)t;
 	/* if (x + P_SIZE > WIDTH \
 		|| y + P_SIZE > HEIGHT)
 		return ; */
-	_draw_p_square(img, x * block_x, y * block_y, 0xFFFF00FF);
+	_draw_p_square(img, x, y, 0xFFFF00FF);
 }
 
 void	_draw_map(t_file *t, t_img *img)
@@ -119,7 +116,7 @@ void	_draw_map(t_file *t, t_img *img)
 		{
 			if (t->map[y][x] == 1)
 				_draw_map_square(img, x * block_x, y * block_y, RED_BLOCK);
-			else if (t->map[y][x] == 0)
+			else/*  if (t->map[y][x] == 0) */
 				_draw_map_square(img, x * block_x, y * block_y, WHITE_BLOCK);
 		}
 	}

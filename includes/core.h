@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/12 16:06:29 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/12 18:49:59 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@
 # define KEY_P_MASK (1L << 0)
 # define KEY_R_MASK (1L << 1)
 
-# define P_SPEED 0.01
+# define P_SPEED 1
 # define R_SPEED 0.05
-# define BLOCK_SIZE 10
-# define P_SIZE 30
+# define BLOCK_SIZE 5
+# define P_SIZE 10
 # define RED_BLOCK 0x00FF0000
 # define WHITE_BLOCK 0x00FFFFFF
 # define INVISIBLE_BLOCK 0xFF000000
@@ -170,11 +170,8 @@ int		_is_valid_map_line(char *line);
 
 
 /*---------------------------------- TOOLS -----------------------------------*/
-void	raycaster(void);
-int	render_screen(void);
+int		raycaster(void);
 t_cub	*cubed(void);
-t_pos	to_screen_pos(t_pos pos);
-
 
 /*--------------------------------- UTILS 1 ----------------------------------*/
 
@@ -184,6 +181,7 @@ int		_is_map_line(char *line);
 void	_exit_error(char *msg);
 
 /*--------------------------------- UTILS 2 ----------------------------------*/
+t_cub	*cubed(void);
 void	_clean_content(t_file *content);
 void	_read_all_file(int fd);
 int		_all_elements_set(t_file *t);

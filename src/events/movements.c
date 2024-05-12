@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:05:24 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/12 16:07:17 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/12 18:48:10 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ bool	_is_matrix_wall(float ny, float nx)
 	y = (int)(ny);
 	x = (int)(nx);
 	map = cubed()->content->map;
-	if (map[y][x] == 1)
+	if (map[y][x] == 1 /* \
+		|| map[y][(int)round(x + 0.6)] == 1 \
+		|| map[(int)round(y + 0.6)][x] == 1 \
+		|| map[(int)round(y + 0.6)][(int)round(x + 0.6)] == 1 */)
 		return (true);
 	return (false);
 }
@@ -42,9 +45,9 @@ void	_linear_movement(t_player *p, int orientation)
 	teta = p->dir.teta;
 	new_y = ((sin(teta) * speed) * orientation) + p->pos.y;
 	new_x = ((cos(teta) * speed) * orientation) + p->pos.x;
-	if (!_is_matrix_wall(new_y, p->pos.x))
+	// if (!_is_matrix_wall(new_y, p->pos.x))
 		p->pos.y = new_y;
-	if (!_is_matrix_wall(p->pos.y, new_x))
+	// if (!_is_matrix_wall(p->pos.y, new_x))
 		p->pos.x = new_x;
 }
 
@@ -64,9 +67,9 @@ void	_strafe_movement(t_player *p, int orientation)
 	teta = (3 * (PI / 2)) + p->dir.teta;
 	new_y = (sin(teta) * speed * orientation) + p->pos.y;
 	new_x = (cos(teta) * speed * orientation) + p->pos.x;
-	if (!_is_matrix_wall(new_y, p->pos.x))
+	// if (!_is_matrix_wall(new_y, p->pos.x))
 		p->pos.y = new_y;
-	if (!_is_matrix_wall(p->pos.y, new_x))
+	// if (!_is_matrix_wall(p->pos.y, new_x))
 		p->pos.x = new_x;
 	/* if (new_y >= 0 && new_y + P_SIZE <= HEIGHT)
 		p->pos.y = new_y;
