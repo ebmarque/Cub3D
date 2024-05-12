@@ -38,11 +38,10 @@ int main(int argc, char *argv[])
 	// t_cub	cub;
 	_check_errors(argc, argv);
 	mx_var_init();
-	_draw_map(cubed()->content, &cubed()->mx_var->screen_buffer);
-	// mlx_hook(cubed()->mx_var->win, WIN_DESTROY, DESTROY_MASK, quit_game, NULL);
-	// mlx_hook(cubed()->mx_var->win, KEY_PRESSED, KEY_P_MASK, _key_pressed, cubed()->player);
-	// mlx_hook(cubed()->mx_var->win, KEY_RELEASED, KEY_R_MASK, _key_release, cubed()->player);
-	// mlx_loop_hook(cubed()->mx_var->mlx, _raycasting_loop, cubed()->player);
+	mlx_hook(cubed()->mx_var->win, WIN_DESTROY, DESTROY_MASK, quit_game, NULL);
+	mlx_hook(cubed()->mx_var->win, KEY_PRESSED, KEY_P_MASK, _key_pressed, cubed()->player);
+	mlx_hook(cubed()->mx_var->win, KEY_RELEASED, KEY_R_MASK, _key_release, cubed()->player);
+	mlx_loop_hook(cubed()->mx_var->mlx, _raycasting_loop, cubed()->player);
 	mlx_loop(cubed()->mx_var->mlx);
 	return (0);
 }

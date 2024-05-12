@@ -6,11 +6,25 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:05:24 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/05 20:30:39 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/12 16:07:17 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
+
+bool	_is_matrix_wall(float ny, float nx)
+{
+	int	**map;
+	int	y;
+	int	x;
+
+	y = (int)(ny);
+	x = (int)(nx);
+	map = cubed()->content->map;
+	if (map[y][x] == 1)
+		return (true);
+	return (false);
+}
 
 void	_linear_movement(t_player *p, int orientation)
 {
@@ -28,9 +42,9 @@ void	_linear_movement(t_player *p, int orientation)
 	teta = p->dir.teta;
 	new_y = ((sin(teta) * speed) * orientation) + p->pos.y;
 	new_x = ((cos(teta) * speed) * orientation) + p->pos.x;
-	if (new_y >= 0 && new_y <= HEIGHT)
+	if (!_is_matrix_wall(new_y, p->pos.x))
 		p->pos.y = new_y;
-	if (new_x >= 0 && new_x <= WIDTH)
+	if (!_is_matrix_wall(p->pos.y, new_x))
 		p->pos.x = new_x;
 }
 
@@ -50,10 +64,14 @@ void	_strafe_movement(t_player *p, int orientation)
 	teta = (3 * (PI / 2)) + p->dir.teta;
 	new_y = (sin(teta) * speed * orientation) + p->pos.y;
 	new_x = (cos(teta) * speed * orientation) + p->pos.x;
-	if (new_y - 5 >= 0 && new_y + 5<= HEIGHT)
+	if (!_is_matrix_wall(new_y, p->pos.x))
 		p->pos.y = new_y;
-	if (new_x - 5 >= 0 && new_x + 5<= WIDTH)
+	if (!_is_matrix_wall(p->pos.y, new_x))
 		p->pos.x = new_x;
+	/* if (new_y >= 0 && new_y + P_SIZE <= HEIGHT)
+		p->pos.y = new_y;
+	if (new_x >= 0 && new_x + P_SIZE<= WIDTH)
+		p->pos.x = new_x; */
 }
 void	_spin(t_player *p, int wise)
 {

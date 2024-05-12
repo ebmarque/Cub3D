@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:45:19 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/10 17:16:41 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/12 12:56:30 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ int	_raycasting_loop(void)
 		_spin(p, -1);
 	if (p->r_d)
 		_spin(p, +1);
+	_draw_map(cubed()->content, &cubed()->mx_var->screen_buffer);
 	return (0);
 }

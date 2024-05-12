@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/10 17:32:49 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/12 16:06:29 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,10 @@
 # define KEY_P_MASK (1L << 0)
 # define KEY_R_MASK (1L << 1)
 
-# define P_SPEED 0.02
+# define P_SPEED 0.01
 # define R_SPEED 0.05
-# define BLOCK_SIDE 10
+# define BLOCK_SIZE 10
+# define P_SIZE 30
 # define RED_BLOCK 0x00FF0000
 # define WHITE_BLOCK 0x00FFFFFF
 # define INVISIBLE_BLOCK 0xFF000000
