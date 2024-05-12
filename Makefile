@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tiago <tiago@student.42.fr>                +#+  +:+       +#+         #
+#    By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/05/10 17:03:06 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/05/12 16:15:36 by tmoutinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ CORE = $(addprefix $(SRC_DIRECTORY)/, main.c)
 #SRCS = $(ERROR) $(TOOLS) $(CORE) $(EVENTS)
 
 RAYCASTER = $(addprefix $(RAYCASTING_DIRECTORY)/, raycaster.c)
-SRCS = $(ERROR) $(TOOLS) $(CORE) $(RAYCASTER)
+SRCS = $(ERROR) $(TOOLS) $(CORE) $(RAYCASTER) $(EVENTS)
 
 
 UNAME_S := $(shell uname -s)

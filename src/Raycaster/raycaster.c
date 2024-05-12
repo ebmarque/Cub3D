@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/12 15:58:27 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/12 18:57:35 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,14 +171,6 @@ void	render_pixel(int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-
-int	gen_trgb(int opacity, t_rgb color)
-{
-	if (opacity > 255 || color.r > 255 || color.g > 255 || color.b > 255)
-		return (0);
-	return (opacity << 24 | color.r << 16 | color.g << 8 | color.b);
-}
-
 int	_get_img_pixel(t_texture *mlx, int x, int y)
 {
 	return (*(unsigned int *)(mlx->addr + \
@@ -203,10 +195,7 @@ void	texture_render(t_ray *ray, int x_cord)
 		text->y = (int)text->pos & (text_info->height - 1);
 		text->pos += text->step;
 		color = _get_img_pixel(text_info, text_info->height - text->x - 1, text->y);
-		//printf("%f\n", ray->wall_x);
-		//color = _get_img_pixel(cubed()->texture[NORTH], ray->pos.x, y);
 		//color = gen_trgb(255, cubed()->content->floor);
-		//printf("%X\n", color);
 		render_pixel(x_cord, y, color);
 		y++;
 	}
@@ -231,6 +220,9 @@ void	raycaster(void)
 
 int	render_screen(void)
 {
+	_black_window(&cubed()->mx_var->screen_buffer);
+	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
+	_raycasting_loop();
 	raycaster();
 	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
 	
