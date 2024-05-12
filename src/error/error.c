@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:29 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/08 20:33:20 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/05 20:41:21 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,20 @@ static t_player *_player_initial_orientation(t_file *t)
 	char		ori;
 
 	p = ft_calloc(1, sizeof(t_player));
+	p->pos.x = t->p_position.x;
+	p->pos.y = t->p_position.y;
 	map = t->map;
-	ori = map[t->begin.y][t->begin.x];
-	if (ori == (int)'N')
+	ori = (char)map[(int)t->p_position.y][(int)t->p_position.x];
+	if (ori == 'N')
 		p->dir.teta = PI / 2;
-	else if (ori == (int)'S')
+	else if (ori == 'S')
 		p->dir.teta = 3 * (PI / 2);
-	else if (ori == (int)'W')
+	else if (ori == 'W')
 		p->dir.teta = PI;
-	else if (ori == (int)'E')
+	else if (ori == 'E')
 		p->dir.teta = 0;
+	p->dir.x = cos(p->dir.teta);
+	p->dir.y = sin(p->dir.teta);
 	return (p);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/07 20:18:12 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/12 16:06:29 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,13 @@
 # define KEY_P_MASK (1L << 0)
 # define KEY_R_MASK (1L << 1)
 
+# define P_SPEED 0.01
+# define R_SPEED 0.05
+# define BLOCK_SIZE 10
+# define P_SIZE 30
+# define RED_BLOCK 0x00FF0000
+# define WHITE_BLOCK 0x00FFFFFF
+# define INVISIBLE_BLOCK 0xFF000000
 /*-----------------MATH--------------------*/
 #define PI 3.1415926
 
@@ -198,8 +205,39 @@ void	_fill_map(t_file *content, char *file, int i, int fd);
 void	_fill_map_line(t_file *t, int i, int width, char *line);
 bool	_is_player_char(char c);
 
+/*-------------------------------- MOVEMENTS ---------------------------------*/
 
+bool	_inside_y_limits(int y);
+bool	_inside_x_limits(int x);
 
 void	_check_map_rules(t_file *t);
+int		_key_pressed(int k, void *data);
+int		_key_release(int k, void *data);
+int		_raycasting_loop(void);
+void	_handle_input(t_player *p);
+
+
+void	_linear_movement(t_player *p, int orientation);
+void	_strafe_movement(t_player *p, int orientation);
+void	_spin(t_player *p, int wise);
+
+
+/*--------------------------------- COLOR U ----------------------------------*/
+
+int		gen_trgb(int opacity, t_rgb color);
+int		get_opacity(int trgb);
+int		get_r(int trgb);
+int		get_g(int trgb);
+int		get_b(int trgb);
+
+/*--------------------------------- COLOR U ----------------------------------*/
+
+void	_draw_map_square(t_img *img, int x, int y, int color);
+bool	_insede_p_square(int x, int y, int side_l, t_point c);
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void	_black_window(t_img *m);
+void	_draw_map(t_file *t, t_img *img);
+
+
 
 #endif

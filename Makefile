@@ -6,7 +6,7 @@
 #    By: tiago <tiago@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/05/06 22:41:38 by tiago            ###   ########.fr        #
+#    Updated: 2024/05/10 17:03:06 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ INCLUDES = includes/core.h
 
 ERROR_DIRECTORY = src/error
 
+EVENTS_DIRECTORY = src/events
+
 TOOLS_DIRECTORY = src/tools
 
 CORE_DIRECTORY = src/core
@@ -45,14 +47,21 @@ ERROR = $(addprefix $(ERROR_DIRECTORY)/, \
 		error.c content_error.c map_validation.c \
 		map_validation_2.c map_rules.c)
 
+EVENTS = $(addprefix $(EVENTS_DIRECTORY)/, \
+		draw.c hooks.c movements.c \
+		movements_utils.c draw_utils.c color_utils.c )
+
 TOOLS = $(addprefix $(TOOLS_DIRECTORY)/, \
 		utils1.c utils2.c utils3.c)
 
 CORE = $(addprefix $(SRC_DIRECTORY)/, main.c)
 
-RAYCASTER = $(addprefix $(RAYCASTING_DIRECTORY)/, raycaster.c)
 
+#SRCS = $(ERROR) $(TOOLS) $(CORE) $(EVENTS)
+
+RAYCASTER = $(addprefix $(RAYCASTING_DIRECTORY)/, raycaster.c)
 SRCS = $(ERROR) $(TOOLS) $(CORE) $(RAYCASTER)
+
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Darwin)
