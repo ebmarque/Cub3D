@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/03 20:26:12 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/12 16:08:03 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,39 @@ void	mx_var_init()
 	cubed()->mx_var->img = mlx_new_image(cubed()->mx_var->mlx, \
 		WIDTH, HEIGHT);
 	screen_buff.img = mlx_new_image(cubed()->mx_var->mlx, \
-		HEIGHT - 1, WIDTH - 1);
+		WIDTH, HEIGHT);
 	screen_buff.addr = mlx_get_data_addr(screen_buff.img,
 			&screen_buff.bbp, &screen_buff.line_length,
 			&screen_buff.endian);
 	cubed()->mx_var->screen_buffer = screen_buff;
+	cubed()->player->pos.x = cubed()->content->p_position.y;
+	cubed()->player->pos.y = cubed()->content->p_position.x;
+	cubed()->player->pos = to_screen_pos(cubed()->player->pos);
+	//printf("%f   %f\n", cubed()->content->p_position.x, cubed()->content->p_position.y);
+	//printf("%f   %f\n", cubed()->player->pos.x, cubed()->player->pos.y);
+	//printf("%d\n", cubed()->content->map[(int)cubed()->content->p_position.y][(int)cubed()->content->p_position.x]);
+	//printf("%f   %f\n", cubed()->player->pos.x, cubed()->player->pos.y);
+	//exit(1);
+	if (cubed()->player->dir.teta == PI/2)
+	{
+		cubed()->player->dir = (t_pos) {-1,0,0,0};
+		cubed()->player->plane = (t_pos) {0,0.66,0,0};
+	}
+	else if (cubed()->player->dir.teta == 3 * (PI/2))
+	{
+		cubed()->player->dir = (t_pos) {1,0,0,0};
+		cubed()->player->plane = (t_pos) {0,-0.66,0,0};
+	}
+	else if (cubed()->player->dir.teta == PI)
+	{
+		cubed()->player->dir = (t_pos) {0,-1,0,0};
+		cubed()->player->plane = (t_pos) {0.66,0,0,0};
+	}
+	else if (cubed()->player->dir.teta == 0)
+	{
+		cubed()->player->dir = (t_pos) {0,1,0,0};
+		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
+	}
 }
 
 void	destroy_game()
@@ -58,21 +86,25 @@ int	quit_game(void)
 	exit(EXIT_SUCCESS);
 }
 
-void	_upload_texture(t_texture *text, char *path)
+t_texture	*_upload_texture(char *path)
 {
-
+	t_texture	*text;
+	
+	text = ft_calloc(1 ,sizeof(t_texture));
+	text->img = mlx_xpm_file_to_image(cubed()->mx_var->mlx, path,
+			&(text->width), &(text->height));
+	text->addr = mlx_get_data_addr(text->img, &text->bpp, &text->line_len,
+			&text->endian);
+	return (text);
 }
 
 void	_load_textures(void)
 {
-	_upload_texture(cubed()->map_name[NORTH],\
-	cubed()->content->no_t);
-	_upload_texture(cubed()->map_name[SOUTH],\
-	cubed()->content->so_t);
-	_upload_texture(cubed()->map_name[EAST],\
-	cubed()->content->ea_t);
-	_upload_texture(cubed()->map_name[WEST],\
-	cubed()->content->we_t);
+	cubed()->texture = ft_calloc(5 ,sizeof(t_texture));
+	cubed()->texture[NORTH] = _upload_texture(cubed()->content->no_t);
+	cubed()->texture[SOUTH] = _upload_texture(cubed()->content->so_t);
+	cubed()->texture[EAST] = _upload_texture(cubed()->content->ea_t);
+	cubed()->texture[WEST] = _upload_texture(cubed()->content->we_t);
 }
 
 void	game_sequence()
@@ -80,7 +112,7 @@ void	game_sequence()
 	mx_var_init();
 	_load_textures();
 	mlx_hook (cubed()->mx_var->win, WIN_DESTROY, DESTROY_MASK, quit_game, NULL);
-	mlx_loop_hook(cubed()->mx_var->mlx, raycaster, NULL);
+	mlx_loop_hook(cubed()->mx_var->mlx, render_screen, NULL);
 	mlx_loop(cubed()->mx_var->mlx);
 }
 

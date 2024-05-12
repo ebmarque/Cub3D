@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 13:08:07 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/04 19:10:09 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/06 22:34:22 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,9 +146,9 @@ void	_print_map(t_file *t)
 	printf("\n\n");
 }
 
-t_cub	*cubed(void)
-{
-	static t_cub	cub;
+// t_cub	*cubed(void)
+// {
+// 	static t_cub	cub;
 
-	return (&cub);
-}
+// 	return (&cub);
+// }

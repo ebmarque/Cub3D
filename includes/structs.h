@@ -17,10 +17,10 @@ typedef struct s_point
 
 typedef enum e_text_index
 {
-	NORTH,
-	SOUTH,
-	WEST,
-	EAST,
+	NORTH = 0,
+	SOUTH = 1,
+	WEST = 2,
+	EAST = 3,
 }	t_text_index;
 
 typedef struct s_player
@@ -145,7 +145,7 @@ typedef struct s_cub
 	t_file		*content;
     t_player	*player;
     t_mx_var	*mx_var;
-	t_texture	*texture[4];
+	t_texture	**texture;
 	
 }				t_cub;
 
