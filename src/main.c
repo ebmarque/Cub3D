@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/04 16:40:53 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/12 16:08:03 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,39 @@ void	mx_var_init()
 	cubed()->mx_var->img = mlx_new_image(cubed()->mx_var->mlx, \
 		WIDTH, HEIGHT);
 	screen_buff.img = mlx_new_image(cubed()->mx_var->mlx, \
-		HEIGHT - 1, WIDTH - 1);
+		WIDTH, HEIGHT);
 	screen_buff.addr = mlx_get_data_addr(screen_buff.img,
 			&screen_buff.bbp, &screen_buff.line_length,
 			&screen_buff.endian);
 	cubed()->mx_var->screen_buffer = screen_buff;
-	cubed()->player = ft_calloc(1, sizeof(t_mx_var));
-	cubed()->player->dir.x = cubed()->content->p_position.x;
-	cubed()->player->dir.y = cubed()->content->p_position.y;
+	cubed()->player->pos.x = cubed()->content->p_position.y;
+	cubed()->player->pos.y = cubed()->content->p_position.x;
+	cubed()->player->pos = to_screen_pos(cubed()->player->pos);
+	//printf("%f   %f\n", cubed()->content->p_position.x, cubed()->content->p_position.y);
+	//printf("%f   %f\n", cubed()->player->pos.x, cubed()->player->pos.y);
+	//printf("%d\n", cubed()->content->map[(int)cubed()->content->p_position.y][(int)cubed()->content->p_position.x]);
+	//printf("%f   %f\n", cubed()->player->pos.x, cubed()->player->pos.y);
+	//exit(1);
+	if (cubed()->player->dir.teta == PI/2)
+	{
+		cubed()->player->dir = (t_pos) {-1,0,0,0};
+		cubed()->player->plane = (t_pos) {0,0.66,0,0};
+	}
+	else if (cubed()->player->dir.teta == 3 * (PI/2))
+	{
+		cubed()->player->dir = (t_pos) {1,0,0,0};
+		cubed()->player->plane = (t_pos) {0,-0.66,0,0};
+	}
+	else if (cubed()->player->dir.teta == PI)
+	{
+		cubed()->player->dir = (t_pos) {0,-1,0,0};
+		cubed()->player->plane = (t_pos) {0.66,0,0,0};
+	}
+	else if (cubed()->player->dir.teta == 0)
+	{
+		cubed()->player->dir = (t_pos) {0,1,0,0};
+		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
+	}
 }
 
 void	destroy_game()

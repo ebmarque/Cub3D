@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:29 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/04 14:39:16 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/08 20:33:20 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static t_player *_player_initial_orientation(t_file *t)
 
 	p = ft_calloc(1, sizeof(t_player));
 	map = t->map;
-	ori = map[t->begin.x][t->begin.y];
+	ori = map[t->begin.y][t->begin.x];
 	if (ori == (int)'N')
 		p->dir.teta = PI / 2;
 	else if (ori == (int)'S')
