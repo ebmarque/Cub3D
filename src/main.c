@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/12 18:54:30 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/15 22:26:53 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ t_cub	*cubed(void)
 
 void	update_player()
 {
-	cubed()->player->dir = (t_pos) {(int)roundf(cos(cubed()->player->dir.teta)),(int)roundf(sin(cubed()->player->dir.teta)),0,0};
-	cubed()->player->plane =  /* cubed()->player->dir; */(t_pos) {(int)roundf(cos(cubed()->player->dir.teta * 0.33)),(int)roundf(sin(cubed()->player->dir.teta * 0.33)),0,0};
-	/* if (cubed()->player->dir.teta == PI/2)
+	//cubed()->player->dir = (t_pos) {(int)roundf(cos(cubed()->player->dir.teta)),(int)roundf(sin(cubed()->player->dir.teta)),0,0};
+	//cubed()->player->plane =  /* cubed()->player->dir; */(t_pos) {(int)roundf(cos(cubed()->player->dir.teta * 0.33)),(int)roundf(sin(cubed()->player->dir.teta * 0.33)),0,0};
+	if (cubed()->player->dir.teta == PI/2)
 	{
-		cubed()->player->dir = (t_pos) {-1, 0,0,0};
-		cubed()->player->plane = (t_pos) {0, 0.66,0,0};
+		cubed()->player->dir = (t_pos) {1, 0,0,0};
+		cubed()->player->plane = (t_pos) {0, -0.66,0,0};
 	}
 	else if (cubed()->player->dir.teta == 3 * (PI/2))
 	{
-		cubed()->player->dir = (t_pos) {1,0,0,0};
-		cubed()->player->plane = (t_pos) {0,-0.66,0,0};
+		cubed()->player->dir = (t_pos) {-1,0,0,0};
+		cubed()->player->plane = (t_pos) {0,0.66,0,0};
 	}
 	else if (cubed()->player->dir.teta == PI)
 	{
@@ -42,7 +42,7 @@ void	update_player()
 	{
 		cubed()->player->dir = (t_pos) {0,1,0,0};
 		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
-	} */
+	}
 }
 
 void	mx_var_init()
