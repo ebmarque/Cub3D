@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/15 23:07:51 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/16 20:07:31 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@ void	init_ray(t_ray *ray, int x_cord)
 	ray->dir.y = p->dir.y + p->plane.y * x_cam;
 	ray->delta_dist.x = fabs(1 / ray->dir.x);
 	ray->delta_dist.y = fabs(1 / ray->dir.y);
-/* 	printf("x_cam %f\n", x_cam);
-	printf("p->dir %f %f\n", p->dir.x, p->dir.y);
-	printf("p->plane %f %f\n", p->plane.x, p->plane.y);
-	printf("ray->pos %f %f\n", ray->pos.x, ray->pos.y); */
 }
 //Gets distance from one x or y side to the next x or y side;
 void	get_side_dist(t_ray *ray)
@@ -113,16 +109,12 @@ void	wall_placement(t_ray *ray)
 	t_pos	curr;
 
 	curr = to_map_pos(cubed()->player->pos);
-	//printf("wall placement %f %f \n", cubed()->player->pos.x, cubed()->player->pos.y);
 	if (!ray->side)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
 		ray->wall_dist = ray->side_dist.y - ray->delta_dist.y;
-	//printf("%f \n", ray->wall_dist);
 	ray->line_height = (int)(HEIGHT / ray->wall_dist);
-	//printf("ray->line_height %d \n", ray->line_height);
 	ray->start = HEIGHT/2 - ray->line_height / 2;
-	//printf("%d %d \n", ray->start, ray->end);
 	if (ray->start < 0)
 		ray->start = 0;
 	ray->end = ray->line_height / 2 + HEIGHT / 2;
@@ -137,7 +129,6 @@ void	wall_placement(t_ray *ray)
 	//Floor is a C function that returns the largest integer value not greater than x;
 	//this allows to get the non integer part of the wall_x;
 	ray->wall_x -= floor(ray->wall_x);
-	printf("%f\n", ray->wall_x);
 }
 
 t_texture	*get_text_info(t_ray *ray)
@@ -226,6 +217,6 @@ int	render_screen(void)
 	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
 	raycaster();
 	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
-	
+	printf("palyer dir x %f, player dir y %f\n", cubed()->player->dir.x, cubed()->player->dir.y);
 	return(EXIT_SUCCESS);
 }

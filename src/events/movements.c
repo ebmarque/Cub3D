@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:05:24 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/14 22:12:23 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/16 20:48:14 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	_strafe_movement(t_player *p, int orientation)
 void	_spin(t_player *p, int wise)
 {
 	double	new_teta;
+	t_pos	plane;
 
 	new_teta = p->dir.teta + (wise * R_SPEED);
 	if (new_teta >= 2 * PI)
@@ -85,6 +86,9 @@ void	_spin(t_player *p, int wise)
 	p->dir.teta = new_teta;
 	p->dir.y = sin(p->dir.teta);
 	p->dir.x = cos(p->dir.teta);
+	plane.y = p->plane.x * sin(p->dir.teta) + p->plane.y * cos(p->dir.teta);
+	plane.x = p->plane.x * cos(p->dir.teta) - p->plane.y * sin(p->dir.teta);
+	p->plane = plane;
 }
 
 void	_handle_walk(t_player *p)
