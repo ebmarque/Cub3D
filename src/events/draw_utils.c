@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:35:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/12 16:02:02 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:55:50 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,96 +33,53 @@ void	_black_window(t_img *m)
 	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
 }
 
-bool	_insede_p_square(int x, int y, int side_l, t_point c)
-{
-	if (x < 0 || y < 0)
-		return (false);
-	if (x >= c.x - (int)(side_l / 2) && x <= c.x + (int)(side_l / 2))
-	{
-		if (y >= c.y - (int)(side_l / 2) && y <= c.y + (int)(side_l / 2))
-			return (true);
-	}
-	return (false);
-}
-
-void	_draw_map_square(t_img *img, int x, int y, int color)
+void	_draw_square(t_gmap *mini, int x, int y, int factor)
 {
 	int	i;
 	int	j;
+	int	color;
 
-	i = y;
-	j = x;
-	int	block_y = (int)round(((HEIGHT / cubed()->content->matrix_dimensions.y)));
-	int	block_x = (int)round(((WIDTH / cubed()->content->matrix_dimensions.x)));
-	while (y < i + block_y)
+	if (factor == 2)
+		color = WHITE_BLOCK;
+	else
+		color = RED_BLOCK;
+	i = -1;
+	while (++i < mini->tile / factor)
 	{
-		x = j;
-		while (x < j + block_x)
-		{
-			my_mlx_pixel_put(img, x, y, color);
-			x++;
-		}
-		y++;
+		j = -1;
+		while (++j < mini->tile  / factor)
+			my_mlx_pixel_put(&mini->map_img, x + j, y + i, color);
 	}
 }
 
-void	_draw_p_square(t_img *img, int x, int y, int color)
+void	_draw_player(t_gmap *mini)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 
-	i = y;
-	j = x;
-	int	block_y = (int)round(((HEIGHT / cubed()->content->matrix_dimensions.y) * 0.98));
-	int	block_x = (int)round(((WIDTH / cubed()->content->matrix_dimensions.x) * 0.98));
-	while (y < i + block_y)
-	{
-		x = j;
-		while (x < j + block_x)
-		{
-			my_mlx_pixel_put(img, x, y, color);
-			x++;
-		}
-		y++;
-	}
+	x = (int)round(mini->player.x);
+	y = (int)round(mini->player.y);
+	_draw_square(mini, x, y, 2);
 }
 
-void	_draw_player(t_player *p, t_file *t, t_img *img)
+void	_draw_map(t_gmap *mini)
 {
 	int	y;
 	int	x;
-
-	y = (int)(round(p->pos.y));
-	x = (int)(round(p->pos.x));
-	int	block_y = (int)round(((HEIGHT / cubed()->content->matrix_dimensions.y)));
-	int	block_x = (int)round(((WIDTH / cubed()->content->matrix_dimensions.x)));
-	(void)t;
-	/* if (x + P_SIZE > WIDTH \
-		|| y + P_SIZE > HEIGHT)
-		return ; */
-	_draw_p_square(img, x * block_x, y * block_y, 0xFFFF00FF);
-}
-
-void	_draw_map(t_file *t, t_img *img)
-{
-	int	y;
-	int	x;
-	int	block_y = (int)round(((HEIGHT / cubed()->content->matrix_dimensions.y)));
-	int	block_x = (int)round(((WIDTH / cubed()->content->matrix_dimensions.x)));
 
 	y = -1;
-	_black_window(img);
-	while (++y < t->matrix_dimensions.y)
+	_black_window(&mini->map_img);
+	while (++y < cubed()->content->matrix_dimensions.y)
 	{
 		x = -1;
-		while (++x < t->matrix_dimensions.x)
+		while (++x < cubed()->content->matrix_dimensions.x)
 		{
-			if (t->map[y][x] == 1)
-				_draw_map_square(img, x * block_x, y * block_y, RED_BLOCK);
-			else if (t->map[y][x] == 0)
-				_draw_map_square(img, x * block_x, y * block_y, WHITE_BLOCK);
+			if (mini->map[y][x] == 1)
+				_draw_square(mini, x * mini->tile, y * mini->tile, 1);
 		}
+		
 	}
-	_draw_player(cubed()->player, t, img);
-	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
+	_draw_player(mini);
+	mlx_put_image_to_window(mini->map_img.mlx, \
+		mini->map_img.win, mini->map_img.img, 0, 0);
 }
