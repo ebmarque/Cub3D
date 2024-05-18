@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   content_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:34:03 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/08 19:51:22 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/18 10:59:02 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	_set_floor(char **split, t_file *content)
 		return (-1);
 	}
 	content->floor.r = ft_atol(color_values[0]);
-	content->floor.b = ft_atol(color_values[1]);
-	content->floor.g = ft_atol(color_values[2]);
+	content->floor.g = ft_atol(color_values[1]);
+	content->floor.b = ft_atol(color_values[2]);
 	content->floor.is_set = true;
 	if (_check_color_values(content->floor) == -1)
 	{
@@ -79,8 +79,8 @@ int	_set_ceiling(char **split, t_file *content)
 		return (-1);
 	}
 	content->ceiling.r = ft_atol(color_values[0]);
-	content->ceiling.b = ft_atol(color_values[1]);
-	content->ceiling.g = ft_atol(color_values[2]);
+	content->ceiling.g = ft_atol(color_values[1]);
+	content->ceiling.b = ft_atol(color_values[2]);
 	content->ceiling.is_set = true;
 	if (_check_color_values(content->ceiling) == -1)
 	{

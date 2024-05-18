@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/12 15:58:27 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:32:15 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ t_pos	to_screen_pos(t_pos pos)
 	t_pos	screen_pos;
 
 	//screen_pos = pos;
-	screen_pos.x = 50 + (10 * pos.x) + ((double)10 / 2);//MAP_POS + (TILE_SIZE * pos.x) + ((double)TILE_SIZE / 2);
-	screen_pos.y = 50 + (10 * pos.y) + ((double)10 / 2);//MAP_POS + (TILE_SIZE * pos.y) + ((double)TILE_SIZE / 2);
+	screen_pos.x = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
+	 (BLOCK_SIZE * pos.x) + ((double)BLOCK_SIZE / 2);
+	screen_pos.y = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
+	(BLOCK_SIZE * pos.y) + ((double)BLOCK_SIZE / 2);
 	return (screen_pos);
 }
 
@@ -27,8 +29,8 @@ t_pos	to_map_pos(t_pos screen_pos)
 	t_pos	map_pos;
 
 	//map_pos = screen_pos;
-	map_pos.x = (screen_pos.x - 50)/10/*MAP_POS) / TILE_SIZE*/;
-	map_pos.y = (screen_pos.y - 50)/10/*MAP_POS) / TILE_SIZE*/;
+	map_pos.x = (screen_pos.x - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
+	map_pos.y = (screen_pos.y - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
 	return (map_pos);
 }
 
@@ -40,16 +42,12 @@ void	init_ray(t_ray *ray, int x_cord)
 	t_player	*p;
 
 	p = (cubed()->player);
-	x_cam = 2 * x_cord / (double)WIDTH - 1;
+	x_cam = 2 * (double)x_cord / (double)WIDTH - 1;
 	ray->pos = to_map_pos(p->pos);
 	ray->dir.x = p->dir.x + p->plane.x * x_cam;
 	ray->dir.y = p->dir.y + p->plane.y * x_cam;
 	ray->delta_dist.x = fabs(1 / ray->dir.x);
 	ray->delta_dist.y = fabs(1 / ray->dir.y);
-	printf("x_cam %f\n", x_cam);
-	printf("p->dir %f %f\n", p->dir.x, p->dir.y);
-	printf("p->plane %f %f\n", p->plane.x, p->plane.y);
-	printf("ray->pos %f %f\n", ray->pos.x, ray->pos.y);
 }
 //Gets distance from one x or y side to the next x or y side;
 void	get_side_dist(t_ray *ray)
@@ -113,16 +111,12 @@ void	wall_placement(t_ray *ray)
 	t_pos	curr;
 
 	curr = to_map_pos(cubed()->player->pos);
-	printf("wall placement %f %f \n", cubed()->player->pos.x, cubed()->player->pos.y);
 	if (!ray->side)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
 		ray->wall_dist = ray->side_dist.y - ray->delta_dist.y;
-	printf("%f \n", ray->wall_dist);
-	ray->line_height = (double)(HEIGHT / ray->wall_dist);
-	//printf("ray->line_height %d \n", ray->line_height);
+	ray->line_height = (int)(HEIGHT / ray->wall_dist);
 	ray->start = HEIGHT/2 - ray->line_height / 2;
-	//printf("%d %d \n", ray->start, ray->end);
 	if (ray->start < 0)
 		ray->start = 0;
 	ray->end = ray->line_height / 2 + HEIGHT / 2;
@@ -171,14 +165,6 @@ void	render_pixel(int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-
-int	gen_trgb(int opacity, t_rgb color)
-{
-	if (opacity > 255 || color.r > 255 || color.g > 255 || color.b > 255)
-		return (0);
-	return (opacity << 24 | color.r << 16 | color.g << 8 | color.b);
-}
-
 int	_get_img_pixel(t_texture *mlx, int x, int y)
 {
 	return (*(unsigned int *)(mlx->addr + \
@@ -197,17 +183,37 @@ void	texture_render(t_ray *ray, int x_cord)
 	text = ft_calloc(1, sizeof(t_text_info));
 	text->x = (ray->wall_x * (double)text_info->width);
 	text->step = (double)text_info->height / ray->line_height;
-	text->pos = (ray->start - (double)WIDTH / 2 + (double)ray->line_height / 2 * text->step);
+	text->pos = (ray->start - (double)HEIGHT / 2 + (double)ray->line_height / 2 ) * text->step;
 	while (y < ray->end)
 	{
 		text->y = (int)text->pos & (text_info->height - 1);
 		text->pos += text->step;
-		color = _get_img_pixel(text_info, text_info->height - text->x - 1, text->y);
-		//printf("%f\n", ray->wall_x);
-		//color = _get_img_pixel(cubed()->texture[NORTH], ray->pos.x, y);
-		//color = gen_trgb(255, cubed()->content->floor);
-		//printf("%X\n", color);
+		color = _get_img_pixel(text_info, text->x, text->y);
 		render_pixel(x_cord, y, color);
+		y++;
+	}
+}
+
+void	_render_floor(int x)
+{
+	int y;
+
+	y = HEIGHT / 2;
+	while (y < HEIGHT - 1)
+	{
+		render_pixel(x, y, gen_trgb(254, cubed()->content->floor));
+		y++;
+	}
+}
+
+void	_render_ceiling(int x)
+{
+	int y;
+
+	y = 0;
+	while (y < HEIGHT / 2)
+	{
+		render_pixel(x, y, gen_trgb(254, cubed()->content->ceiling));
 		y++;
 	}
 }
@@ -220,6 +226,8 @@ void	raycaster(void)
     x = 0;
     while(x < WIDTH)
     {
+		_render_floor(x);
+		_render_ceiling(x);
         init_ray(&ray, x);
 		get_side_dist(&ray);
 		perform_dda(&ray);
@@ -229,10 +237,12 @@ void	raycaster(void)
     }
 }
 
+
 int	render_screen(void)
 {
+	_raycasting_loop();
+	_black_window(&cubed()->mx_var->screen_buffer);
 	raycaster();
 	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
-	
 	return(EXIT_SUCCESS);
 }

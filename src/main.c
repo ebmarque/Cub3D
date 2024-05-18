@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/12 16:08:03 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:13:43 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,32 @@ t_cub	*cubed(void)
 	static t_cub	cub;
 
 	return (&cub);
+}
+
+void	update_player()
+{
+	//cubed()->player->dir = (t_pos) {(int)roundf(cos(cubed()->player->dir.teta)),(int)roundf(sin(cubed()->player->dir.teta)),0,0};
+	//cubed()->player->plane =  /* cubed()->player->dir; */(t_pos) {(int)roundf(cos(cubed()->player->dir.teta * 0.33)),(int)roundf(sin(cubed()->player->dir.teta * 0.33)),0,0};
+	if (cubed()->player->dir.teta == PI/2)
+	{
+		cubed()->player->dir = (t_pos) {1, 0,0,0};
+		cubed()->player->plane = (t_pos) {0, -0.66,0,0};
+	}
+	else if (cubed()->player->dir.teta == 3 * (PI/2))
+	{
+		cubed()->player->dir = (t_pos) {-1,0,0,0};
+		cubed()->player->plane = (t_pos) {0,0.66,0,0};
+	}
+	else if (cubed()->player->dir.teta == PI)
+	{
+		cubed()->player->dir = (t_pos) {0,-1,0,0};
+		cubed()->player->plane = (t_pos) {0.66,0,0,0};
+	}
+	else if (cubed()->player->dir.teta == 0)
+	{
+		cubed()->player->dir = (t_pos) {0,1,0,0};
+		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
+	}
 }
 
 void	mx_var_init()
@@ -30,6 +56,8 @@ void	mx_var_init()
 		WIDTH, HEIGHT);
 	screen_buff.img = mlx_new_image(cubed()->mx_var->mlx, \
 		WIDTH, HEIGHT);
+	screen_buff.mlx = cubed()->mx_var->mlx;
+	screen_buff.win = cubed()->mx_var->win;
 	screen_buff.addr = mlx_get_data_addr(screen_buff.img,
 			&screen_buff.bbp, &screen_buff.line_length,
 			&screen_buff.endian);
@@ -37,31 +65,7 @@ void	mx_var_init()
 	cubed()->player->pos.x = cubed()->content->p_position.y;
 	cubed()->player->pos.y = cubed()->content->p_position.x;
 	cubed()->player->pos = to_screen_pos(cubed()->player->pos);
-	//printf("%f   %f\n", cubed()->content->p_position.x, cubed()->content->p_position.y);
-	//printf("%f   %f\n", cubed()->player->pos.x, cubed()->player->pos.y);
-	//printf("%d\n", cubed()->content->map[(int)cubed()->content->p_position.y][(int)cubed()->content->p_position.x]);
-	//printf("%f   %f\n", cubed()->player->pos.x, cubed()->player->pos.y);
-	//exit(1);
-	if (cubed()->player->dir.teta == PI/2)
-	{
-		cubed()->player->dir = (t_pos) {-1,0,0,0};
-		cubed()->player->plane = (t_pos) {0,0.66,0,0};
-	}
-	else if (cubed()->player->dir.teta == 3 * (PI/2))
-	{
-		cubed()->player->dir = (t_pos) {1,0,0,0};
-		cubed()->player->plane = (t_pos) {0,-0.66,0,0};
-	}
-	else if (cubed()->player->dir.teta == PI)
-	{
-		cubed()->player->dir = (t_pos) {0,-1,0,0};
-		cubed()->player->plane = (t_pos) {0.66,0,0,0};
-	}
-	else if (cubed()->player->dir.teta == 0)
-	{
-		cubed()->player->dir = (t_pos) {0,1,0,0};
-		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
-	}
+	update_player();
 }
 
 void	destroy_game()
@@ -112,6 +116,8 @@ void	game_sequence()
 	mx_var_init();
 	_load_textures();
 	mlx_hook (cubed()->mx_var->win, WIN_DESTROY, DESTROY_MASK, quit_game, NULL);
+	mlx_hook(cubed()->mx_var->win, KEY_PRESSED, KEY_P_MASK, _key_pressed, cubed()->player);
+	mlx_hook(cubed()->mx_var->win, KEY_RELEASED, KEY_R_MASK, _key_release, cubed()->player);
 	mlx_loop_hook(cubed()->mx_var->mlx, render_screen, NULL);
 	mlx_loop(cubed()->mx_var->mlx);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:45:19 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/12 12:56:30 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/12 16:46:49 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,17 @@ int	_raycasting_loop(void)
 	t_player *p;
 	p = cubed()->player;
 	if (p->w)
-		_linear_movement(p, -1);
+		_linear_movement(p, 1);
 	if (p->s)
-		_linear_movement(p, +1);
+		_linear_movement(p, -1);
 	if (p->a)
 		_strafe_movement(p, -1);
 	if (p->d)
 		_strafe_movement(p, +1);
 	if (p->r_a)
-		_spin(p, -1);
+		_spin(p, 1);
 	if (p->r_d)
-		_spin(p, +1);
-	_draw_map(cubed()->content, &cubed()->mx_var->screen_buffer);
+		_spin(p, -1);
+	//_draw_map(cubed()->content, &cubed()->mx_var->screen_buffer);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:05:24 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/12 16:07:17 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:30:18 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	_linear_movement(t_player *p, int orientation)
 	teta = p->dir.teta;
 	new_y = ((sin(teta) * speed) * orientation) + p->pos.y;
 	new_x = ((cos(teta) * speed) * orientation) + p->pos.x;
-	if (!_is_matrix_wall(new_y, p->pos.x))
+	// if (!_is_matrix_wall(new_y, p->pos.x))
 		p->pos.y = new_y;
-	if (!_is_matrix_wall(p->pos.y, new_x))
+	// if (!_is_matrix_wall(p->pos.y, new_x))
 		p->pos.x = new_x;
 }
 
@@ -64,9 +64,9 @@ void	_strafe_movement(t_player *p, int orientation)
 	teta = (3 * (PI / 2)) + p->dir.teta;
 	new_y = (sin(teta) * speed * orientation) + p->pos.y;
 	new_x = (cos(teta) * speed * orientation) + p->pos.x;
-	if (!_is_matrix_wall(new_y, p->pos.x))
+	// if (!_is_matrix_wall(new_y, p->pos.x))
 		p->pos.y = new_y;
-	if (!_is_matrix_wall(p->pos.y, new_x))
+	// if (!_is_matrix_wall(p->pos.y, new_x))
 		p->pos.x = new_x;
 	/* if (new_y >= 0 && new_y + P_SIZE <= HEIGHT)
 		p->pos.y = new_y;
@@ -76,6 +76,7 @@ void	_strafe_movement(t_player *p, int orientation)
 void	_spin(t_player *p, int wise)
 {
 	double	new_teta;
+	t_pos	plane;
 
 	new_teta = p->dir.teta + (wise * R_SPEED);
 	if (new_teta >= 2 * PI)
@@ -85,6 +86,9 @@ void	_spin(t_player *p, int wise)
 	p->dir.teta = new_teta;
 	p->dir.y = sin(p->dir.teta);
 	p->dir.x = cos(p->dir.teta);
+	plane.x = p->plane.x;
+	p->plane.x = p->plane.x * cos(wise * R_SPEED) - p->plane.y * sin(wise * R_SPEED);
+	p->plane.y = plane.x * sin(wise * R_SPEED) + p->plane.y * cos(wise * R_SPEED);
 }
 
 void	_handle_walk(t_player *p)
