@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:05:24 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/18 13:30:18 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/18 14:20:55 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 bool	_is_matrix_wall(float ny, float nx)
 {
 	int	**map;
-	int	y;
-	int	x;
+	int	yu;
+	int	xl;
+	int	yd;
+	int	xr;
 
-	y = (int)(ny);
-	x = (int)(nx);
+	printf("posicao na matrix -> x: %0.3f y: %0.3f\n", cubed()->player->pos.x, cubed()->player->pos.y );
+	printf("posicao na screen -> x: %0.3f y: %0.3f\n\n", cubed()->gmap->player.x, cubed()->gmap->player.y );
+	yu = (int)(ny);
+	yd = (int)(ny + 0.5f);
+	xl = (int)(nx);
+	xr = (int)(nx + 0.5f);
 	map = cubed()->content->map;
-	if (map[y][x] == 1)
+	if (map[yu][xl] == 1 || map[yu][xr] == 1 || map[yd][xl] == 1 || map[yd][xr] == 1)
 		return (true);
 	return (false);
 }
@@ -32,20 +38,34 @@ void	_linear_movement(t_player *p, int orientation)
 	double	new_x;
 	double	teta;
 	double	speed;
-
+	float	pixel_speed = P_SPEED *  (float)cubed()->gmap->tile;
+	
 	if (p->w && (p->a || p->d))
+	{
 		speed = P_SPEED * 0.75;
+		pixel_speed *= 0.75f;
+	}
 	else if (p->s && (p->a || p->d))
+	{
 		speed = P_SPEED * 0.75;
+		pixel_speed *= 0.75f;
+	}
 	else
 		speed = P_SPEED;
 	teta = p->dir.teta;
 	new_y = ((sin(teta) * speed) * orientation) + p->pos.y;
 	new_x = ((cos(teta) * speed) * orientation) + p->pos.x;
-	// if (!_is_matrix_wall(new_y, p->pos.x))
+	if (!_is_matrix_wall(new_y, p->pos.x))
+	{
 		p->pos.y = new_y;
-	// if (!_is_matrix_wall(p->pos.y, new_x))
+		cubed()->gmap->player.y += (sin(teta) * pixel_speed) * orientation;
+	}
+	if (!_is_matrix_wall(p->pos.y, new_x))
+	{
 		p->pos.x = new_x;
+		cubed()->gmap->player.x += (cos(teta) * pixel_speed) * orientation;
+		
+	}
 }
 
 void	_strafe_movement(t_player *p, int orientation)
@@ -55,23 +75,34 @@ void	_strafe_movement(t_player *p, int orientation)
 	double	new_x;
 	double	teta;
 	double	speed;
+	float	pixel_speed = P_SPEED * (float)cubed()->gmap->tile;
+
 	if (p->w && (p->a || p->d))
+	{
 		speed = P_SPEED * 0.75;
+		pixel_speed *= 0.75f;
+	}
 	else if (p->s && (p->a || p->d))
+	{
 		speed = P_SPEED * 0.75;
+		pixel_speed *= 0.75f;
+	}
 	else
 		speed = P_SPEED;
 	teta = (3 * (PI / 2)) + p->dir.teta;
 	new_y = (sin(teta) * speed * orientation) + p->pos.y;
 	new_x = (cos(teta) * speed * orientation) + p->pos.x;
-	// if (!_is_matrix_wall(new_y, p->pos.x))
+	if (!_is_matrix_wall(new_y, p->pos.x))
+	{
 		p->pos.y = new_y;
-	// if (!_is_matrix_wall(p->pos.y, new_x))
+		cubed()->gmap->player.y += (sin(teta) * pixel_speed) * orientation;
+	}
+	if (!_is_matrix_wall(p->pos.y, new_x))
+	{
 		p->pos.x = new_x;
-	/* if (new_y >= 0 && new_y + P_SIZE <= HEIGHT)
-		p->pos.y = new_y;
-	if (new_x >= 0 && new_x + P_SIZE<= WIDTH)
-		p->pos.x = new_x; */
+		cubed()->gmap->player.x += (cos(teta) * pixel_speed) * orientation;
+		
+	}
 }
 void	_spin(t_player *p, int wise)
 {

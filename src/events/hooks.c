@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:45:19 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/12 16:46:49 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/18 14:19:31 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,11 @@ int	_key_release(int k, void *data)
 		return (-1);
 	return (0);
 }
+
 int	_raycasting_loop(void)
 {
 	t_player *p;
+
 	p = cubed()->player;
 	if (p->w)
 		_linear_movement(p, 1);
@@ -83,7 +85,7 @@ int	_raycasting_loop(void)
 	if (p->r_a)
 		_spin(p, 1);
 	if (p->r_d)
-		_spin(p, -1);
-	//_draw_map(cubed()->content, &cubed()->mx_var->screen_buffer);
+		_spin(p, +1);	
+	_draw_map(cubed()->gmap);
 	return (0);
 }

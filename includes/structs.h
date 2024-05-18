@@ -131,11 +131,10 @@ typedef struct s_file
 
 typedef struct s_gmap
 {
-	int	max_x;
-	int	max_y;
-	int	blk_x;
-	int	blk_y;
-	int	**map;
+	int		tile;
+	int		**map;
+	t_pos	player;
+	t_img	map_img;
 }				t_gmap;
 
 
@@ -146,7 +145,7 @@ typedef struct s_cub
     t_player	*player;
     t_mx_var	*mx_var;
 	t_texture	**texture;
-	
+	t_gmap		*gmap;
 }				t_cub;
 
 #endif

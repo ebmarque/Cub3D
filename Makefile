@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+         #
+#    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/05/12 16:15:36 by tmoutinh         ###   ########.fr        #
+#    Updated: 2024/05/18 14:15:58 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,13 +54,13 @@ EVENTS = $(addprefix $(EVENTS_DIRECTORY)/, \
 TOOLS = $(addprefix $(TOOLS_DIRECTORY)/, \
 		utils1.c utils2.c utils3.c)
 
-CORE = $(addprefix $(SRC_DIRECTORY)/, main.c)
+CORE = $(addprefix $(SRC_DIRECTORY)/, core/main.c)
 
 
-#SRCS = $(ERROR) $(TOOLS) $(CORE) $(EVENTS)
+SRCS = $(ERROR) $(TOOLS) $(CORE) $(EVENTS)
 
 RAYCASTER = $(addprefix $(RAYCASTING_DIRECTORY)/, raycaster.c)
-SRCS = $(ERROR) $(TOOLS) $(CORE) $(RAYCASTER) $(EVENTS)
+# SRCS = $(ERROR) $(TOOLS) $(CORE) $(RAYCASTER) $(EVENTS)
 
 
 UNAME_S := $(shell uname -s)
