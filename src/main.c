@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/18 13:13:43 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/18 15:45:15 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,55 @@ t_cub	*cubed(void)
 	return (&cub);
 }
 
+static void	_init_img(t_img *img)
+{
+	img->mlx = cubed()->mx_var->mlx;
+	img->win = cubed()->mx_var->win;
+	img->img = mlx_new_image(img->mlx, WIDTH * 0.25, HEIGHT * 0.25);
+	img->addr = mlx_get_data_addr(img->img, &img->bbp, \
+		&img->line_length, &img->endian);
+}
+
+void	_init_gmap(void)
+{
+	t_gmap	*mini;
+
+	mini = ft_calloc(1, sizeof(t_gmap));
+	mini->map = cubed()->content->map;
+	mini->tile = (float)((WIDTH * 0.25) / cubed()->content->matrix_dimensions.x);
+	mini->player.x = cubed()->player->pos.x * mini->tile;
+	mini->player.y = cubed()->player->pos.y * mini->tile;
+	mini->player.is_set = 1;
+	mini->player.teta = 0;
+	_init_img(&mini->map_img);
+	cubed()->gmap = mini;
+	printf("posicao na matrix -> x: %0.3f y: %0.3f\n", cubed()->player->pos.x, cubed()->player->pos.y );
+	printf("posicao na screen -> x: %0.3f y: %0.3f\n\n", cubed()->gmap->player.x, cubed()->gmap->player.y );
+}
+
 void	update_player()
 {
 	//cubed()->player->dir = (t_pos) {(int)roundf(cos(cubed()->player->dir.teta)),(int)roundf(sin(cubed()->player->dir.teta)),0,0};
 	//cubed()->player->plane =  /* cubed()->player->dir; */(t_pos) {(int)roundf(cos(cubed()->player->dir.teta * 0.33)),(int)roundf(sin(cubed()->player->dir.teta * 0.33)),0,0};
 	if (cubed()->player->dir.teta == PI/2)
 	{
-		cubed()->player->dir = (t_pos) {1, 0,0,0};
-		cubed()->player->plane = (t_pos) {0, -0.66,0,0};
+		cubed()->player->dir = (t_pos) {-1, 0,0,0};
+		cubed()->player->plane = (t_pos) {0, 0.66,0,0};
 	}
 	else if (cubed()->player->dir.teta == 3 * (PI/2))
 	{
-		cubed()->player->dir = (t_pos) {-1,0,0,0};
-		cubed()->player->plane = (t_pos) {0,0.66,0,0};
+		cubed()->player->dir = (t_pos) {1,0,0,0};
+		cubed()->player->plane = (t_pos) {0,-0.66,0,0};
 	}
 	else if (cubed()->player->dir.teta == PI)
 	{
-		cubed()->player->dir = (t_pos) {0,-1,0,0};
-		cubed()->player->plane = (t_pos) {0.66,0,0,0};
+		cubed()->player->dir = (t_pos) {0,1,0,0};
+		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
 	}
 	else if (cubed()->player->dir.teta == 0)
 	{
-		cubed()->player->dir = (t_pos) {0,1,0,0};
-		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
+		cubed()->player->dir = (t_pos) {0,-1,0,0};
+		cubed()->player->plane = (t_pos) {0.66,0,0,0};
 	}
 }
 
@@ -62,10 +88,13 @@ void	mx_var_init()
 			&screen_buff.bbp, &screen_buff.line_length,
 			&screen_buff.endian);
 	cubed()->mx_var->screen_buffer = screen_buff;
-	cubed()->player->pos.x = cubed()->content->p_position.y;
-	cubed()->player->pos.y = cubed()->content->p_position.x;
+/* 	cubed()->player->pos.x = cubed()->content->p_position.y;
+	cubed()->player->pos.y = cubed()->content->p_position.x; */
 	cubed()->player->pos = to_screen_pos(cubed()->player->pos);
 	update_player();
+	//_init_img(&cubed()->mx_var->screen_buffer);
+	_init_gmap();
+	cubed()->gmap->map_img = screen_buff;
 }
 
 void	destroy_game()

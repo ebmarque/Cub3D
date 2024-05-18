@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/18 14:17:37 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/18 15:00:30 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,7 @@ int		get_b(int trgb);
 
 void	_draw_square(t_gmap *mini, int x, int y, int factor);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void	_black_window(t_img *m);
+void	_black_window(t_img *m, float factor);
 void	_draw_map(t_gmap *mini);
 
 

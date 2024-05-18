@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:35:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/18 12:03:06 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/18 15:51:48 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,19 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	_black_window(t_img *m)
+void	_black_window(t_img *m, float factor)
 {
 	
-	for (int i = 0; i < HEIGHT; i++)
+	for (int i = 0; i < HEIGHT * factor; i++)
 	{
-		for (int j = 0; j < WIDTH; j++)
+		for (int j = 0; j < WIDTH * factor; j++)
 		{
 			my_mlx_pixel_put(m, j, i, 0);
 		}
 	}
 	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
 }
+
 
 void	_draw_square(t_gmap *mini, int x, int y, int factor)
 {
@@ -42,7 +43,7 @@ void	_draw_square(t_gmap *mini, int x, int y, int factor)
 	if (factor == 2)
 		color = WHITE_BLOCK;
 	else
-		color = RED_BLOCK;
+		color = gen_trgb(10, (t_rgb){255,255,255,1});
 	i = -1;
 	while (++i < mini->tile / factor)
 	{
@@ -68,7 +69,7 @@ void	_draw_map(t_gmap *mini)
 	int	x;
 
 	y = -1;
-	_black_window(&mini->map_img);
+	//_black_window(&mini->map_img, 0.25f);
 	while (++y < cubed()->content->matrix_dimensions.y)
 	{
 		x = -1;

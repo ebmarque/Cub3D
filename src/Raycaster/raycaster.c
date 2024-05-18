@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/18 13:32:15 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/18 15:00:00 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ t_pos	to_screen_pos(t_pos pos)
 {
 	t_pos	screen_pos;
 
-	//screen_pos = pos;
-	screen_pos.x = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
-	 (BLOCK_SIZE * pos.x) + ((double)BLOCK_SIZE / 2);
-	screen_pos.y = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
-	(BLOCK_SIZE * pos.y) + ((double)BLOCK_SIZE / 2);
+	screen_pos = pos;
+	//screen_pos.x = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
+	// (BLOCK_SIZE * pos.x) + ((double)BLOCK_SIZE / 2);
+	//screen_pos.y = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
+	//(BLOCK_SIZE * pos.y) + ((double)BLOCK_SIZE / 2);
 	return (screen_pos);
 }
 
@@ -28,9 +28,9 @@ t_pos	to_map_pos(t_pos screen_pos)
 {
 	t_pos	map_pos;
 
-	//map_pos = screen_pos;
-	map_pos.x = (screen_pos.x - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
-	map_pos.y = (screen_pos.y - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
+	map_pos = screen_pos;
+	//map_pos.x = (screen_pos.x - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
+	//map_pos.y = (screen_pos.y - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
 	return (map_pos);
 }
 
@@ -241,8 +241,9 @@ void	raycaster(void)
 int	render_screen(void)
 {
 	_raycasting_loop();
-	_black_window(&cubed()->mx_var->screen_buffer);
+	_black_window(&cubed()->mx_var->screen_buffer, 1.0f);
 	raycaster();
 	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
+	_draw_map(cubed()->gmap);
 	return(EXIT_SUCCESS);
 }

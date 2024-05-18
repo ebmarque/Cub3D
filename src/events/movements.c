@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:05:24 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/18 14:20:55 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/18 14:45:48 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,32 +122,32 @@ void	_spin(t_player *p, int wise)
 	p->plane.y = plane.x * sin(wise * R_SPEED) + p->plane.y * cos(wise * R_SPEED);
 }
 
-void	_handle_walk(t_player *p)
-{
-	if (p->w)
-		_linear_movement(p, -1);
-	if (p->s)
-		_linear_movement(p, +1);
-	if (p->a)
-		_strafe_movement(p, -1);
-	if (p->d)
-		_strafe_movement(p, +1);
-}
+// void	_handle_walk(t_player *p)
+// {
+// 	if (p->w)
+// 		_linear_movement(p, -1);
+// 	if (p->s)
+// 		_linear_movement(p, +1);
+// 	if (p->a)
+// 		_strafe_movement(p, -1);
+// 	if (p->d)
+// 		_strafe_movement(p, +1);
+// }
 
-void	_handle_rotation(t_player *p)
-{
-	if (p->r_a)
-		_spin(p, -1);
-	if (p->r_d)
-		_spin(p, +1);
-	if (p->r_w)
-		return ;
-	if (p->r_s)
-		return ;
-}
+// void	_handle_rotation(t_player *p)
+// {
+// 	if (p->r_a)
+// 		_spin(p, -1);
+// 	if (p->r_d)
+// 		_spin(p, +1);
+// 	if (p->r_w)
+// 		return ;
+// 	if (p->r_s)
+// 		return ;
+// }
 
-void	_handle_input(t_player *p)
-{
-	_handle_walk(p);
-	_handle_rotation(p);
-}
+// void	_handle_input(t_player *p)
+// {
+// 	_handle_walk(p);
+// 	_handle_rotation(p);
+// }
