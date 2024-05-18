@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:05:24 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/16 20:48:14 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/18 13:30:18 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ void	_spin(t_player *p, int wise)
 	p->dir.teta = new_teta;
 	p->dir.y = sin(p->dir.teta);
 	p->dir.x = cos(p->dir.teta);
-	plane.y = p->plane.x * sin(p->dir.teta) + p->plane.y * cos(p->dir.teta);
-	plane.x = p->plane.x * cos(p->dir.teta) - p->plane.y * sin(p->dir.teta);
-	p->plane = plane;
+	plane.x = p->plane.x;
+	p->plane.x = p->plane.x * cos(wise * R_SPEED) - p->plane.y * sin(wise * R_SPEED);
+	p->plane.y = plane.x * sin(wise * R_SPEED) + p->plane.y * cos(wise * R_SPEED);
 }
 
 void	_handle_walk(t_player *p)

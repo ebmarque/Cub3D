@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/16 20:07:31 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/18 13:32:15 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ t_pos	to_screen_pos(t_pos pos)
 	t_pos	screen_pos;
 
 	//screen_pos = pos;
-	screen_pos.x = 50 + (10 * pos.x) + ((double)10 / 2);//MAP_POS + (TILE_SIZE * pos.x) + ((double)TILE_SIZE / 2);
-	screen_pos.y = 50 + (10 * pos.y) + ((double)10 / 2);//MAP_POS + (TILE_SIZE * pos.y) + ((double)TILE_SIZE / 2);
+	screen_pos.x = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
+	 (BLOCK_SIZE * pos.x) + ((double)BLOCK_SIZE / 2);
+	screen_pos.y = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
+	(BLOCK_SIZE * pos.y) + ((double)BLOCK_SIZE / 2);
 	return (screen_pos);
 }
 
@@ -27,8 +29,8 @@ t_pos	to_map_pos(t_pos screen_pos)
 	t_pos	map_pos;
 
 	//map_pos = screen_pos;
-	map_pos.x = (screen_pos.x - 50)/10/*MAP_POS) / TILE_SIZE*/;
-	map_pos.y = (screen_pos.y - 50)/10/*MAP_POS) / TILE_SIZE*/;
+	map_pos.x = (screen_pos.x - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
+	map_pos.y = (screen_pos.y - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
 	return (map_pos);
 }
 
@@ -187,8 +189,31 @@ void	texture_render(t_ray *ray, int x_cord)
 		text->y = (int)text->pos & (text_info->height - 1);
 		text->pos += text->step;
 		color = _get_img_pixel(text_info, text->x, text->y);
-		//color = gen_trgb(255, cubed()->content->floor);
 		render_pixel(x_cord, y, color);
+		y++;
+	}
+}
+
+void	_render_floor(int x)
+{
+	int y;
+
+	y = HEIGHT / 2;
+	while (y < HEIGHT - 1)
+	{
+		render_pixel(x, y, gen_trgb(254, cubed()->content->floor));
+		y++;
+	}
+}
+
+void	_render_ceiling(int x)
+{
+	int y;
+
+	y = 0;
+	while (y < HEIGHT / 2)
+	{
+		render_pixel(x, y, gen_trgb(254, cubed()->content->ceiling));
 		y++;
 	}
 }
@@ -201,6 +226,8 @@ void	raycaster(void)
     x = 0;
     while(x < WIDTH)
     {
+		_render_floor(x);
+		_render_ceiling(x);
         init_ray(&ray, x);
 		get_side_dist(&ray);
 		perform_dda(&ray);
@@ -210,13 +237,12 @@ void	raycaster(void)
     }
 }
 
+
 int	render_screen(void)
 {
 	_raycasting_loop();
 	_black_window(&cubed()->mx_var->screen_buffer);
-	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
 	raycaster();
 	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
-	printf("palyer dir x %f, player dir y %f\n", cubed()->player->dir.x, cubed()->player->dir.y);
 	return(EXIT_SUCCESS);
 }
