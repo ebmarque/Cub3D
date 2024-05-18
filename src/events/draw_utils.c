@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:35:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/18 15:51:48 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/18 16:52:57 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ void	_black_window(t_img *m, float factor)
 	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
 }
 
+int	_get_reverse(t_rgb	color)
+{
+	return (255 << 24 | (255 - color.r) << 16 | (255 - color.g) << 8 | ((255 - color.b)));
+}
+
+int	_get_reverseb(t_rgb	color)
+{
+	return (255 << 24 | color.r << 16 | (172 - color.g) << 8 | color.b);
+}
 
 void	_draw_square(t_gmap *mini, int x, int y, int factor)
 {
@@ -41,9 +50,9 @@ void	_draw_square(t_gmap *mini, int x, int y, int factor)
 	int	color;
 
 	if (factor == 2)
-		color = WHITE_BLOCK;
+		color = _get_reverseb(cubed()->content->ceiling);
 	else
-		color = gen_trgb(10, (t_rgb){255,255,255,1});
+		color = _get_reverse(cubed()->content->ceiling);
 	i = -1;
 	while (++i < mini->tile / factor)
 	{
