@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:05:24 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/17 20:07:31 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/18 12:34:15 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,19 @@
 bool	_is_matrix_wall(float ny, float nx)
 {
 	int	**map;
-	int	y;
-	int	x;
+	int	yu;
+	int	xl;
+	int	yd;
+	int	xr;
 
-	y = (int)(ny);
-	x = (int)(nx);
-	printf("real player: x: %0.3f y: %0.3f\n", nx, ny);
-	printf("minimap player: x: %0.3f y: %0.3f\n", cubed()->gmap->player.x, cubed()->gmap->player.y);
+	printf("posicao na matrix -> x: %0.3f y: %0.3f\n", cubed()->player->pos.x, cubed()->player->pos.y );
+	printf("posicao na screen -> x: %0.3f y: %0.3f\n\n", cubed()->gmap->player.x, cubed()->gmap->player.y );
+	yu = (int)(ny);
+	yd = (int)(ny + 0.5f);
+	xl = (int)(nx);
+	xr = (int)(nx + 0.5f);
 	map = cubed()->content->map;
-	if (map[y][x] == 1)
+	if (map[yu][xl] == 1 || map[yu][xr] == 1 || map[yd][xl] == 1 || map[yd][xr] == 1)
 		return (true);
 	return (false);
 }
@@ -34,11 +38,18 @@ void	_linear_movement(t_player *p, int orientation)
 	double	new_x;
 	double	teta;
 	double	speed;
-
+	float	pixel_speed = P_SPEED *  (float)cubed()->gmap->tile;
+	
 	if (p->w && (p->a || p->d))
+	{
 		speed = P_SPEED * 0.75;
+		pixel_speed *= 0.75f;
+	}
 	else if (p->s && (p->a || p->d))
+	{
 		speed = P_SPEED * 0.75;
+		pixel_speed *= 0.75f;
+	}
 	else
 		speed = P_SPEED;
 	teta = p->dir.teta;
@@ -47,12 +58,12 @@ void	_linear_movement(t_player *p, int orientation)
 	if (!_is_matrix_wall(new_y, p->pos.x))
 	{
 		p->pos.y = new_y;
-		cubed()->gmap->player.y += (sin(teta) * 4.0f) * orientation;
+		cubed()->gmap->player.y += (sin(teta) * pixel_speed) * orientation;
 	}
 	if (!_is_matrix_wall(p->pos.y, new_x))
 	{
 		p->pos.x = new_x;
-		cubed()->gmap->player.x += (cos(teta) * 4.0f) * orientation;
+		cubed()->gmap->player.x += (cos(teta) * pixel_speed) * orientation;
 		
 	}
 }
@@ -64,10 +75,18 @@ void	_strafe_movement(t_player *p, int orientation)
 	double	new_x;
 	double	teta;
 	double	speed;
+	float	pixel_speed = P_SPEED * (float)cubed()->gmap->tile;
+
 	if (p->w && (p->a || p->d))
+	{
 		speed = P_SPEED * 0.75;
+		pixel_speed *= 0.75f;
+	}
 	else if (p->s && (p->a || p->d))
+	{
 		speed = P_SPEED * 0.75;
+		pixel_speed *= 0.75f;
+	}
 	else
 		speed = P_SPEED;
 	teta = (3 * (PI / 2)) + p->dir.teta;
@@ -76,12 +95,12 @@ void	_strafe_movement(t_player *p, int orientation)
 	if (!_is_matrix_wall(new_y, p->pos.x))
 	{
 		p->pos.y = new_y;
-		cubed()->gmap->player.y += (sin(teta) * 4.0f) * orientation;
+		cubed()->gmap->player.y += (sin(teta) * pixel_speed) * orientation;
 	}
 	if (!_is_matrix_wall(p->pos.y, new_x))
 	{
 		p->pos.x = new_x;
-		cubed()->gmap->player.x += (cos(teta) * 4.0f) * orientation;
+		cubed()->gmap->player.x += (cos(teta) * pixel_speed) * orientation;
 		
 	}
 }

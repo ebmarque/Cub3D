@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:35:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/17 19:55:50 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/18 12:03:06 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	_draw_player(t_gmap *mini)
 	int	x;
 	int	y;
 
-	x = (int)round(mini->player.x);
-	y = (int)round(mini->player.y);
+	x = (int)floor(mini->player.x);
+	y = (int)floor(mini->player.y);
 	_draw_square(mini, x, y, 2);
 }
 

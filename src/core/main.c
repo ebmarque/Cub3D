@@ -39,13 +39,15 @@ void	_init_gmap(void)
 
 	mini = ft_calloc(1, sizeof(t_gmap));
 	mini->map = cubed()->content->map;
-	mini->tile = 8;
+	mini->tile = (float)((WIDTH * 0.25) / cubed()->content->matrix_dimensions.x);
 	mini->player.x = cubed()->player->pos.x * mini->tile;
 	mini->player.y = cubed()->player->pos.y * mini->tile;
 	mini->player.is_set = 1;
 	mini->player.teta = 0;
 	_init_img(&mini->map_img);
 	cubed()->gmap = mini;
+	printf("posicao na matrix -> x: %0.3f y: %0.3f\n", cubed()->player->pos.x, cubed()->player->pos.y );
+	printf("posicao na screen -> x: %0.3f y: %0.3f\n\n", cubed()->gmap->player.x, cubed()->gmap->player.y );
 }
 
 
