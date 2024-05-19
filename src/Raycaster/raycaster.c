@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/18 15:00:00 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/19 15:05:03 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_pos	to_screen_pos(t_pos pos)
 	t_pos	screen_pos;
 
 	screen_pos = pos;
-	//screen_pos.x = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
+	//screen_pos.x = (BLOCK_SIZE * BLOCK_SIZE / 2) +
 	// (BLOCK_SIZE * pos.x) + ((double)BLOCK_SIZE / 2);
-	//screen_pos.y = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
+	//screen_pos.y = (BLOCK_SIZE * BLOCK_SIZE / 2) +
 	//(BLOCK_SIZE * pos.y) + ((double)BLOCK_SIZE / 2);
 	return (screen_pos);
 }
@@ -99,7 +99,7 @@ void	perform_dda(t_ray *ray)
 			ray->side = 1;
 		}
 		//Is sufficient to check the map wall
-		if (cubed()->content->map[(int)ray->pos.x][(int)ray->pos.y] > 0)
+		if (cubed()->content->map[(int)ray->pos.y][(int)ray->pos.x] > 0)
 			hit = true;
 	}
 }
@@ -140,16 +140,16 @@ t_texture	*get_text_info(t_ray *ray)
 	if (!ray->side)
 	{
 		if (ray->dir.x < 0)
-			text = cubed()->texture[SOUTH];
+			text = cubed()->texture[WEST];
 		else
-			text = cubed()->texture[NORTH];
+			text = cubed()->texture[EAST];
 	}
 	else
 	{
 		if (ray->dir.y < 0)
-			text = cubed()->texture[WEST];
+			text = cubed()->texture[NORTH];
 		else
-			text = cubed()->texture[EAST];
+			text = cubed()->texture[SOUTH];
 	}
 	return (text);
 }
