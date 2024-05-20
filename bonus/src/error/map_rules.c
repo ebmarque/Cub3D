@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 18:15:27 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/19 20:20:04 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:03:03 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	_fill_block2(t_file *t, t_point current, int c)
 		t->map[current.y][current.x] = 'z';
 }
 
-static void	_fill_block(t_file *t, t_point current, int c)
+void	_fill_block(t_file *t, t_point current, int c)
 {
 	if (c == 'N')
 		t->map[current.y][current.x] = 'n';
@@ -98,11 +98,14 @@ static void	_fill_block(t_file *t, t_point current, int c)
 
 static bool	_fill_validation(t_file *t, t_point size, t_point current)
 {
+	printf("Looking at: %d\n", t->map[current.y][current.x]);
 	if (current.x < 0 || current.y < 0 || current.x > size.x - 1\
 		|| current.y > size.y - 1)
 		return (false);
 	if (((current.x == 0 || current.y == 0 || current.x == size.x - 1
-		|| current.y == size.y - 1) && t->map[current.y][current.x] == 0)
+		|| current.y == size.y - 1) && (t->map[current.y][current.x] == 0
+		|| t->map[current.y][current.x] == 'C'
+		|| t->map[current.y][current.x] == 'O'))
 		|| t->map[current.y][current.x] == 'x')
 	{
 		_print_map(t);
@@ -110,9 +113,11 @@ static bool	_fill_validation(t_file *t, t_point size, t_point current)
 		_exit_error(OPEN_WALLS);
 	}
 	if (!_is_player_char(t->map[current.y][current.x]) \
-		&& t->map[current.y][current.x] != 0)
+		&& t->map[current.y][current.x] != 0 \
+		&& t->map[current.y][current.x] != 'O')
 		return (false);
 	_fill_block(t, current, t->map[current.y][current.x]);
+	printf("Filled with: %d\n\n", t->map[current.y][current.x]);
 	return (true);
 }
 
@@ -142,7 +147,8 @@ void	_flood_fill(t_file *t)
 		c.x = -1;
 		while (++c.x < size.x)
 		{
-			if (t->map[c.y][c.x] == 0)
+			if (t->map[c.y][c.x] == 0 || t->map[c.y][c.x] == 'C' \
+				|| t->map[c.y][c.x] == 'O')
 				_fill(t, size, c, t->map[t->begin.y][t->begin.x]);
 		}
 	}

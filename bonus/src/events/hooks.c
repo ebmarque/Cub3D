@@ -6,19 +6,57 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:45:19 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/19 20:59:25 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/20 20:29:48 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
 
+void	_open_door(t_point p, t_file *t)
+{
+	/* if (t->map[p.y - 1][p.x] == 1)
+		t->map[p.y - 1][p.x] = 2;
+	if (t->map[p.y + 1][p.x] == 1)
+		t->map[p.y + 1][p.x] = 2;
+	if (t->map[p.y][p.x - 1] == 1)
+		t->map[p.y][p.x - 1] = 2;
+	if (t->map[p.y][p.x + 1] == 1)
+		t->map[p.y][p.x + 1] = 2; */
+	t->map[p.y][p.x] = 'O';
+}
+
+void	_close_door(t_point p, t_file *t)
+{
+	/* if (t->map[p.y - 1][p.x] == 2)
+		t->map[p.y - 1][p.x] = 1;
+	if (t->map[p.y + 1][p.x] == 2)
+		t->map[p.y + 1][p.x] = 1;
+	if (t->map[p.y][p.x - 1] == 2)
+		t->map[p.y][p.x - 1] = 1;
+	if (t->map[p.y][p.x + 1] == 2)
+		t->map[p.y][p.x + 1] = 1; */
+	t->map[p.y][p.x] = 'C';
+}
+
+void	_look_for_door(t_player *p, t_file *t)
+{
+	t_point	interaction;
+
+
+	interaction.y = (int)((sin(p->dir.teta) * -0.9f) + p->pos.y);
+	interaction.x = (int)((cos(p->dir.teta) * 0.9f) + p->pos.x);
+
+	if (t->map[(int)interaction.y][(int)interaction.x] == 'C')
+		t->map[interaction.y][interaction.x] = 'O';		
+	else if (t->map[(int)interaction.y][(int)interaction.x] == 'O')
+		t->map[interaction.y][interaction.x] = 'C';
+}
 
 int	_key_pressed(int k, void *data)
 {
 	t_player	*p;
 
 	p = (t_player *)data;
-	printf("u pressed: %d\n", k);
 	if (k == ESC)
 		exit(0);
 	if (k == W)
@@ -29,6 +67,8 @@ int	_key_pressed(int k, void *data)
 		p->a = 1;
 	if (k == D)
 		p->d = 1;
+	if (k == E)
+		_look_for_door(cubed()->player, cubed()->content);
 	if (k == ENTER)
 		p->map_view *= -1;
 	if (k == DOWN)
@@ -57,8 +97,6 @@ int	_key_release(int k, void *data)
 		p->a = 0;
 	if (k == D)
 		p->d = 0;
-	// if (k == ENTER)
-	// 	p->map_view = 0;
 	if (k == DOWN)
 		p->r_s = 0;
 	if (k == LEFT)
@@ -76,16 +114,16 @@ int	_raycasting_loop(void)
 
 	p = cubed()->player;
 	if (p->w)
-		_linear_movement(p, 1);
-	if (p->s)
 		_linear_movement(p, -1);
+	if (p->s)
+		_linear_movement(p, +1);
 	if (p->a)
 		_strafe_movement(p, -1);
 	if (p->d)
 		_strafe_movement(p, +1);
 	if (p->r_a)
-		_spin(p, -1);
+		_spin(p, +1);
 	if (p->r_d)
-		_spin(p, 1);	
+		_spin(p, -1);	
 	return (0);
 }

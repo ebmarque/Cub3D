@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:05:24 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/19 21:26:40 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:16:49 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,15 @@ void	_linear_movement(t_player *p, int orientation)
 	pixel_speed = speed * (float)cubed()->gmap->tile;
 	teta = p->dir.teta;
 	new_y = ((sin(teta) * speed) * orientation) + p->pos.y;
+	orientation *= -1;
 	new_x = ((cos(teta) * speed) * orientation) + p->pos.x;
+	orientation *= -1;
 	if (!_is_matrix_wall(new_y, p->pos.x))
 	{
 		p->pos.y = new_y;
 		cubed()->gmap->player.y += (sin(teta) * pixel_speed) * orientation;
 	}
+	orientation *= -1;
 	if (!_is_matrix_wall(p->pos.y, new_x))
 	{
 		p->pos.x = new_x;
@@ -81,18 +84,19 @@ void	_strafe_movement(t_player *p, int orientation)
 	else
 		speed = P_SPEED;
 	pixel_speed = speed * (float)cubed()->gmap->tile;
-	teta = (3 * (PI / 2)) + p->dir.teta;
-	new_y = (sin(teta) * speed * orientation) + p->pos.y;
-	new_x = (cos(teta) * speed * orientation) + p->pos.x;
+	teta =  p->dir.teta;
+	printf("direcao real: %0.3f, Ref Horizontal %0.3f\n", p->dir.teta, teta);
+	new_y = ((cos(teta) * speed) * orientation) + p->pos.y;
+	new_x = ((sin(teta) * speed) * orientation) + p->pos.x;
 	if (!_is_matrix_wall(new_y, p->pos.x))
 	{
 		p->pos.y = new_y;
-		cubed()->gmap->player.y += (sin(teta) * pixel_speed) * orientation;
+		cubed()->gmap->player.y += (cos(teta) * pixel_speed) * orientation;
 	}
 	if (!_is_matrix_wall(p->pos.y, new_x))
 	{
 		p->pos.x = new_x;
-		cubed()->gmap->player.x += (cos(teta) * pixel_speed) * orientation;
+		cubed()->gmap->player.x += (sin(teta) * pixel_speed) * orientation;
 	}
 }
 void	_spin(t_player *p, int wise)

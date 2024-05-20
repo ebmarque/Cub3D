@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:17:33 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/04 16:57:48 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/20 12:59:34 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	_fill_map_line(t_file *t, int i, int width, char *line)
 				_set_player(t, j, i, line);
 			else if (line[j] == '0')
 				t->map[i][j] = 0;
-			else
+			else if (ft_is_space(line[j]))
 				t->map[i][j] = 'x';
+			else
+				t->map[i][j] = line[j];
 		}
 		else
 			t->map[i][j] = 'x';

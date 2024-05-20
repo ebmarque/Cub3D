@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:35:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/19 21:14:12 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/20 20:34:22 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,13 @@ void	_draw_square(t_gmap *mini, int x, int y, int factor)
 	if (factor == 2)
 		color = RED_BLOCK;
 		// color = _get_reverseb(cubed()->content->ceiling);
-	else
+	else if (factor == 1)
 		color = WHITE_BLOCK;
+	else if (factor == 3)
+	{
+		factor = 1;
+		color = 0x00FFaF5F;
+	}
 		// color = _get_reverse(cubed()->content->ceiling);
 	i = -1;
 	while (++i < mini->tile / factor)
@@ -88,6 +93,8 @@ void	_draw_map(t_gmap *mini)
 		{
 			if (mini->map[y][x] == 1)
 				_draw_square(mini, x * mini->tile, y * mini->tile, 1);
+			else if (mini->map[y][x] == 'C')
+				_draw_square(mini, x * mini->tile, y * mini->tile, 3);
 		}
 		
 	}

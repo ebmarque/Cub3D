@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/19 20:40:47 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/20 20:30:56 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@
 # define KEY_P_MASK (1L << 0)
 # define KEY_R_MASK (1L << 1)
 
-# define P_SPEED 0.05
-# define R_SPEED 0.05
+# define P_SPEED 0.025
+# define R_SPEED 0.02
 # define BLOCK_SIZE 10
 # define P_SIZE 30
 # define RED_BLOCK 0x00FF0000
@@ -151,6 +151,11 @@ typedef enum e_key
 	D = 100,
 	W = 119,
 	Q = 113,
+	E = 101,
+	F = 102,
+	R = 114,
+	SPACE = 32,
+	ENTER = 65293,
 	UP = 65362,
 	DOWN = 65364,
 	RIGHT = 65363,
