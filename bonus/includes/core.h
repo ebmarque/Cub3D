@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/20 20:30:56 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/21 01:36:13 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,19 @@
 # define WIN_DESTROY 17
 # define KEY_PRESSED 2
 # define KEY_RELEASED 3
+# define MOUSE_CLICK 4
+# define MOUSE_RELEASED 5
+# define MOUSE_MOTION 6
 # define DESTROY_MASK (1L << 17)
+# define CLICK_MASK (1L << 2)
+# define MRELEASE_MASK (1L << 3)
+# define MOTION_MASK (1L << 6)
 # define KEY_P_MASK (1L << 0)
 # define KEY_R_MASK (1L << 1)
 
 # define P_SPEED 0.025
 # define R_SPEED 0.02
+# define MOUSE_SPEED 0.001
 # define BLOCK_SIZE 10
 # define P_SIZE 30
 # define RED_BLOCK 0x00FF0000

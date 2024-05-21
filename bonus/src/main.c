@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/20 11:05:20 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/21 01:32:28 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,22 @@ void	update_player()
 	//cubed()->player->plane =  /* cubed()->player->dir; */(t_pos) {(int)roundf(cos(cubed()->player->dir.teta * 0.33)),(int)roundf(sin(cubed()->player->dir.teta * 0.33)),0,0};
 	if (cubed()->player->dir.teta == PI/2)
 	{
-		// cubed()->player->dir = (t_pos) {-1, 0,0,0};
+		cubed()->player->dir = (t_pos) {-1, 0,0,0};
 		cubed()->player->plane = (t_pos) {0, 0.66,0,0};
 	}
 	else if (cubed()->player->dir.teta == 3 * (PI/2))
 	{
-		// cubed()->player->dir = (t_pos) {1,0,0,0};
+		cubed()->player->dir = (t_pos) {1,0,0,0};
 		cubed()->player->plane = (t_pos) {0,-0.66,0,0};
 	}
 	else if (cubed()->player->dir.teta == PI)
 	{
-		// cubed()->player->dir = (t_pos) {0,1,0,0};
+		cubed()->player->dir = (t_pos) {0,1,0,0};
 		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
 	}
 	else if (cubed()->player->dir.teta == 0)
 	{
-		// cubed()->player->dir = (t_pos) {0,-1,0,0};
+		cubed()->player->dir = (t_pos) {0,-1,0,0};
 		cubed()->player->plane = (t_pos) {0.66,0,0,0};
 	}
 }
@@ -138,6 +138,52 @@ void	_load_textures(void)
 	cubed()->texture[EAST] = _upload_texture(cubed()->content->ea_t);
 	cubed()->texture[WEST] = _upload_texture(cubed()->content->we_t);
 }
+int	_mouse_click(int button, int x, int y, void *data)
+{
+	(void)data;
+	if (button != 1)
+		return (0);
+	cubed()->mouse.on = 1;
+	cubed()->mouse.pos.x = x;
+	cubed()->mouse.pos.y = y;
+	cubed()->mouse.prev = cubed()->mouse.pos;
+	return (0);
+}
+
+int	_mouse_release(int button, int x, int y, void *data)
+{
+	(void)data;
+	if (button != 1)
+		return (0);
+	cubed()->mouse.on = 0;
+	cubed()->mouse.pos.x = x;
+	cubed()->mouse.pos.y = y;
+	cubed()->mouse.prev = cubed()->mouse.pos;
+	return (0);
+}
+
+void	_motion_spin(int x)
+{
+	double	new_teta;
+
+	new_teta = cubed()->player->dir.teta + (x * MOUSE_SPEED);
+	if (new_teta >= 2 * PI)
+		new_teta = 0;
+	if (new_teta < 0)
+		new_teta = 2 * PI;
+	cubed()->player->dir.teta = new_teta;
+}
+
+int	_mouse_move(int x, int y, void *data)
+{
+	(void)data;
+	if (x == cubed()->mouse.prev.x && y == cubed()->mouse.prev.y)
+		return (0);
+	if (cubed()->mouse.on)
+		_motion_spin(x - cubed()->mouse.prev.x);
+	return (0);
+}
+
 
 void	game_sequence()
 {
@@ -146,6 +192,9 @@ void	game_sequence()
 	mlx_hook (cubed()->mx_var->win, WIN_DESTROY, DESTROY_MASK, quit_game, NULL);
 	mlx_hook(cubed()->mx_var->win, KEY_PRESSED, KEY_P_MASK, _key_pressed, cubed()->player);
 	mlx_hook(cubed()->mx_var->win, KEY_RELEASED, KEY_R_MASK, _key_release, cubed()->player);
+	mlx_hook(cubed()->mx_var->win, MOUSE_MOTION, MOTION_MASK, _mouse_move, NULL);
+	mlx_hook(cubed()->mx_var->win, MOUSE_CLICK, CLICK_MASK, _mouse_click, NULL);
+	mlx_hook(cubed()->mx_var->win, MOUSE_RELEASED, MRELEASE_MASK, _mouse_release, NULL);
 	mlx_loop_hook(cubed()->mx_var->mlx, render_screen, NULL);
 	mlx_loop(cubed()->mx_var->mlx);
 }

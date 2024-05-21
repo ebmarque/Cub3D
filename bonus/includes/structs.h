@@ -137,6 +137,13 @@ typedef struct s_gmap
 	t_img	map_img;
 }				t_gmap;
 
+typedef struct s_mouse
+{
+	t_point prev;
+	t_point	pos;
+	int		on;
+}				t_mouse;
+
 
 typedef struct s_cub
 {
@@ -146,6 +153,7 @@ typedef struct s_cub
     t_mx_var	*mx_var;
 	t_texture	**texture;
 	t_gmap		*gmap;
+	t_mouse		mouse;
 }				t_cub;
 
 #endif
