@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:45:19 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/20 20:29:48 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:17:40 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	_look_for_door(t_player *p, t_file *t)
 	t_point	interaction;
 
 
-	interaction.y = (int)((sin(p->dir.teta) * -0.9f) + p->pos.y);
-	interaction.x = (int)((cos(p->dir.teta) * 0.9f) + p->pos.x);
+	interaction.y = (int)((sin(p->pos.teta) * -0.9f) + p->pos.y);
+	interaction.x = (int)((cos(p->pos.teta) * 0.9f) + p->pos.x);
 
 	if (t->map[(int)interaction.y][(int)interaction.x] == 'C')
 		t->map[interaction.y][interaction.x] = 'O';		

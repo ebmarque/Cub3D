@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:29 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/05 20:41:21 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:12:05 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	_check_empty_file(char *file)
  * @param t The file struct containing the map.
  * @return A pointer to the initialized player struct.
  */
-static t_player *_player_initial_orientation(t_file *t)
+static t_player	*_player_initial_orientation(t_file *t)
 {
 	t_player	*p;
 	int			**map;
@@ -92,13 +92,13 @@ static t_player *_player_initial_orientation(t_file *t)
 	map = t->map;
 	ori = (char)map[(int)t->p_position.y][(int)t->p_position.x];
 	if (ori == 'N')
-		p->dir.teta = PI / 2;
+		p->pos.teta = PI / 2;
 	else if (ori == 'S')
-		p->dir.teta = 3 * (PI / 2);
+		p->pos.teta = 3 * (PI / 2);
 	else if (ori == 'W')
-		p->dir.teta = PI;
+		p->pos.teta = PI;
 	else if (ori == 'E')
-		p->dir.teta = 0;
+		p->pos.teta = 0;
 	p->dir.x = cos(p->dir.teta);
 	p->dir.y = sin(p->dir.teta);
 	return (p);

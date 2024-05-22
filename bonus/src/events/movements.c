@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:05:24 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/20 16:16:49 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:18:47 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	_linear_movement(t_player *p, int orientation)
 	else
 		speed = P_SPEED;
 	pixel_speed = speed * (float)cubed()->gmap->tile;
-	teta = p->dir.teta;
+	teta = p->pos.teta;
 	new_y = ((sin(teta) * speed) * orientation) + p->pos.y;
 	orientation *= -1;
 	new_x = ((cos(teta) * speed) * orientation) + p->pos.x;
@@ -84,8 +84,7 @@ void	_strafe_movement(t_player *p, int orientation)
 	else
 		speed = P_SPEED;
 	pixel_speed = speed * (float)cubed()->gmap->tile;
-	teta =  p->dir.teta;
-	printf("direcao real: %0.3f, Ref Horizontal %0.3f\n", p->dir.teta, teta);
+	teta =  p->pos.teta;
 	new_y = ((cos(teta) * speed) * orientation) + p->pos.y;
 	new_x = ((sin(teta) * speed) * orientation) + p->pos.x;
 	if (!_is_matrix_wall(new_y, p->pos.x))
@@ -104,12 +103,12 @@ void	_spin(t_player *p, int wise)
 	double	new_teta;
 	t_pos	plane;
 
-	new_teta = p->dir.teta + (wise * R_SPEED);
+	new_teta = p->pos.teta + (wise * R_SPEED);
 	if (new_teta >= 2 * PI)
 		new_teta = 0;
 	if (new_teta < 0)
 		new_teta = 2 * PI;
-	p->dir.teta = new_teta;
+	p->pos.teta = new_teta;
 	p->dir.y = sin(p->dir.teta);
 	p->dir.x = cos(p->dir.teta);
 	plane.x = p->plane.x;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+         #
+#    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/05/18 14:24:44 by tmoutinh         ###   ########.fr        #
+#    Updated: 2024/05/22 15:39:37 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ RAYCASTING_DIRECTORY = src/Raycaster
 
 ERROR = $(addprefix $(ERROR_DIRECTORY)/, \
 		error.c content_error.c map_validation.c \
-		map_validation_2.c map_rules.c)
+		map_validation_2.c map_rules.c error_utils_1.c error_utils_2.c)
 
 EVENTS = $(addprefix $(EVENTS_DIRECTORY)/, \
 		draw.c hooks.c movements.c \

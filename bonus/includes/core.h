@@ -6,13 +6,9 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/21 01:36:13 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:51:55 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-
-
 
 #ifndef CORE_H
 # define CORE_H
@@ -46,62 +42,42 @@
  */
 
 # define EMPTY_SPACES " \t\v\b\a\r\f\n"
-# define MEMORY_ERROR RED "ERROR: Failed to allocate memory" RESET
-# define INVALID_ARGC RED "ERROR: Wrong number of arguments." RESET
-# define INVALID_NAME RED "ERROR: Invalid map name." RESET
-# define NO_ACCESS RED "ERROR: File cannot be accessed." RESET
-# define NO_RIGHTS RED "ERROR: File (Permission for execution denied)." RESET
-# define NO_TEXTURE_ACCESS RED "ERROR: Texture file cannot be accessed." RESET
-# define NO_TEXTURE_RIGHTS RED \
-	"ERROR: Texture file (Permission for execution denied)." RESET
-# define EMPTY_MAP RED "ERROR: Empty map file." RESET
-# define WRONG_EXT RED "ERROR: Map file with wrong extension < .cub > ." RESET
-# define PARSING_ERROR RED "ERROR: Map file wrongly formatted." RESET
-# define EMPTY_TEXTURE RED "ERROR: Empty texture file." RESET
-# define INVALID_MAP_LINE RED "ERROR: Map contains invalid characters." RESET
-# define EMPTY_MAP_LINE RED "ERROR: Map contains empty line." RESET
-# define PLAYER_ON_EDGE RED "ERROR: Player is on the edge of the map." RESET
-# define DUPLICATED_PLAYER RED "ERROR: More than one player on the map" RESET
-# define NO_PLAYER RED "ERROR: Player start position not found." RESET
-# define OPEN_WALLS RED "ERROR: Player is not surrounded by walls." RESET
-# define SMALL_MAP RED "ERROR: Map dimensions are too small." RESET
-
-/*-----------------MLX--------------------*/
-/**
- * @file core.h
- * @brief This file contains the definitions of various constants used in the Cub3D program.
- */
-
-# define WIN_DESTROY 17 /**< The window destroy event code. */
-# define KEY_PRESSED 2 /**< The key pressed event code. */
-# define KEY_RELEASED 3 /**< The key released event code. */
-# define DESTROY_MASK (1L << 17) /**< The mask for the window destroy event. */
-# define KEY_P_MASK (1L << 0) /**< The mask for the key pressed event. */
-# define KEY_R_MASK (1L << 1) /**< The mask for the key released event. */
-
+# define MEMORY_ERROR "ERROR: Failed to allocate memory"
+# define INVALID_ARGC "ERROR: Wrong number of arguments."
+# define INVALID_NAME "ERROR: Invalid map name."
+# define NO_ACCESS "ERROR: File cannot be accessed."
+# define NO_RIGHTS "ERROR: File (Permission for execution denied)."
+# define NO_TEXTURE_ACCESS "ERROR: Texture file cannot be accessed."
+# define NO_TEXTURE_RIGHTS \
+	"ERROR: Texture file (Permission for execution denied)."
+# define EMPTY_MAP "ERROR: Empty map file."
+# define WRONG_EXT "ERROR: Map file with wrong extension < .cub > ."
+# define PARSING_ERROR "ERROR: Map file wrongly formatted."
+# define EMPTY_TEXTURE "ERROR: Empty texture file."
+# define INVALID_MAP_LINE "ERROR: Map contains invalid characters."
+# define EMPTY_MAP_LINE "ERROR: Map contains empty line."
+# define PLAYER_ON_EDGE "ERROR: Player is on the edge of the map."
+# define DUPLICATED_PLAYER "ERROR: More than one player on the map"
+# define NO_PLAYER "ERROR: Player start position not found."
+# define OPEN_WALLS "ERROR: Player is not surrounded by walls."
+# define SMALL_MAP "ERROR: Map dimensions are too small."
+# define WIN_DESTROY 17
+# define KEY_PRESSED 2
+# define KEY_RELEASED 3
 # define WIN_DESTROY 17
 # define KEY_PRESSED 2
 # define KEY_RELEASED 3
 # define MOUSE_CLICK 4
-# define MOUSE_RELEASED 5
 # define MOUSE_MOTION 6
-# define DESTROY_MASK (1L << 17)
-# define CLICK_MASK (1L << 2)
-# define MRELEASE_MASK (1L << 3)
-# define MOTION_MASK (1L << 6)
-# define KEY_P_MASK (1L << 0)
-# define KEY_R_MASK (1L << 1)
-
 # define P_SPEED 0.025
-# define R_SPEED 0.02
+# define R_SPEED 0.05
 # define MOUSE_SPEED 0.001
 # define BLOCK_SIZE 10
 # define P_SIZE 30
 # define RED_BLOCK 0x00FF0000
 # define WHITE_BLOCK 0x00FFFFFF
 # define INVISIBLE_BLOCK 0xFF000000
-/*-----------------MATH--------------------*/
-#define PI 3.1415926
+# define PI 3.1415926
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -169,93 +145,105 @@ typedef enum e_key
 	LEFT = 65361
 }		t_key;
 
-
 # endif
 
+/*---------------------------------- CORE ------------------------------------*/
+void		_load_textures(void);
+void		_init_gmap(void);
+t_texture	*_upload_texture(char *path);
+void		update_player();
+void		_init_img(t_img *img);
+void		mx_var_init();
+void		destroy_game();
+int			quit_game(void);
 
 
-/*---------------------------------- ERRORS -----------------------------------*/
 /*---------------------------------- ERROR -----------------------------------*/
 
-void	_check_errors(int argc, char **argv);
-t_file	*_check_map_content(char *file);
+void		_check_errors(int argc, char **argv);
+t_file		*_check_map_content(char *file);
+int			_check_color_values(t_rgb color);
+int			_set_floor(char **split, t_file *content);
+int			_set_ceiling(char **split, t_file *content);
+int			_save_element_data(char **split, t_file *content);
+bool		_is_player_on_edge(t_file *t);
+bool		_duplicate_player(t_file *t);
+int			_recover_block(char c);
+void		_fill_block(t_file *t, t_point current, int c);
 
 /*------------------------------ MAP VALIDATION ------------------------------*/
 
-void	_check_valid_map_char(char *file, int start, int fd, t_file *content);
-void	_check_and_parse_map(t_file *content, char *file);
-void	_check_valid_map_char(char *file, int start, int fd, t_file *content);
-int		_is_valid_map_line(char *line);
-
+bool		_is_valid_map_char(char c);
+int			_is_valid_map_line(char *line);
+void		_check_valid_map_char(char *file, int start, int fd, t_file *content);
+void		_update_map_width(t_file *content, char *line);
+void		_check_valid_map_char(char *file, int start, int fd, t_file *content);
+void		_check_and_parse_map(t_file *content, char *file);
+void		_check_valid_map_char(char *file, int start, int fd, t_file *content);
+int			_is_valid_map_line(char *line);
 
 /*---------------------------------- TOOLS -----------------------------------*/
-void	raycaster(void);
-int	render_screen(void);
-t_cub	*cubed(void);
-t_pos	to_screen_pos(t_pos pos);
 
+void		raycaster(void);
+int			render_screen(void);
+t_cub		*cubed(void);
+t_pos		to_screen_pos(t_pos pos);
 
 /*--------------------------------- UTILS 1 ----------------------------------*/
 
-int		_get_split_size(char **line);
-int		_is_element(char *line);
-int		_is_map_line(char *line);
-void	_exit_error(char *msg);
+int			_get_split_size(char **line);
+int			_is_element(char *line);
+int			_is_map_line(char *line);
+void		_exit_error(char *msg);
 
 /*--------------------------------- UTILS 2 ----------------------------------*/
-void	_clean_content(t_file *content);
-void	_read_all_file(int fd);
-int		_all_elements_set(t_file *t);
-void	_print_content_variable(t_file *t);
-char	*_give_texture(char *line);
+
+void		_clean_content(t_file *content);
+void		_read_all_file(int fd);
+int			_all_elements_set(t_file *t);
+void		_print_content_variable(t_file *t);
+char		*_give_texture(char *line);
 
 /*--------------------------------- UTILS 3 ----------------------------------*/
 
-int		_check_t_file_permissions(char *file);
-int		_check_t_empty_file(char *file);
-char	*_tab_into_spaces(char *source);
-void	_fill_tabs(const char *source, char *new_string);
-size_t	_count_tabs(const char *source);
-
-
-void	_get_map(t_file *content, char *file);
-void	_print_map(t_file *t);
-void	_fill_map(t_file *content, char *file, int i, int fd);
-void	_fill_map_line(t_file *t, int i, int width, char *line);
-bool	_is_player_char(char c);
+int			_check_t_file_permissions(char *file);
+int			_check_t_empty_file(char *file);
+char		*_tab_into_spaces(char *source);
+void		_fill_tabs(const char *source, char *new_string);
+size_t		_count_tabs(const char *source);
+void		_get_map(t_file *content, char *file);
+void		_print_map(t_file *t);
+void		_fill_map(t_file *content, char *file, int i, int fd);
+void		_fill_map_line(t_file *t, int i, int width, char *line);
+bool		_is_player_char(char c);
 
 /*-------------------------------- MOVEMENTS ---------------------------------*/
 
-bool	_inside_y_limits(int y);
-bool	_inside_x_limits(int x);
-
-void	_check_map_rules(t_file *t);
-int		_key_pressed(int k, void *data);
-int		_key_release(int k, void *data);
-int		_raycasting_loop(void);
-void	_handle_input(t_player *p);
-
-
-void	_linear_movement(t_player *p, int orientation);
-void	_strafe_movement(t_player *p, int orientation);
-void	_spin(t_player *p, int wise);
-
+bool		_inside_y_limits(int y);
+bool		_inside_x_limits(int x);
+void		_check_map_rules(t_file *t);
+int			_key_pressed(int k, void *data);
+int			_key_release(int k, void *data);
+int			_raycasting_loop(void);
+void		_linear_movement(t_player *p, int orientation);
+void		_strafe_movement(t_player *p, int orientation);
+void		_spin(t_player *p, int wise);
+int			_mouse_move(int x, int y, void *data);
+int			_mouse_click(int button, int x, int y, void *data);
 
 /*--------------------------------- COLOR U ----------------------------------*/
 
-int		gen_trgb(int opacity, t_rgb color);
-int		get_opacity(int trgb);
-int		get_r(int trgb);
-int		get_g(int trgb);
-int		get_b(int trgb);
+int			gen_trgb(int opacity, t_rgb color);
+int			get_opacity(int trgb);
+int			get_r(int trgb);
+int			get_g(int trgb);
+int			get_b(int trgb);
 
 /*--------------------------------- COLOR U ----------------------------------*/
 
-void	_draw_square(t_gmap *mini, int x, int y, int factor);
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void	_black_window(t_img *m, float factor);
-void	_draw_map(t_gmap *mini);
-
-
+void		_draw_square(t_gmap *mini, int x, int y, int factor);
+void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void		_black_window(t_img *m, float factor);
+void		_draw_map(t_gmap *mini);
 
 #endif

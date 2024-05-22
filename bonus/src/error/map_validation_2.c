@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:17:33 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/20 12:59:34 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:01:42 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ bool	_is_player_char(char c)
 		return (true);
 	return (false);
 }
+
 static void	_set_player(t_file *t, int x, int y, char *line)
 {
 	t->p_position.x = (double)x;
@@ -59,23 +60,21 @@ void	_fill_map(t_file *content, char *file, int i, int fd)
 	char	*line;
 	int		j;
 
-	j = 0;
+	j = -1;
 	fd = open(file, O_RDONLY);
 	line = _tab_into_spaces(get_next_line(fd));
 	while (line && ++i <= content->map_end_line)
 	{
 		if (i >= content->map_start_line && i <= content->map_end_line)
-		{
-			_fill_map_line(content, j, content->map_width, ft_strtrim(line, "\n"));
-			j++;
-		}
+			_fill_map_line(content, ++j, \
+				content->map_width, ft_strtrim(line, "\n"));
 		free(line);
 		line = _tab_into_spaces(get_next_line(fd));
 	}
 	if (line)
 		free(line);
-	_read_all_file(fd);
 	close(fd);
+	_read_all_file(fd);
 	if (content->p_position.is_set == false)
 	{
 		_clean_content(content);

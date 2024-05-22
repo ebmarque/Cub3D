@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/21 01:31:34 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:59:33 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,10 +241,10 @@ void	raycaster(void)
 int	render_screen(void)
 {
 	_raycasting_loop();
-	_black_window(&cubed()->mx_var->screen_buffer, 1.0f);
-	raycaster();
-	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
-	if(cubed()->player->map_view == 1)
-		_draw_map(cubed()->gmap);
+	_black_window(&cubed()->gmap->map_img, 1.0f);
+	// if(cubed()->player->map_view == 1)
+	// raycaster();
+	// mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
+	_draw_map(cubed()->gmap);
 	return(EXIT_SUCCESS);
 }

@@ -83,6 +83,6 @@ int	_is_map_line(char *line)
  */
 void	_exit_error(char *msg)
 {
-	ft_putstr_fd(msg, 2);
+	printf(RED"%s"RESET, msg);
 	exit(EXIT_FAILURE);
 }
