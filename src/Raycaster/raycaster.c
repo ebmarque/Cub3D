@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/19 15:05:03 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/22 22:14:18 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,14 @@ void	get_side_dist(t_ray *ray)
 	}
 }
 
+
+bool	_verify_hit(int x, int y)
+{
+	if (cubed()->content->map[y][x] == 1 || cubed()->content->map[y][x] == 'C' || cubed()->content->map[y][x] == 'O')
+		return(true);
+	return(false);
+}
+
 void	perform_dda(t_ray *ray)
 {
 	bool	hit;
@@ -99,8 +107,9 @@ void	perform_dda(t_ray *ray)
 			ray->side = 1;
 		}
 		//Is sufficient to check the map wall
-		if (cubed()->content->map[(int)ray->pos.y][(int)ray->pos.x] > 0)
-			hit = true;
+		/* if (cubed()->content->map[(int)ray->pos.y][(int)ray->pos.x] == 1)
+			hit = true; */
+		hit = _verify_hit(ray->pos.x, ray->pos.y);
 	}
 }
 
