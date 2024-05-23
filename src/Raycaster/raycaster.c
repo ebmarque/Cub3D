@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/18 15:00:00 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:26:47 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_pos	to_screen_pos(t_pos pos)
 	t_pos	screen_pos;
 
 	screen_pos = pos;
-	//screen_pos.x = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
+	//screen_pos.x = (BLOCK_SIZE * BLOCK_SIZE / 2) +
 	// (BLOCK_SIZE * pos.x) + ((double)BLOCK_SIZE / 2);
-	//screen_pos.y = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
+	//screen_pos.y = (BLOCK_SIZE * BLOCK_SIZE / 2) +
 	//(BLOCK_SIZE * pos.y) + ((double)BLOCK_SIZE / 2);
 	return (screen_pos);
 }
@@ -154,6 +154,8 @@ t_texture	*get_text_info(t_ray *ray)
 	return (text);
 }
 
+
+
 void	render_pixel(int x, int y, int color)
 {
 	char	*dst;
@@ -169,6 +171,22 @@ int	_get_img_pixel(t_texture *mlx, int x, int y)
 {
 	return (*(unsigned int *)(mlx->addr + \
 		(y * mlx->line_len) + (x * (mlx->bpp / 8))));
+}
+
+int	shader_texture(double wall_dist, int color)
+{
+	double	attenuation_coef;
+	unsigned char		r;
+	unsigned char		g;
+	unsigned char		b;
+
+	if (wall_dist > SHADER_DIST)
+		return ((0 << 16) | (0 << 8) | 0);
+	attenuation_coef = (SHADER_DIST - wall_dist) / SHADER_DIST;
+	r = attenuation_coef * (color >> 16 & 0xFF);
+	g = attenuation_coef * (color >> 8 & 0xFF);
+	b = attenuation_coef * (color & 0xFF);
+	return ((r << 16) | (g << 8) | b);
 }
 
 void	texture_render(t_ray *ray, int x_cord)
@@ -189,31 +207,59 @@ void	texture_render(t_ray *ray, int x_cord)
 		text->y = (int)text->pos & (text_info->height - 1);
 		text->pos += text->step;
 		color = _get_img_pixel(text_info, text->x, text->y);
-		render_pixel(x_cord, y, color);
+		render_pixel(x_cord, y, shader_texture(ray->wall_dist, color));
 		y++;
 	}
 }
 
+int	shader_floor(double ref, double wall_dist, int color)
+{
+	double	attenuation_coef;
+	unsigned char		r;
+	unsigned char		g;
+	unsigned char		b;
+
+	attenuation_coef = (wall_dist - ref) / ref;
+	r = attenuation_coef * (color >> 16 & 0xFF);
+	g = attenuation_coef * (color >> 8 & 0xFF);
+	b = attenuation_coef * (color & 0xFF);
+	return ((r << 16) | (g << 8) | b);
+}
+
+int	shader_ceilling(double ref, double wall_dist, int color)
+{
+	double	attenuation_coef;
+	unsigned char		r;
+	unsigned char		g;
+	unsigned char		b;
+
+	attenuation_coef = (ref - wall_dist) / ref;
+	r = attenuation_coef * (color >> 16 & 0xFF);
+	g = attenuation_coef * (color >> 8 & 0xFF);
+	b = attenuation_coef * (color & 0xFF);
+	return ((r << 16) | (g << 8) | b);
+}
+
 void	_render_floor(int x)
 {
-	int y;
+	double y;
 
 	y = HEIGHT / 2;
-	while (y < HEIGHT - 1)
+	while (y < HEIGHT)
 	{
-		render_pixel(x, y, gen_trgb(254, cubed()->content->floor));
+		render_pixel(x, y, shader_floor(HEIGHT/2 , y, gen_trgb(0, cubed()->content->floor)));
 		y++;
 	}
 }
 
 void	_render_ceiling(int x)
 {
-	int y;
+	double y;
 
 	y = 0;
 	while (y < HEIGHT / 2)
 	{
-		render_pixel(x, y, gen_trgb(254, cubed()->content->ceiling));
+		render_pixel(x, y, shader_ceilling(HEIGHT/2 , y, gen_trgb(0, cubed()->content->ceiling)));
 		y++;
 	}
 }
