@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/22 17:51:55 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:29:26 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@
 # define WHITE "\033[0;37m"
 # define RESET "\033[0m"
 # define INVISIBLE "\033[8m"
+# define BG_BLACK "\033[40m"
+# define BG_RED "\033[41m"
+# define BG_GREEN "\033[42m"
+# define BG_YELLOW "\033[43m"
+# define BG_BLUE "\033[44m"
+# define BG_MAGENTA "\033[45m"
+# define BG_CYAN "\033[46m"
+# define BG_WHITE "\033[47m"
 
 // The width of the game window.
 # define WIDTH 1200
@@ -195,6 +203,7 @@ int			_get_split_size(char **line);
 int			_is_element(char *line);
 int			_is_map_line(char *line);
 void		_exit_error(char *msg);
+void		_free_map(t_file *t);
 
 /*--------------------------------- UTILS 2 ----------------------------------*/
 

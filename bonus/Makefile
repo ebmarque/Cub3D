@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/05/22 17:47:24 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/05/23 16:30:07 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,8 @@ EVENTS = $(addsuffix .c, $(addprefix $(EVENTS_DIRECTORY)/, \
 TOOLS = $(addsuffix .c, $(addprefix $(TOOLS_DIRECTORY)/, \
 		utils1 					\
 		utils2 					\
-		utils3					))
+		utils3					\
+		utils4					))
 
 CORE = $(addsuffix .c, $(addprefix $(CORE_DIRECTORY)/, \
 		terminate				\

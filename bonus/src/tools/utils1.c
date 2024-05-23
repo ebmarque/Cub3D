@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:36 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/27 19:31:31 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:23:16 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	_is_map_line(char *line)
 	split = ft_split(line, EMPTY_SPACES);
 	if (!split[0] || !*split[0] || !ft_strncmp(split[0], "\n", 2))
 	{
-		ft_free_split(split);		
+		ft_free_split(split);
 		return (0);
 	}
 	if (!_is_element(split[0]))
@@ -85,4 +85,23 @@ void	_exit_error(char *msg)
 {
 	printf(RED"%s"RESET, msg);
 	exit(EXIT_FAILURE);
+}
+
+/**
+ * Frees the memory allocated for the map in the t_file structure.
+ * 
+ * @param t A pointer to the t_file structure.
+ */
+void	_free_map(t_file *t)
+{
+	int	i;
+	int	matrix_hight;
+
+	matrix_hight = t->map_end_line - t->map_start_line + 1;
+	i = -1;
+	while (++i < matrix_hight)
+		if (t->map[i])
+			free(t->map[i]);
+	if (t->map)
+		free(t->map);
 }

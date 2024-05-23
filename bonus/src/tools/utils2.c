@@ -6,30 +6,11 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:55:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/04/28 17:16:54 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:23:09 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
-
-/**
- * Frees the memory allocated for the map in the t_file structure.
- * 
- * @param t A pointer to the t_file structure.
- */
-void	_free_map(t_file *t)
-{
-	int	i;
-	int	matrix_hight;
-
-	matrix_hight = t->map_end_line - t->map_start_line + 1;
-	i = -1;
-	while (++i < matrix_hight)
-		if (t->map[i])
-			free(t->map[i]);
-	if (t->map)
-		free(t->map);
-}
 
 /**
  * Frees the memory allocated for the content of a file structure.
