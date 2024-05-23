@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/23 21:26:47 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/23 21:36:05 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	perform_dda(t_ray *ray)
 			ray->side = 1;
 		}
 		//Is sufficient to check the map wall
-		if (cubed()->content->map[(int)ray->pos.x][(int)ray->pos.y] > 0)
+		if (cubed()->content->map[(int)ray->pos.y][(int)ray->pos.x] > 0)
 			hit = true;
 	}
 }
@@ -140,16 +140,16 @@ t_texture	*get_text_info(t_ray *ray)
 	if (!ray->side)
 	{
 		if (ray->dir.x < 0)
-			text = cubed()->texture[SOUTH];
+			text = cubed()->texture[WEST];
 		else
-			text = cubed()->texture[NORTH];
+			text = cubed()->texture[EAST];
 	}
 	else
 	{
 		if (ray->dir.y < 0)
-			text = cubed()->texture[WEST];
+			text = cubed()->texture[NORTH];
 		else
-			text = cubed()->texture[EAST];
+			text = cubed()->texture[SOUTH];
 	}
 	return (text);
 }

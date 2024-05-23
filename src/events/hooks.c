@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:45:19 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/18 15:02:16 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:36:51 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ int	_raycasting_loop(void)
 	if (p->d)
 		_strafe_movement(p, +1);
 	if (p->r_a)
-		_spin(p, -1);
+		_spin(p, 1);
 	if (p->r_d)
-		_spin(p, 1);	
+		_spin(p, -1);	
 	//_draw_map(cubed()->gmap);
 	return (0);
 }
