@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:17:13 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/22 18:03:59 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:26:17 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,29 +49,26 @@ t_texture	*_upload_texture(char *path)
 	return (text);
 }
 
-
 void	update_player()
 {
-	//cubed()->player->dir = (t_pos) {(int)roundf(cos(cubed()->player->dir.teta)),(int)roundf(sin(cubed()->player->dir.teta)),0,0};
-	//cubed()->player->plane =  /* cubed()->player->dir; */(t_pos) {(int)roundf(cos(cubed()->player->dir.teta * 0.33)),(int)roundf(sin(cubed()->player->dir.teta * 0.33)),0,0};
 	if (cubed()->player->dir.teta == PI/2)
 	{
-		cubed()->player->dir = (t_pos) {-1, 0,0,0};
-		cubed()->player->plane = (t_pos) {0, 0.66,0,0};
+		cubed()->player->dir = (t_pos){-1, 0,0,0};
+		cubed()->player->plane = (t_pos){0, 0.66,0,0};
 	}
 	else if (cubed()->player->dir.teta == 3 * (PI/2))
 	{
-		cubed()->player->dir = (t_pos) {1,0,0,0};
-		cubed()->player->plane = (t_pos) {0,-0.66,0,0};
+		cubed()->player->dir = (t_pos){1,0,0,0};
+		cubed()->player->plane = (t_pos){0,-0.66,0,0};
 	}
 	else if (cubed()->player->dir.teta == PI)
 	{
-		cubed()->player->dir = (t_pos) {0,1,0,0};
-		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
+		cubed()->player->dir = (t_pos){0,1,0,0};
+		cubed()->player->plane = (t_pos){-0.66,0,0,0};
 	}
 	else if (cubed()->player->dir.teta == 0)
 	{
-		cubed()->player->dir = (t_pos) {0,-1,0,0};
-		cubed()->player->plane = (t_pos) {0.66,0,0,0};
+		cubed()->player->dir = (t_pos){0,-1,0,0};
+		cubed()->player->plane = (t_pos){0.66,0,0,0};
 	}
 }
