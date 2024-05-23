@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/23 21:36:05 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/23 21:46:42 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ int	shader_texture(double wall_dist, int color)
 	unsigned char		g;
 	unsigned char		b;
 
-	if (wall_dist > SHADER_DIST)
+	if (wall_dist >= SHADER_DIST)
 		return ((0 << 16) | (0 << 8) | 0);
 	attenuation_coef = (SHADER_DIST - wall_dist) / SHADER_DIST;
 	r = attenuation_coef * (color >> 16 & 0xFF);

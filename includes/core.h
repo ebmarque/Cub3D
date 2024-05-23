@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/23 20:14:32 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/23 21:47:04 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@
 # define RED_BLOCK 0x00FF0000
 # define WHITE_BLOCK 0x00FFFFFF
 # define INVISIBLE_BLOCK 0xFF000000
-# define SHADER_DIST 7.70
+# define SHADER_DIST 5.00
 /*-----------------MATH--------------------*/
 #define PI 3.1415926
 
