@@ -6,14 +6,15 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:39:16 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/08 14:43:38 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:03:51 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
 
 /**
- * Generates a 32-bit ARGB color value based on the given opacity, red, green, and blue values.
+ * Generates a 32-bit ARGB color value based on the given opacity, red, green, 
+ * and blue values.
  * 
  * @param opacity The opacity value (0-255).
  * @param red The red value (0-255).
@@ -24,7 +25,7 @@
 int	gen_trgb(int opacity, t_rgb color)
 {
 	if (opacity > 255 || color.r > 255 || color.g > 255 || color.b > 255)
-		return 0;
+		return (0);
 	return (opacity << 24 | color.r << 16 | color.g << 8 | color.b);
 }
 

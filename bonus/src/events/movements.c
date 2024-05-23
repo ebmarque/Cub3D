@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:05:24 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/21 11:18:47 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:21:00 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	_linear_movement(t_player *p, int orientation)
 	double	teta;
 	double	speed;
 	float	pixel_speed;
-	
+
 	if ((p->w && (p->a || p->d)) || (p->s && (p->a || p->d)))
 		speed = P_SPEED * 0.75;
 	else
@@ -55,19 +55,17 @@ void	_linear_movement(t_player *p, int orientation)
 	pixel_speed = speed * (float)cubed()->gmap->tile;
 	teta = p->pos.teta;
 	new_y = ((sin(teta) * speed) * orientation) + p->pos.y;
-	orientation *= -1;
-	new_x = ((cos(teta) * speed) * orientation) + p->pos.x;
-	orientation *= -1;
+	new_x = ((-1) * (cos(teta) * speed) * orientation) + p->pos.x;
 	if (!_is_matrix_wall(new_y, p->pos.x))
 	{
 		p->pos.y = new_y;
 		cubed()->gmap->player.y += (sin(teta) * pixel_speed) * orientation;
 	}
-	orientation *= -1;
 	if (!_is_matrix_wall(p->pos.y, new_x))
 	{
 		p->pos.x = new_x;
-		cubed()->gmap->player.x += (cos(teta) * pixel_speed) * orientation;
+		cubed()->gmap->player.x += ((-1) * (cos(teta) * pixel_speed)) \
+			* orientation;
 	}
 }
 
@@ -84,7 +82,7 @@ void	_strafe_movement(t_player *p, int orientation)
 	else
 		speed = P_SPEED;
 	pixel_speed = speed * (float)cubed()->gmap->tile;
-	teta =  p->pos.teta;
+	teta = p->pos.teta;
 	new_y = ((cos(teta) * speed) * orientation) + p->pos.y;
 	new_x = ((sin(teta) * speed) * orientation) + p->pos.x;
 	if (!_is_matrix_wall(new_y, p->pos.x))
@@ -98,6 +96,7 @@ void	_strafe_movement(t_player *p, int orientation)
 		cubed()->gmap->player.x += (sin(teta) * pixel_speed) * orientation;
 	}
 }
+
 void	_spin(t_player *p, int wise)
 {
 	double	new_teta;
@@ -112,6 +111,8 @@ void	_spin(t_player *p, int wise)
 	p->dir.y = sin(p->dir.teta);
 	p->dir.x = cos(p->dir.teta);
 	plane.x = p->plane.x;
-	p->plane.x = p->plane.x * cos(wise * R_SPEED) - p->plane.y * sin(wise * R_SPEED);
-	p->plane.y = plane.x * sin(wise * R_SPEED) + p->plane.y * cos(wise * R_SPEED);
+	p->plane.x = p->plane.x * cos(wise * R_SPEED) \
+		- p->plane.y * sin(wise * R_SPEED);
+	p->plane.y = plane.x * sin(wise * R_SPEED) \
+		+ p->plane.y * cos(wise * R_SPEED);
 }

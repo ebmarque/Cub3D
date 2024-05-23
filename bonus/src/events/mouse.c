@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:08:55 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/22 17:35:08 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:15:16 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ static void	_motion_spin(int x)
 int	_mouse_move(int x, int y, void *data)
 {
 	(void)data;
-	if ((x == cubed()->mouse.prev.x && y == cubed()->mouse.prev.y) || !cubed()->mouse.on)
+	if ((x == cubed()->mouse.prev.x && y == cubed()->mouse.prev.y) \
+		|| !cubed()->mouse.on)
 		return (0);
 	if (cubed()->mouse.on)
 	{
 		_motion_spin(cubed()->mouse.prev.x - x);
-		mlx_mouse_move(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mouse.prev.x,cubed()->mouse.prev.y);
+		mlx_mouse_move(cubed()->mx_var->mlx, cubed()->mx_var->win, \
+			cubed()->mouse.prev.x, cubed()->mouse.prev.y);
 	}
 	return (0);
 }

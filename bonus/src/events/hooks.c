@@ -6,48 +6,46 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:45:19 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/21 11:17:40 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:14:35 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
 
-void	_open_door(t_point p, t_file *t)
-{
-	/* if (t->map[p.y - 1][p.x] == 1)
-		t->map[p.y - 1][p.x] = 2;
-	if (t->map[p.y + 1][p.x] == 1)
-		t->map[p.y + 1][p.x] = 2;
-	if (t->map[p.y][p.x - 1] == 1)
-		t->map[p.y][p.x - 1] = 2;
-	if (t->map[p.y][p.x + 1] == 1)
-		t->map[p.y][p.x + 1] = 2; */
-	t->map[p.y][p.x] = 'O';
-}
+// void	_open_door(t_point p, t_file *t)
+// {
+// 	if (t->map[p.y - 1][p.x] == 1)
+// 		t->map[p.y - 1][p.x] = 2;
+// 	if (t->map[p.y + 1][p.x] == 1)
+// 		t->map[p.y + 1][p.x] = 2;
+// 	if (t->map[p.y][p.x - 1] == 1)
+// 		t->map[p.y][p.x - 1] = 2;
+// 	if (t->map[p.y][p.x + 1] == 1)
+// 		t->map[p.y][p.x + 1] = 2;
+// 	t->map[p.y][p.x] = 'O';
+// }
 
-void	_close_door(t_point p, t_file *t)
-{
-	/* if (t->map[p.y - 1][p.x] == 2)
-		t->map[p.y - 1][p.x] = 1;
-	if (t->map[p.y + 1][p.x] == 2)
-		t->map[p.y + 1][p.x] = 1;
-	if (t->map[p.y][p.x - 1] == 2)
-		t->map[p.y][p.x - 1] = 1;
-	if (t->map[p.y][p.x + 1] == 2)
-		t->map[p.y][p.x + 1] = 1; */
-	t->map[p.y][p.x] = 'C';
-}
+// void	_close_door(t_point p, t_file *t)
+// {
+// 	if (t->map[p.y - 1][p.x] == 2)
+// 		t->map[p.y - 1][p.x] = 1;
+// 	if (t->map[p.y + 1][p.x] == 2)
+// 		t->map[p.y + 1][p.x] = 1;
+// 	if (t->map[p.y][p.x - 1] == 2)
+// 		t->map[p.y][p.x - 1] = 1;
+// 	if (t->map[p.y][p.x + 1] == 2)
+// 		t->map[p.y][p.x + 1] = 1;
+// 	t->map[p.y][p.x] = 'C';
+// }
 
 void	_look_for_door(t_player *p, t_file *t)
 {
 	t_point	interaction;
 
-
 	interaction.y = (int)((sin(p->pos.teta) * -0.9f) + p->pos.y);
 	interaction.x = (int)((cos(p->pos.teta) * 0.9f) + p->pos.x);
-
 	if (t->map[(int)interaction.y][(int)interaction.x] == 'C')
-		t->map[interaction.y][interaction.x] = 'O';		
+		t->map[interaction.y][interaction.x] = 'O';
 	else if (t->map[(int)interaction.y][(int)interaction.x] == 'O')
 		t->map[interaction.y][interaction.x] = 'C';
 }
@@ -71,8 +69,6 @@ int	_key_pressed(int k, void *data)
 		_look_for_door(cubed()->player, cubed()->content);
 	if (k == ENTER)
 		p->map_view *= -1;
-	if (k == DOWN)
-		p->r_s = 1;
 	if (k == LEFT)
 		p->r_a = 1;
 	if (k == RIGHT)
@@ -97,8 +93,6 @@ int	_key_release(int k, void *data)
 		p->a = 0;
 	if (k == D)
 		p->d = 0;
-	if (k == DOWN)
-		p->r_s = 0;
 	if (k == LEFT)
 		p->r_a = 0;
 	if (k == RIGHT)
@@ -110,7 +104,7 @@ int	_key_release(int k, void *data)
 
 int	_raycasting_loop(void)
 {
-	t_player *p;
+	t_player	*p;
 
 	p = cubed()->player;
 	if (p->w)
@@ -124,6 +118,6 @@ int	_raycasting_loop(void)
 	if (p->r_a)
 		_spin(p, +1);
 	if (p->r_d)
-		_spin(p, -1);	
+		_spin(p, -1);
 	return (0);
 }
