@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/25 19:49:16 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/25 20:03:32 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,7 +270,6 @@ int	render_screen(void)
 {
 	_black_window(&cubed()->mx_var->screen_buffer, 1.0f);
 	_raycasting_loop();
-	// if(cubed()->player->map_view == 1)
 	raycaster();
 	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
  	if (cubed()->player->map_view == 1)

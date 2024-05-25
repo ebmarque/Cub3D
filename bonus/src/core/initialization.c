@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:17:13 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 19:29:47 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/25 20:06:17 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	_init_gmap(void)
 	mini->player.y = cubed()->player->pos.y * mini->tile;
 	mini->player.is_set = 1;
 	mini->player.teta = 0;
-	_init_img(&mini->map_img);
+	//_init_img(&mini->map_img);
 	cubed()->gmap = mini;
 	cubed()->player->map_view = 1;
 }
@@ -52,21 +52,12 @@ t_texture	*_upload_texture(char *path)
 
 void	update_player()
 {
-	
 	if (cubed()->player->pos.teta == PI/2)
-	{
 		cubed()->player->plane = (t_pos){+0.66,0,0,0};
-	}
 	else if (cubed()->player->pos.teta == 3 * (PI/2))
-	{
 		cubed()->player->plane = (t_pos){-0.66,0,0,0};
-	}
 	else if (cubed()->player->pos.teta == PI)
-	{
 		cubed()->player->plane = (t_pos){0,+0.66,0,0};
-	}
 	else if (cubed()->player->pos.teta == 0)
-	{
 		cubed()->player->plane = (t_pos){0,-0.66,0,0};
-	}
 }
