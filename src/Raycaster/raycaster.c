@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/23 21:46:42 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/25 15:10:38 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
-
-t_pos	to_screen_pos(t_pos pos)
-{
-	t_pos	screen_pos;
-
-	screen_pos = pos;
-	//screen_pos.x = (BLOCK_SIZE * BLOCK_SIZE / 2) +
-	// (BLOCK_SIZE * pos.x) + ((double)BLOCK_SIZE / 2);
-	//screen_pos.y = (BLOCK_SIZE * BLOCK_SIZE / 2) +
-	//(BLOCK_SIZE * pos.y) + ((double)BLOCK_SIZE / 2);
-	return (screen_pos);
-}
-
-t_pos	to_map_pos(t_pos screen_pos)
-{
-	t_pos	map_pos;
-
-	map_pos = screen_pos;
-	//map_pos.x = (screen_pos.x - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
-	//map_pos.y = (screen_pos.y - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
-	return (map_pos);
-}
 
 void	init_ray(t_ray *ray, int x_cord)
 {
@@ -43,7 +21,7 @@ void	init_ray(t_ray *ray, int x_cord)
 
 	p = (cubed()->player);
 	x_cam = 2 * (double)x_cord / (double)WIDTH - 1;
-	ray->pos = to_map_pos(p->pos);
+	ray->pos = p->pos;
 	ray->dir.x = p->dir.x + p->plane.x * x_cam;
 	ray->dir.y = p->dir.y + p->plane.y * x_cam;
 	ray->delta_dist.x = fabs(1 / ray->dir.x);
@@ -110,7 +88,7 @@ void	wall_placement(t_ray *ray)
 {
 	t_pos	curr;
 
-	curr = to_map_pos(cubed()->player->pos);
+	curr = cubed()->player->pos;
 	if (!ray->side)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else

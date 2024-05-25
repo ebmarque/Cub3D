@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/23 21:47:04 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/25 15:13:07 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,8 +178,6 @@ int		_is_valid_map_line(char *line);
 void	raycaster(void);
 int	render_screen(void);
 t_cub	*cubed(void);
-t_pos	to_screen_pos(t_pos pos);
-
 
 /*--------------------------------- UTILS 1 ----------------------------------*/
 
