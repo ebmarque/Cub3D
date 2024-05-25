@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 18:34:20 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/23 16:08:34 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/25 16:22:32 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	_draw_map(t_gmap *mini)
 		}
 	}
 	_draw_player(mini);
-	mlx_put_image_to_window(mini->map_img.mlx, \
-		mini->map_img.win, mini->map_img.img, 0, 0);
+/* 	mlx_put_image_to_window(mini->map_img.mlx, \
+		mini->map_img.win, mini->map_img.img, 0, 0); */
 }

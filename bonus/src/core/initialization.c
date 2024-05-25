@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:17:13 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/23 15:26:17 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/25 17:52:39 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,21 @@ t_texture	*_upload_texture(char *path)
 
 void	update_player()
 {
-	if (cubed()->player->dir.teta == PI/2)
+	
+	if (cubed()->player->pos.teta == PI/2)
 	{
-		cubed()->player->dir = (t_pos){-1, 0,0,0};
-		cubed()->player->plane = (t_pos){0, 0.66,0,0};
-	}
-	else if (cubed()->player->dir.teta == 3 * (PI/2))
-	{
-		cubed()->player->dir = (t_pos){1,0,0,0};
-		cubed()->player->plane = (t_pos){0,-0.66,0,0};
-	}
-	else if (cubed()->player->dir.teta == PI)
-	{
-		cubed()->player->dir = (t_pos){0,1,0,0};
 		cubed()->player->plane = (t_pos){-0.66,0,0,0};
 	}
-	else if (cubed()->player->dir.teta == 0)
+	else if (cubed()->player->pos.teta == 3 * (PI/2))
 	{
-		cubed()->player->dir = (t_pos){0,-1,0,0};
-		cubed()->player->plane = (t_pos){0.66,0,0,0};
+		cubed()->player->plane = (t_pos){+0.66,0,0,0};
+	}
+	else if (cubed()->player->pos.teta == PI)
+	{
+		cubed()->player->plane = (t_pos){0,-0.66,0,0};
+	}
+	else if (cubed()->player->pos.teta == 0)
+	{
+		cubed()->player->plane = (t_pos){0,+0.66,0,0};
 	}
 }

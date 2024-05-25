@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:35:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/23 16:08:06 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/25 16:23:29 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	_draw_square(t_gmap *mini, int x, int y, int factor)
 	if (factor == 2)
 		color = RED_BLOCK;
 	else if (factor == 1)
-		color = WHITE_BLOCK;
+		color = _get_reverse(cubed()->content->ceiling);
 	else if (factor == 3)
 	{
 		factor = 1;
@@ -70,6 +70,6 @@ void	_draw_square(t_gmap *mini, int x, int y, int factor)
 	{
 		j = -1;
 		while (++j < mini->tile / factor)
-			my_mlx_pixel_put(&mini->map_img, x + j, y + i, color);
+			my_mlx_pixel_put(/* &mini->map_img */&cubed()->mx_var->screen_buffer, x + j, y + i, color);
 	}
 }

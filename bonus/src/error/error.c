@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:29 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/22 15:12:05 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/25 17:53:40 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ static t_player	*_player_initial_orientation(t_file *t)
 		p->pos.teta = PI;
 	else if (ori == 'E')
 		p->pos.teta = 0;
-	p->dir.x = cos(p->dir.teta);
-	p->dir.y = sin(p->dir.teta);
+	p->dir.x = cos(p->pos.teta);
+	p->dir.y = -1 * sin(p->pos.teta);
 	return (p);
 }
 

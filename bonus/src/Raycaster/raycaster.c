@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/23 16:13:23 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/25 17:00:54 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
-
-t_pos	to_screen_pos(t_pos pos)
-{
-	t_pos	screen_pos;
-
-	screen_pos = pos;
-	//screen_pos.x = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
-	// (BLOCK_SIZE * pos.x) + ((double)BLOCK_SIZE / 2);
-	//screen_pos.y = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
-	//(BLOCK_SIZE * pos.y) + ((double)BLOCK_SIZE / 2);
-	return (screen_pos);
-}
-
-t_pos	to_map_pos(t_pos screen_pos)
-{
-	t_pos	map_pos;
-
-	map_pos = screen_pos;
-	//map_pos.x = (screen_pos.x - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
-	//map_pos.y = (screen_pos.y - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
-	return (map_pos);
-}
 
 void	init_ray(t_ray *ray, int x_cord)
 {
@@ -43,7 +21,7 @@ void	init_ray(t_ray *ray, int x_cord)
 
 	p = (cubed()->player);
 	x_cam = 2 * (double)x_cord / (double)WIDTH - 1;
-	ray->pos = to_map_pos(p->pos);
+	ray->pos = p->pos;
 	ray->dir.x = p->dir.x + p->plane.x * x_cam;
 	ray->dir.y = p->dir.y + p->plane.y * x_cam;
 	ray->delta_dist.x = fabs(1 / ray->dir.x);
@@ -99,7 +77,7 @@ void	perform_dda(t_ray *ray)
 			ray->side = 1;
 		}
 		//Is sufficient to check the map wall
-		if (cubed()->content->map[(int)ray->pos.x][(int)ray->pos.y] > 0)
+		if (cubed()->content->map[(int)ray->pos.y][(int)ray->pos.x] > 0)
 			hit = true;
 	}
 }
@@ -110,7 +88,7 @@ void	wall_placement(t_ray *ray)
 {
 	t_pos	curr;
 
-	curr = to_map_pos(cubed()->player->pos);
+	curr = cubed()->player->pos;
 	if (!ray->side)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
@@ -140,16 +118,16 @@ t_texture	*get_text_info(t_ray *ray)
 	if (!ray->side)
 	{
 		if (ray->dir.x < 0)
-			text = cubed()->texture[SOUTH];
+			text = cubed()->texture[EAST];
 		else
-			text = cubed()->texture[NORTH];
+			text = cubed()->texture[WEST];
 	}
 	else
 	{
 		if (ray->dir.y < 0)
-			text = cubed()->texture[WEST];
+			text = cubed()->texture[SOUTH];
 		else
-			text = cubed()->texture[EAST];
+			text = cubed()->texture[NORTH];
 	}
 	return (text);
 }
@@ -240,12 +218,12 @@ void	raycaster(void)
 
 int	render_screen(void)
 {
+	_black_window(&cubed()->mx_var->screen_buffer, 1.0f);
 	_raycasting_loop();
-	_black_window(&cubed()->gmap->map_img, 1.0f);
 	// if(cubed()->player->map_view == 1)
-	// raycaster();
-	// mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
-	if (cubed()->player->map_view == 1)
+	raycaster();
+	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
+ 	if (cubed()->player->map_view == 1)
 		_draw_map(cubed()->gmap);
 	return(EXIT_SUCCESS);
 }

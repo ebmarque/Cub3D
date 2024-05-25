@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:04:16 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/23 15:23:03 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/25 16:07:21 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	mx_var_init(void)
 	cubed()->mx_var->win = win;
 	// _init_img(cubed()->mx_var->img);
 	_init_img(&cubed()->mx_var->screen_buffer);
-	cubed()->player->pos = to_screen_pos(cubed()->player->pos);
+	//cubed()->gmap->map_img = cubed()->mx_var->screen_buffer;
+	cubed()->player->pos = cubed()->player->pos;
 	update_player();
 	_init_gmap();
 }
