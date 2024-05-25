@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/25 15:10:38 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:13:23 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
+
+t_pos	to_screen_pos(t_pos pos)
+{
+	t_pos	screen_pos;
+
+	screen_pos = pos;
+	//screen_pos.x = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
+	// (BLOCK_SIZE * pos.x) + ((double)BLOCK_SIZE / 2);
+	//screen_pos.y = (BLOCK_SIZE * BLOCK_SIZE / 2) + \
+	//(BLOCK_SIZE * pos.y) + ((double)BLOCK_SIZE / 2);
+	return (screen_pos);
+}
+
+t_pos	to_map_pos(t_pos screen_pos)
+{
+	t_pos	map_pos;
+
+	map_pos = screen_pos;
+	//map_pos.x = (screen_pos.x - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
+	//map_pos.y = (screen_pos.y - (BLOCK_SIZE * BLOCK_SIZE / 2))/BLOCK_SIZE;
+	return (map_pos);
+}
 
 void	init_ray(t_ray *ray, int x_cord)
 {
@@ -21,7 +43,7 @@ void	init_ray(t_ray *ray, int x_cord)
 
 	p = (cubed()->player);
 	x_cam = 2 * (double)x_cord / (double)WIDTH - 1;
-	ray->pos = p->pos;
+	ray->pos = to_map_pos(p->pos);
 	ray->dir.x = p->dir.x + p->plane.x * x_cam;
 	ray->dir.y = p->dir.y + p->plane.y * x_cam;
 	ray->delta_dist.x = fabs(1 / ray->dir.x);
@@ -56,14 +78,6 @@ void	get_side_dist(t_ray *ray)
 	}
 }
 
-
-bool	_verify_hit(int x, int y)
-{
-	if (cubed()->content->map[y][x] == 1 || cubed()->content->map[y][x] == 'C' || cubed()->content->map[y][x] == 'O')
-		return(true);
-	return(false);
-}
-
 void	perform_dda(t_ray *ray)
 {
 	bool	hit;
@@ -85,7 +99,7 @@ void	perform_dda(t_ray *ray)
 			ray->side = 1;
 		}
 		//Is sufficient to check the map wall
-		if (cubed()->content->map[(int)ray->pos.y][(int)ray->pos.x] > 0)
+		if (cubed()->content->map[(int)ray->pos.x][(int)ray->pos.y] > 0)
 			hit = true;
 	}
 }
@@ -96,7 +110,7 @@ void	wall_placement(t_ray *ray)
 {
 	t_pos	curr;
 
-	curr = cubed()->player->pos;
+	curr = to_map_pos(cubed()->player->pos);
 	if (!ray->side)
 		ray->wall_dist = ray->side_dist.x - ray->delta_dist.x;
 	else
@@ -126,21 +140,19 @@ t_texture	*get_text_info(t_ray *ray)
 	if (!ray->side)
 	{
 		if (ray->dir.x < 0)
-			text = cubed()->texture[WEST];
+			text = cubed()->texture[SOUTH];
 		else
-			text = cubed()->texture[EAST];
+			text = cubed()->texture[NORTH];
 	}
 	else
 	{
 		if (ray->dir.y < 0)
-			text = cubed()->texture[NORTH];
+			text = cubed()->texture[WEST];
 		else
-			text = cubed()->texture[SOUTH];
+			text = cubed()->texture[EAST];
 	}
 	return (text);
 }
-
-
 
 void	render_pixel(int x, int y, int color)
 {
@@ -157,22 +169,6 @@ int	_get_img_pixel(t_texture *mlx, int x, int y)
 {
 	return (*(unsigned int *)(mlx->addr + \
 		(y * mlx->line_len) + (x * (mlx->bpp / 8))));
-}
-
-int	shader_texture(double wall_dist, int color)
-{
-	double	attenuation_coef;
-	unsigned char		r;
-	unsigned char		g;
-	unsigned char		b;
-
-	if (wall_dist >= SHADER_DIST)
-		return ((0 << 16) | (0 << 8) | 0);
-	attenuation_coef = (SHADER_DIST - wall_dist) / SHADER_DIST;
-	r = attenuation_coef * (color >> 16 & 0xFF);
-	g = attenuation_coef * (color >> 8 & 0xFF);
-	b = attenuation_coef * (color & 0xFF);
-	return ((r << 16) | (g << 8) | b);
 }
 
 void	texture_render(t_ray *ray, int x_cord)
@@ -193,59 +189,31 @@ void	texture_render(t_ray *ray, int x_cord)
 		text->y = (int)text->pos & (text_info->height - 1);
 		text->pos += text->step;
 		color = _get_img_pixel(text_info, text->x, text->y);
-		render_pixel(x_cord, y, shader_texture(ray->wall_dist, color));
+		render_pixel(x_cord, y, color);
 		y++;
 	}
 }
 
-int	shader_floor(double ref, double wall_dist, int color)
-{
-	double	attenuation_coef;
-	unsigned char		r;
-	unsigned char		g;
-	unsigned char		b;
-
-	attenuation_coef = (wall_dist - ref) / ref;
-	r = attenuation_coef * (color >> 16 & 0xFF);
-	g = attenuation_coef * (color >> 8 & 0xFF);
-	b = attenuation_coef * (color & 0xFF);
-	return ((r << 16) | (g << 8) | b);
-}
-
-int	shader_ceilling(double ref, double wall_dist, int color)
-{
-	double	attenuation_coef;
-	unsigned char		r;
-	unsigned char		g;
-	unsigned char		b;
-
-	attenuation_coef = (ref - wall_dist) / ref;
-	r = attenuation_coef * (color >> 16 & 0xFF);
-	g = attenuation_coef * (color >> 8 & 0xFF);
-	b = attenuation_coef * (color & 0xFF);
-	return ((r << 16) | (g << 8) | b);
-}
-
 void	_render_floor(int x)
 {
-	double y;
+	int y;
 
 	y = HEIGHT / 2;
-	while (y < HEIGHT)
+	while (y < HEIGHT - 1)
 	{
-		render_pixel(x, y, shader_floor(HEIGHT/2 , y, gen_trgb(0, cubed()->content->floor)));
+		render_pixel(x, y, gen_trgb(254, cubed()->content->floor));
 		y++;
 	}
 }
 
 void	_render_ceiling(int x)
 {
-	double y;
+	int y;
 
 	y = 0;
 	while (y < HEIGHT / 2)
 	{
-		render_pixel(x, y, shader_ceilling(HEIGHT/2 , y, gen_trgb(0, cubed()->content->ceiling)));
+		render_pixel(x, y, gen_trgb(254, cubed()->content->ceiling));
 		y++;
 	}
 }
@@ -273,9 +241,11 @@ void	raycaster(void)
 int	render_screen(void)
 {
 	_raycasting_loop();
-	_black_window(&cubed()->mx_var->screen_buffer, 1.0f);
-	raycaster();
-	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
-	_draw_map(cubed()->gmap);
+	_black_window(&cubed()->gmap->map_img, 1.0f);
+	// if(cubed()->player->map_view == 1)
+	// raycaster();
+	// mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
+	if (cubed()->player->map_view == 1)
+		_draw_map(cubed()->gmap);
 	return(EXIT_SUCCESS);
 }
