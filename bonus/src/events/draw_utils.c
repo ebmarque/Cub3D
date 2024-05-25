@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:35:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 16:23:29 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/25 19:55:22 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	_draw_square(t_gmap *mini, int x, int y, int factor)
 	int	color;
 
 	if (factor == 2)
-		color = RED_BLOCK;
+		color = _get_reverseb(cubed()->content->ceiling);
 	else if (factor == 1)
 		color = _get_reverse(cubed()->content->ceiling);
 	else if (factor == 3)
