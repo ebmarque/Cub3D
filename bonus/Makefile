@@ -6,7 +6,7 @@
 #    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/05/22 15:39:37 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/05/23 18:50:27 by ebmarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,48 +20,57 @@ NAME = Cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g #fsanitize=address
 
-LIBFT_DIRECTORY = src/LIB/LIBFT
 LIBFT = $(LIBFT_DIRECTORY)/libft.a
-
-MLX_DIRECTORY = src/LIB/MLX_MAC
 MLX = $(MLX_DIRECTORY)/libmlx.a
 
-OBJDIR = OBJS
+
+INCLUDES =		 			includes/core.h
+OBJDIR = 					OBJS
+LIBFT_DIRECTORY = 			src/LIB/LIBFT
+MLX_DIRECTORY = 			src/LIB/MLX_MAC
+SRC_DIRECTORY = 			src
+ERROR_DIRECTORY = 			src/error
+EVENTS_DIRECTORY = 			src/events
+TOOLS_DIRECTORY = 			src/tools
+CORE_DIRECTORY = 			src/core
+RAYCASTING_DIRECTORY = 		src/Raycaster
+
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
-SRC_DIRECTORY = src
+ERROR = $(addsuffix .c, $(addprefix $(ERROR_DIRECTORY)/, \
+		content_error			\
+		error_utils_1 			\
+		error_utils_2			\
+		error_utils_3			\
+		error 					\
+		map_validation_2 		\
+		map_validation_1		\
+		map_rules 				))
 
-INCLUDES = includes/core.h
+EVENTS = $(addsuffix .c, $(addprefix $(EVENTS_DIRECTORY)/, \
+		draw 					\
+		hooks movements 		\
+		movements_utils 		\
+		draw_utils 				\
+		mouse	 				\
+		color_utils				))
 
-ERROR_DIRECTORY = src/error
+TOOLS = $(addsuffix .c, $(addprefix $(TOOLS_DIRECTORY)/, \
+		utils1 					\
+		utils2 					\
+		utils3					\
+		utils4					))
 
-EVENTS_DIRECTORY = src/events
+CORE = $(addsuffix .c, $(addprefix $(CORE_DIRECTORY)/, \
+		terminate				\
+		initialization			\
+		mlx_utils				\
+		main					))
 
-TOOLS_DIRECTORY = src/tools
-
-CORE_DIRECTORY = src/core
-
-RAYCASTING_DIRECTORY = src/Raycaster
-
-ERROR = $(addprefix $(ERROR_DIRECTORY)/, \
-		error.c content_error.c map_validation.c \
-		map_validation_2.c map_rules.c error_utils_1.c error_utils_2.c)
-
-EVENTS = $(addprefix $(EVENTS_DIRECTORY)/, \
-		draw.c hooks.c movements.c \
-		movements_utils.c draw_utils.c color_utils.c )
-
-TOOLS = $(addprefix $(TOOLS_DIRECTORY)/, \
-		utils1.c utils2.c utils3.c)
-
-CORE = $(addprefix $(SRC_DIRECTORY)/, main.c)
-
-
-#SRCS = $(ERROR) $(TOOLS) $(CORE) $(EVENTS)
 
 RAYCASTER = $(addprefix $(RAYCASTING_DIRECTORY)/, raycaster.c)
-SRCS = $(ERROR) $(TOOLS) $(CORE) $(RAYCASTER) $(EVENTS)
 
+SRCS = $(ERROR) $(TOOLS) $(CORE) $(RAYCASTER) $(EVENTS)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Darwin)
