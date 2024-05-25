@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 18:35:01 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/25 19:54:42 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@
 # define WHITE_BLOCK 0x00FFFFFF
 # define INVISIBLE_BLOCK 0xFF000000
 # define PI 3.1415926
+# define SHADER_DIST 9.00
 
 # include <stdio.h>
 # include <stdlib.h>

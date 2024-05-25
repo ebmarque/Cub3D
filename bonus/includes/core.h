@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 18:35:01 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/25 19:53:32 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@
 # define WHITE_BLOCK 0x00FFFFFF
 # define INVISIBLE_BLOCK 0xFF000000
 # define PI 3.1415926
+# define DOOR_PATH "./pics/door.xpm"
+# define SHADER_DIST 9.00
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -194,7 +196,7 @@ int			_is_valid_map_line(char *line);
 void		raycaster(void);
 int			render_screen(void);
 t_cub		*cubed(void);
-t_pos		to_screen_pos(t_pos pos);
+bool		_wall_char(int c);
 
 /*--------------------------------- UTILS 1 ----------------------------------*/
 

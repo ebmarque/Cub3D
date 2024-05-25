@@ -152,6 +152,7 @@ typedef struct s_cub
     t_player	*player;
     t_mx_var	*mx_var;
 	t_texture	**texture;
+	t_texture	*door;
 	t_gmap		*gmap;
 	t_mouse		mouse;
 }				t_cub;

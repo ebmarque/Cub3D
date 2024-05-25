@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:17:13 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 18:39:56 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/25 19:29:47 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	_load_textures(void)
 	cubed()->texture[SOUTH] = _upload_texture(cubed()->content->so_t);
 	cubed()->texture[EAST] = _upload_texture(cubed()->content->ea_t);
 	cubed()->texture[WEST] = _upload_texture(cubed()->content->we_t);
+	cubed()->door = _upload_texture(DOOR_PATH);
 }
 
 void	_init_gmap(void)
