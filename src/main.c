@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/22 22:19:39 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/25 15:10:57 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	mx_var_init()
 	cubed()->mx_var->screen_buffer = screen_buff;
 /* 	cubed()->player->pos.x = cubed()->content->p_position.y;
 	cubed()->player->pos.y = cubed()->content->p_position.x; */
-	cubed()->player->pos = to_screen_pos(cubed()->player->pos);
+	cubed()->player->pos = cubed()->player->pos;
 	update_player();
 	//_init_img(&cubed()->mx_var->screen_buffer);
 	_init_gmap();

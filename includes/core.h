@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/18 15:00:30 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/25 15:13:07 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@
 # define RED_BLOCK 0x00FF0000
 # define WHITE_BLOCK 0x00FFFFFF
 # define INVISIBLE_BLOCK 0xFF000000
+# define SHADER_DIST 5.00
 /*-----------------MATH--------------------*/
 #define PI 3.1415926
 
@@ -177,8 +178,6 @@ int		_is_valid_map_line(char *line);
 void	raycaster(void);
 int	render_screen(void);
 t_cub	*cubed(void);
-t_pos	to_screen_pos(t_pos pos);
-
 
 /*--------------------------------- UTILS 1 ----------------------------------*/
 
