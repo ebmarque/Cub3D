@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:45:19 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/23 16:14:35 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:46:34 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	_key_pressed(int k, void *data)
 
 	p = (t_player *)data;
 	if (k == ESC)
-		exit(0);
+		_terminate_cubed();
 	if (k == W)
 		p->w = 1;
 	if (k == S)
@@ -84,7 +84,7 @@ int	_key_release(int k, void *data)
 
 	p = (t_player *)data;
 	if (k == ESC)
-		exit(0);
+		_terminate_cubed();
 	if (k == W)
 		p->w = 0;
 	if (k == S)

@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 18:15:27 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/22 17:46:25 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/25 15:31:18 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ static bool	_fill_validation(t_file *t, t_point size, t_point current)
 
 void	_fill(t_file *t, t_point size, t_point current, int p)
 {
+	// system("clear");
 	if (!_fill_validation(t, size, current))
 		return ;
+	// usleep(42000);
 	_fill(t, size, (t_point){current.x - 1, current.y}, p);
 	_fill(t, size, (t_point){current.x + 1, current.y}, p);
 	_fill(t, size, (t_point){current.x, current.y - 1}, p);

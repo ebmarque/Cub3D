@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/23 15:12:47 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:46:56 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	_game_sequence(void)
 {
 	mx_var_init();
 	_load_textures();
-	mlx_hook (cubed()->mx_var->win, WIN_DESTROY, 1L << 17, quit_game, NULL);
+	mlx_hook (cubed()->mx_var->win, WIN_DESTROY, 1L << 17, _terminate_cubed, NULL);
 	mlx_hook(cubed()->mx_var->win, KEY_PRESSED, 1L << 0, \
 		_key_pressed, cubed()->player);
 	mlx_hook(cubed()->mx_var->win, KEY_RELEASED, 1L << 1, \

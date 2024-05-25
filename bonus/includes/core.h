@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/23 16:29:26 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:47:33 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,6 @@ t_texture	*_upload_texture(char *path);
 void		update_player();
 void		_init_img(t_img *img);
 void		mx_var_init();
-void		destroy_game();
 int			quit_game(void);
 
 
@@ -254,5 +253,9 @@ void		_draw_square(t_gmap *mini, int x, int y, int factor);
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void		_black_window(t_img *m, float factor);
 void		_draw_map(t_gmap *mini);
+
+
+int			_terminate_cubed(void);
+
 
 #endif
