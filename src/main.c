@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/20 11:08:33 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/22 22:19:39 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,23 @@ void	update_player()
 	//cubed()->player->plane =  /* cubed()->player->dir; */(t_pos) {(int)roundf(cos(cubed()->player->dir.teta * 0.33)),(int)roundf(sin(cubed()->player->dir.teta * 0.33)),0,0};
 	if (cubed()->player->dir.teta == PI/2)
 	{
-		// cubed()->player->dir = (t_pos) {-1, 0,0,0};
-		cubed()->player->plane = (t_pos) {0, 0.66,0,0};
+		//cubed()->player->dir = (t_pos) {-1, 0,0,0};
+		cubed()->player->plane = (t_pos) {0.66,0,0,0};
 	}
 	else if (cubed()->player->dir.teta == 3 * (PI/2))
 	{
-		// cubed()->player->dir = (t_pos) {1,0,0,0};
-		cubed()->player->plane = (t_pos) {0,-0.66,0,0};
+		//cubed()->player->dir = (t_pos) {1,0,0,0};
+		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
 	}
 	else if (cubed()->player->dir.teta == PI)
 	{
-		// cubed()->player->dir = (t_pos) {0,1,0,0};
-		cubed()->player->plane = (t_pos) {-0.66,0,0,0};
+		//cubed()->player->dir = (t_pos) {0,1,0,0};
+		cubed()->player->plane = (t_pos) {0, 0.66,0,0};
 	}
 	else if (cubed()->player->dir.teta == 0)
 	{
-		// cubed()->player->dir = (t_pos) {0,-1,0,0};
-		cubed()->player->plane = (t_pos) {0.66,0,0,0};
+		//cubed()->player->dir = (t_pos) {0,-1,0,0};
+		cubed()->player->plane = (t_pos) {0,-0.66,0,0};
 	}
 }
 
