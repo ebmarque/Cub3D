@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:00:29 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 17:53:40 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/25 18:36:07 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ static t_player	*_player_initial_orientation(t_file *t)
 	char		ori;
 
 	p = ft_calloc(1, sizeof(t_player));
-	p->pos.x = t->p_position.x;
-	p->pos.y = t->p_position.y;
+	p->pos.x = t->p_position.x + 0.2f;
+	p->pos.y = t->p_position.y + 0.2f;
 	map = t->map;
 	ori = (char)map[(int)t->p_position.y][(int)t->p_position.x];
 	if (ori == 'N')
@@ -100,7 +100,7 @@ static t_player	*_player_initial_orientation(t_file *t)
 	else if (ori == 'E')
 		p->pos.teta = 0;
 	p->dir.x = cos(p->pos.teta);
-	p->dir.y = -1 * sin(p->pos.teta);
+	p->dir.y = sin(p->pos.teta);
 	return (p);
 }
 

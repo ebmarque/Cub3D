@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:08:55 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/23 16:15:16 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/25 18:32:30 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,24 @@ int	_mouse_click(int button, int x, int y, void *data)
 
 static void	_motion_spin(int x)
 {
-	double	new_teta;
+	double		new_teta;
+	t_pos		plane;
+	t_player	*p;
 
+	p = cubed()->player;
 	new_teta = cubed()->player->pos.teta + (x * MOUSE_SPEED);
 	if (new_teta >= 2 * PI)
 		new_teta = 0;
 	if (new_teta < 0)
 		new_teta = 2 * PI;
 	cubed()->player->pos.teta = new_teta;
+		p->dir.x = cos(p->pos.teta);
+	p->dir.y = sin(p->pos.teta);
+	plane.x = p->plane.x;
+	p->plane.x = p->plane.x * cos(x * MOUSE_SPEED) \
+		- p->plane.y * sin(x * MOUSE_SPEED);
+	p->plane.y = plane.x * sin(x * MOUSE_SPEED) \
+		+ p->plane.y * cos(x * MOUSE_SPEED);
 }
 
 int	_mouse_move(int x, int y, void *data)

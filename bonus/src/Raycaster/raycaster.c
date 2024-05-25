@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/25 17:00:54 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/25 18:29:01 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	get_side_dist(t_ray *ray)
 		ray->step.x = -1;
 		ray->side_dist.x = (ray->pos.x - (int)ray->pos.x) * ray->delta_dist.x;
 	}
-	if (ray->dir.y > 0)
+	if (ray->dir.y < 0)
 	{
 		ray->step.y = 1;
 		ray->side_dist.y = ((int)ray->pos.y + 1 - ray->pos.y)
@@ -103,7 +103,7 @@ void	wall_placement(t_ray *ray)
 	//The value wall_X represents the exact Y value where the wall was hit,
 	//not just the integer coordinates of the wall
 	if (!ray->side)
-		ray->wall_x = curr.y + ray->wall_dist * ray->dir.y;
+		ray->wall_x = curr.y + ray->wall_dist * -ray->dir.y;
 	else
 		ray->wall_x = curr.x + ray->wall_dist * ray->dir.x;
 	//Floor is a C function that returns the largest integer value not greater than x;
@@ -118,9 +118,9 @@ t_texture	*get_text_info(t_ray *ray)
 	if (!ray->side)
 	{
 		if (ray->dir.x < 0)
-			text = cubed()->texture[EAST];
-		else
 			text = cubed()->texture[WEST];
+		else
+			text = cubed()->texture[EAST];
 	}
 	else
 	{

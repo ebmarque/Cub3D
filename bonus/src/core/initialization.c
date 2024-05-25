@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:17:13 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 17:52:39 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/25 18:39:56 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,18 @@ void	update_player()
 	
 	if (cubed()->player->pos.teta == PI/2)
 	{
-		cubed()->player->plane = (t_pos){-0.66,0,0,0};
+		cubed()->player->plane = (t_pos){+0.66,0,0,0};
 	}
 	else if (cubed()->player->pos.teta == 3 * (PI/2))
 	{
-		cubed()->player->plane = (t_pos){+0.66,0,0,0};
+		cubed()->player->plane = (t_pos){-0.66,0,0,0};
 	}
 	else if (cubed()->player->pos.teta == PI)
 	{
-		cubed()->player->plane = (t_pos){0,-0.66,0,0};
+		cubed()->player->plane = (t_pos){0,+0.66,0,0};
 	}
 	else if (cubed()->player->pos.teta == 0)
 	{
-		cubed()->player->plane = (t_pos){0,+0.66,0,0};
+		cubed()->player->plane = (t_pos){0,-0.66,0,0};
 	}
 }

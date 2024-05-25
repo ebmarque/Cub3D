@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/23 18:47:33 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/25 18:35:01 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@
 # define KEY_RELEASED 3
 # define MOUSE_CLICK 4
 # define MOUSE_MOTION 6
-# define P_SPEED 0.025
+# define P_SPEED 0.080
 # define R_SPEED 0.05
 # define MOUSE_SPEED 0.001
 # define BLOCK_SIZE 10
