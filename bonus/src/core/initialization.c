@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:17:13 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 20:06:17 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/26 17:19:51 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
+
+void	_load_sprite()
+{
+	cubed()->sprite = ft_calloc(1, sizeof(t_sprite));
+	cubed()->sprite->sprites = ft_calloc(NB_SPRITES, sizeof(t_texture));
+	cubed()->sprite->sprites[0] = _upload_texture(SPRITE_1);
+	cubed()->sprite->sprites[1] = _upload_texture(SPRITE_2);
+	cubed()->sprite->sprites[2] = _upload_texture(SPRITE_3);
+	cubed()->sprite->current_frame = 0;
+	cubed()->sprite->time = clock();
+}
 
 void	_load_textures(void)
 {
@@ -20,6 +31,7 @@ void	_load_textures(void)
 	cubed()->texture[EAST] = _upload_texture(cubed()->content->ea_t);
 	cubed()->texture[WEST] = _upload_texture(cubed()->content->we_t);
 	cubed()->door = _upload_texture(DOOR_PATH);
+	_load_sprite();
 }
 
 void	_init_gmap(void)
