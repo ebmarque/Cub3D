@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shaders.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:35:05 by tiago             #+#    #+#             */
-/*   Updated: 2024/05/28 23:00:17 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/29 00:39:14 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	shader_texture(double wall_dist, int color)
 	b = shader * (color & 0xFF);
 	return ((r << 16) | (g << 8) | b);
 }
-
 
 int	shader_floor(double ref, double wall_dist, int color)
 {
