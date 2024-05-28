@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/29 00:35:02 by ebmarque          #+#    #+#             */
+/*   Updated: 2024/05/29 00:37:13 by ebmarque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
@@ -9,10 +21,10 @@ typedef struct s_Point
 
 typedef struct s_point
 {
-	double			x;
-	double			y;
-	double			teta;
-	bool			is_set;
+	double	x;
+	double	y;
+	double	teta;
+	bool	is_set;
 }				t_pos;
 
 typedef enum e_text_index
@@ -55,7 +67,6 @@ typedef struct s_text_info
 	int			x;
 	int			y;
 	double		step;
-	
 }				t_text_info;
 
 /**
@@ -83,17 +94,12 @@ typedef struct s_rgb
 	bool	is_set;
 }				t_rgb;
 
-typedef struct  s_ray
+typedef struct s_ray
 {
-    //Start position of the ray [Player position];
-    t_pos		pos;
-    //Direction vector;
+	t_pos		pos;
 	t_pos		dir;
-    //Direction in which the ray is going [Player orientation];
 	t_pos		step;
-    //Distance from one x or y side to the next x or y side;
 	t_pos		delta_dist;
-    //Distance from the player to the wall;
 	t_pos		side_dist;
 	int			side;
 	double		wall_dist;
@@ -101,7 +107,7 @@ typedef struct  s_ray
 	int			line_height;
 	int			start;
 	int			end;
-}   t_ray;
+}				t_ray;
 
 typedef struct s_mx_var
 {
@@ -118,7 +124,7 @@ typedef struct s_file
 	char	*ea_t;
 	char	*we_t;
 	int		**map;
-	t_point begin;
+	t_point	begin;
 	t_rgb	floor;
 	t_rgb	ceiling;
 	bool	open_map;
@@ -139,18 +145,17 @@ typedef struct s_gmap
 
 typedef struct s_mouse
 {
-	t_point prev;
+	t_point	prev;
 	t_point	pos;
 	int		on;
 }				t_mouse;
-
 
 typedef struct s_cub
 {
 	char		*map_name;
 	t_file		*content;
-    t_player	*player;
-    t_mx_var	*mx_var;
+	t_player	*player;
+	t_mx_var	*mx_var;
 	t_texture	**texture;
 	t_gmap		*gmap;
 	t_mouse		mouse;
