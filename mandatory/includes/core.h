@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/29 00:02:06 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/29 00:25:34 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,30 +160,29 @@ typedef enum e_key
 void		_load_textures(void);
 void		_init_gmap(void);
 t_texture	*_upload_texture(char *path);
-void		update_player();
+void		update_player(void);
 void		_init_img(t_img *img);
-void		mx_var_init();
+void		mx_var_init(void);
 int			quit_game(void);
 
-/*----------------------------- RAYCASTER_UTILS -------------------------------*/
+/*---------------------------- RAYCASTER_UTILS -------------------------------*/
 void		init_ray(t_ray *ray, int x_cord);
 void		get_side_dist(t_ray *ray);
 void		perform_dda(t_ray *ray);
 void		wall_placement(t_ray *ray);
 
-/*--------------------------------- RENDERER ----------------------------------*/
+/*-------------------------------- RENDERER ----------------------------------*/
 t_texture	*get_text_info(t_ray *ray);
 void		render_pixel(int x, int y, int color);
 int			_get_img_pixel(t_texture *mlx, int x, int y);
 void		_render_floor(int x);
 void		_render_ceiling(int x);
 
-/*--------------------------------- SHADERS -----------------------------------*/
+/*-------------------------------- SHADERS -----------------------------------*/
 void		texture_render(t_ray *ray, int x_cord);
 int			shader_ceilling(double ref, double wall_dist, int color);
 int			shader_floor(double ref, double wall_dist, int color);
 int			shader_texture(double wall_dist, int color);
-
 
 /*---------------------------------- ERROR -----------------------------------*/
 
@@ -203,11 +202,14 @@ bool		_wall_char(int c);
 
 bool		_is_valid_map_char(char c);
 int			_is_valid_map_line(char *line);
-void		_check_valid_map_char(char *file, int start, int fd, t_file *content);
+void		_check_valid_map_char(char *file, int start, \
+	int fd, t_file *content);
 void		_update_map_width(t_file *content, char *line);
-void		_check_valid_map_char(char *file, int start, int fd, t_file *content);
+void		_check_valid_map_char(char *file, int start, \
+	int fd, t_file *content);
 void		_check_and_parse_map(t_file *content, char *file);
-void		_check_valid_map_char(char *file, int start, int fd, t_file *content);
+void		_check_valid_map_char(char *file, int start, \
+	int fd, t_file *content);
 int			_is_valid_map_line(char *line);
 
 /*---------------------------------- TOOLS -----------------------------------*/
@@ -275,8 +277,6 @@ void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void		_black_window(t_img *m, float factor);
 void		_draw_map(t_gmap *mini);
 
-
 int			_terminate_cubed(void);
-
 
 #endif
