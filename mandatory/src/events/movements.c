@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:05:24 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 17:56:55 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:01:37 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
 
-static bool	_wall_char(int c)
+bool	_wall_char(int c)
 {
 	if ((c >= 1 && c <= 9) || c == 'C')
 		return (true);

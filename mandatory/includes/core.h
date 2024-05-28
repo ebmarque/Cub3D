@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/28 20:42:33 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/29 00:02:06 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ bool		_is_player_on_edge(t_file *t);
 bool		_duplicate_player(t_file *t);
 int			_recover_block(char c);
 void		_fill_block(t_file *t, t_point current, int c);
+bool		_wall_char(int c);
 
 /*------------------------------ MAP VALIDATION ------------------------------*/
 

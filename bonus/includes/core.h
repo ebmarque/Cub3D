@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/28 21:31:40 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/29 00:10:10 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@
 # define WHITE_BLOCK 0x00FFFFFF
 # define INVISIBLE_BLOCK 0xFF000000
 # define PI 3.1415926
-# define DOOR_PATH "./pics/door.xpm"
+# define DOOR_PATH "../textures/door.xpm"
 # define SHADER_DIST 9.00
 # define NB_SPRITES 3
 # define FRAME_DELAY 100000
-# define SPRITE_1 "./pics/sprite_1.xpm"
-# define SPRITE_2 "./pics/sprite_2.xpm"
-# define SPRITE_3 "./pics/sprite_3.xpm"
+# define SPRITE_1 "../textures/sprite_1.xpm"
+# define SPRITE_2 "../textures/sprite_2.xpm"
+# define SPRITE_3 "../textures/sprite_3.xpm"
 
 # include <stdio.h>
 # include <stdlib.h>

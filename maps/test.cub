@@ -1,8 +1,8 @@
 
-NO ./pics/wood.xpm
-SO ./pics/colorstone.xpm
-EA ./pics/eagle.xpm
-WE ./pics/mossy.xpm
+NO ../textures/wood.xpm
+SO ../textures/colorstone.xpm
+EA ../textures/eagle.xpm
+WE ../textures/mossy.xpm
 F 110,100,0
 C 115,30,0
 

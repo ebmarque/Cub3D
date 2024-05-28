@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:38:27 by tiago             #+#    #+#             */
-/*   Updated: 2024/05/28 20:38:55 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/29 00:00:53 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	perform_dda(t_ray *ray)
 			ray->pos.y += ray->step.y;
 			ray->side = 1;
 		}
-		if (cubed()->content->map[(int)ray->pos.y][(int)ray->pos.x] > 0)
+		if (_wall_char(cubed()->content->map[(int)ray->pos.y][(int)ray->pos.x]))
 			hit = true;
 	}
 }
