@@ -144,6 +144,12 @@ typedef struct s_mouse
 	int		on;
 }				t_mouse;
 
+typedef struct s_sprite
+{
+	t_texture    **sprites;
+    int			current_frame;
+	double		time;
+}				t_sprite;
 
 typedef struct s_cub
 {
@@ -153,6 +159,7 @@ typedef struct s_cub
     t_mx_var	*mx_var;
 	t_texture	**texture;
 	t_texture	*door;
+	t_sprite	*sprite;
 	t_gmap		*gmap;
 	t_mouse		mouse;
 }				t_cub;

@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:17:13 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 19:29:47 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/26 17:19:51 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
+
+void	_load_sprite()
+{
+	cubed()->sprite = ft_calloc(1, sizeof(t_sprite));
+	cubed()->sprite->sprites = ft_calloc(NB_SPRITES, sizeof(t_texture));
+	cubed()->sprite->sprites[0] = _upload_texture(SPRITE_1);
+	cubed()->sprite->sprites[1] = _upload_texture(SPRITE_2);
+	cubed()->sprite->sprites[2] = _upload_texture(SPRITE_3);
+	cubed()->sprite->current_frame = 0;
+	cubed()->sprite->time = clock();
+}
 
 void	_load_textures(void)
 {
@@ -20,6 +31,7 @@ void	_load_textures(void)
 	cubed()->texture[EAST] = _upload_texture(cubed()->content->ea_t);
 	cubed()->texture[WEST] = _upload_texture(cubed()->content->we_t);
 	cubed()->door = _upload_texture(DOOR_PATH);
+	_load_sprite();
 }
 
 void	_init_gmap(void)
@@ -33,7 +45,7 @@ void	_init_gmap(void)
 	mini->player.y = cubed()->player->pos.y * mini->tile;
 	mini->player.is_set = 1;
 	mini->player.teta = 0;
-	_init_img(&mini->map_img);
+	//_init_img(&mini->map_img);
 	cubed()->gmap = mini;
 	cubed()->player->map_view = 1;
 }
@@ -52,21 +64,12 @@ t_texture	*_upload_texture(char *path)
 
 void	update_player()
 {
-	
 	if (cubed()->player->pos.teta == PI/2)
-	{
 		cubed()->player->plane = (t_pos){+0.66,0,0,0};
-	}
 	else if (cubed()->player->pos.teta == 3 * (PI/2))
-	{
 		cubed()->player->plane = (t_pos){-0.66,0,0,0};
-	}
 	else if (cubed()->player->pos.teta == PI)
-	{
 		cubed()->player->plane = (t_pos){0,+0.66,0,0};
-	}
 	else if (cubed()->player->pos.teta == 0)
-	{
 		cubed()->player->plane = (t_pos){0,-0.66,0,0};
-	}
 }

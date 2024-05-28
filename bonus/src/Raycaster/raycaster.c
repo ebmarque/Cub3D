@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/25 19:49:16 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:31:45 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,14 +265,34 @@ void	raycaster(void)
     }
 }
 
+void	_select_sprite()
+{
+	cubed()->sprite->current_frame += 1;
+    if (cubed()->sprite->current_frame >= NB_SPRITES)
+	    cubed()->sprite->current_frame = 0;
+}
+
+void	sprite()
+{
+	t_sprite	*sprite;
+	
+	sprite = cubed()->sprite;
+	if (clock() - sprite->time >= FRAME_DELAY)
+	{
+		_select_sprite();
+		sprite->time = clock();
+	}
+	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, \
+	sprite->sprites[sprite->current_frame]->img,(WIDTH/2 - sprite->sprites[sprite->current_frame]->width/2),0);
+}
 
 int	render_screen(void)
 {
 	_black_window(&cubed()->mx_var->screen_buffer, 1.0f);
 	_raycasting_loop();
-	// if(cubed()->player->map_view == 1)
 	raycaster();
 	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, cubed()->mx_var->screen_buffer.img, 0,0);
+	sprite();
  	if (cubed()->player->map_view == 1)
 		_draw_map(cubed()->gmap);
 	return(EXIT_SUCCESS);

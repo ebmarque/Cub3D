@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 19:53:32 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:04:42 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@
 # define PI 3.1415926
 # define DOOR_PATH "./pics/door.xpm"
 # define SHADER_DIST 9.00
+# define NB_SPRITES 3
+# define FRAME_DELAY 100000
+# define SPRITE_1 "./pics/sprite_1.xpm"
+# define SPRITE_2 "./pics/sprite_2.xpm"
+# define SPRITE_3 "./pics/sprite_3.xpm"
 
 # include <stdio.h>
 # include <stdlib.h>
