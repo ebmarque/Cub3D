@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 21:32:20 by tiago             #+#    #+#             */
-/*   Updated: 2024/05/28 21:43:34 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/28 23:01:19 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	texture_render(t_ray *ray, int x_cord)
 		render_pixel(x_cord, y, shader_texture(ray->wall_dist, color));
 		y++;
 	}
+	free(text);
 }
 
 int	shader_floor(double ref, double wall_dist, int color)

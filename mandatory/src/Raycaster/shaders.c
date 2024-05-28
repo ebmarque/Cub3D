@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:35:05 by tiago             #+#    #+#             */
-/*   Updated: 2024/05/28 20:35:54 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/28 23:00:17 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,5 @@ void	texture_render(t_ray *ray, int x_cord)
 		render_pixel(x_cord, y, shader_texture(ray->wall_dist, color));
 		y++;
 	}
+	free(text);
 }
