@@ -6,7 +6,7 @@
 /*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:17:13 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/26 17:19:51 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/28 21:48:06 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	_init_gmap(void)
 	mini->player.y = cubed()->player->pos.y * mini->tile;
 	mini->player.is_set = 1;
 	mini->player.teta = 0;
-	//_init_img(&mini->map_img);
 	cubed()->gmap = mini;
 	cubed()->player->map_view = 1;
 }

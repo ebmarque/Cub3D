@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:04:16 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 16:07:21 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/28 20:48:20 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ void	mx_var_init(void)
 	mlx = cubed()->mx_var->mlx;
 	win = mlx_new_window(mlx, WIDTH, HEIGHT, "CUB3D");
 	cubed()->mx_var->win = win;
-	// _init_img(cubed()->mx_var->img);
 	_init_img(&cubed()->mx_var->screen_buffer);
-	//cubed()->gmap->map_img = cubed()->mx_var->screen_buffer;
 	cubed()->player->pos = cubed()->player->pos;
 	update_player();
 	_init_gmap();

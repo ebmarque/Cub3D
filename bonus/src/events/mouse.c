@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:08:55 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 18:32:30 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:43:59 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	_motion_spin(int x)
 	if (new_teta < 0)
 		new_teta = 2 * PI;
 	cubed()->player->pos.teta = new_teta;
-		p->dir.x = cos(p->pos.teta);
+	p->dir.x = cos(p->pos.teta);
 	p->dir.y = sin(p->pos.teta);
 	plane.x = p->plane.x;
 	p->plane.x = p->plane.x * cos(x * MOUSE_SPEED) \

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+         #
+#    By: tiago <tiago@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 15:52:25 by ebmarque          #+#    #+#              #
-#    Updated: 2024/05/23 18:50:27 by ebmarque         ###   ########.fr        #
+#    Updated: 2024/05/28 20:45:13 by tiago            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,11 @@ CORE = $(addsuffix .c, $(addprefix $(CORE_DIRECTORY)/, \
 		main					))
 
 
-RAYCASTER = $(addprefix $(RAYCASTING_DIRECTORY)/, raycaster.c)
+RAYCASTER = $(addsuffix .c, $(addprefix $(RAYCASTING_DIRECTORY)/, \
+		raycaster_utils			\
+		renderer				\
+		shaders					\
+		raycaster				))
 
 SRCS = $(ERROR) $(TOOLS) $(CORE) $(RAYCASTER) $(EVENTS)
 

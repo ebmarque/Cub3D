@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 19:54:42 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/28 20:42:33 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,25 @@ void		update_player();
 void		_init_img(t_img *img);
 void		mx_var_init();
 int			quit_game(void);
+
+/*----------------------------- RAYCASTER_UTILS -------------------------------*/
+void		init_ray(t_ray *ray, int x_cord);
+void		get_side_dist(t_ray *ray);
+void		perform_dda(t_ray *ray);
+void		wall_placement(t_ray *ray);
+
+/*--------------------------------- RENDERER ----------------------------------*/
+t_texture	*get_text_info(t_ray *ray);
+void		render_pixel(int x, int y, int color);
+int			_get_img_pixel(t_texture *mlx, int x, int y);
+void		_render_floor(int x);
+void		_render_ceiling(int x);
+
+/*--------------------------------- SHADERS -----------------------------------*/
+void		texture_render(t_ray *ray, int x_cord);
+int			shader_ceilling(double ref, double wall_dist, int color);
+int			shader_floor(double ref, double wall_dist, int color);
+int			shader_texture(double wall_dist, int color);
 
 
 /*---------------------------------- ERROR -----------------------------------*/
