@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:17:13 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/29 00:11:33 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/29 00:26:42 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_texture	*_upload_texture(char *path)
 	return (text);
 }
 
-void	update_player()
+void	update_player(void)
 {
 	if (cubed()->player->pos.teta == PI/2)
 		cubed()->player->plane = (t_pos){+0.66,0,0,0};
