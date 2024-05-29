@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 15:53:15 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/22 15:59:18 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:52:41 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 bool	_is_valid_map_char(char c)
 {
-	if (c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != 'O' \
-		&& c != 'C' && c != '0' && c != '1' && c != '2' && c != '3' \
-		&& c != '4' && c != '5' && c != '6' && c != '7' && c != '8' \
-		&& c != '9' && !ft_is_space(c))
+	if (c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != '0' \
+		&& c != '1' && !ft_is_space(c))
 		return (false);
 	return (true);
 }
