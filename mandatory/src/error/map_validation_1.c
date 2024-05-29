@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:32:35 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/22 15:57:18 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/29 19:17:59 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	_get_map_width(t_file *content, char *file, int fd)
 	line = _tab_into_spaces(get_next_line(fd));
 	while (line && i++)
 	{
-		if (i >= content->map_start_line && i <= content->map_end_line)
+		if (i >= content->map_start_line && i <= content->map_end_line + 1)
 			_update_map_width(content, line);
 		free(line);
 		line = _tab_into_spaces(get_next_line(fd));

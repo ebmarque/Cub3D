@@ -5,12 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 16:17:13 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/29 00:46:55 by ebmarque         ###   ########.fr       */
+/*   Created: 2024/05/29 17:48:30 by ebmarque          #+#    #+#             */
+/*   Updated: 2024/05/29 18:59:55 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
+
+void	_load_sprite(void)
+{
+	t_sprite	*s;
+
+	s = ft_calloc(1, sizeof(t_sprite));
+	s->sprites = ft_calloc(NB_SPRITES, sizeof(t_texture));
+	s->sprites[0] = _upload_texture(SPRITE_1);
+	s->sprites[1] = _upload_texture(SPRITE_2);
+	s->sprites[2] = _upload_texture(SPRITE_3);
+	s->current_frame = 0;
+	s->time = clock();
+	cubed()->sprite = s;
+}
 
 void	_load_textures(void)
 {
@@ -19,6 +33,8 @@ void	_load_textures(void)
 	cubed()->texture[SOUTH] = _upload_texture(cubed()->content->so_t);
 	cubed()->texture[EAST] = _upload_texture(cubed()->content->ea_t);
 	cubed()->texture[WEST] = _upload_texture(cubed()->content->we_t);
+	cubed()->door = _upload_texture(DOOR_PATH);
+	_load_sprite();
 }
 
 void	_init_gmap(void)
@@ -27,13 +43,12 @@ void	_init_gmap(void)
 
 	mini = ft_calloc(1, sizeof(t_gmap));
 	mini->map = cubed()->content->map;
-	mini->tile = \
-		(float)((WIDTH * 0.25) / cubed()->content->matrix_dimensions.x);
+	mini->tile = (float)((WIDTH * 0.25) / \
+		cubed()->content->matrix_dimensions.x);
 	mini->player.x = cubed()->player->pos.x * mini->tile;
 	mini->player.y = cubed()->player->pos.y * mini->tile;
 	mini->player.is_set = 1;
 	mini->player.teta = 0;
-	_init_img(&mini->map_img);
 	cubed()->gmap = mini;
 	cubed()->player->map_view = 1;
 }
@@ -52,16 +67,16 @@ t_texture	*_upload_texture(char *path)
 
 void	update_player(void)
 {
-	t_pos	p;
+	t_pos	plane;
 
-	p = cubed()->player->plane;
+	plane = (t_pos){0, 0, 0, 0};
 	if (cubed()->player->pos.teta == PI / 2)
-		p = (t_pos){+0.66, 0, 0, 0};
+		plane = (t_pos){+0.66, 0, 0, 0};
 	else if (cubed()->player->pos.teta == 3 * (PI / 2))
-		p = (t_pos){-0.66, 0, 0, 0};
+		plane = (t_pos){-0.66, 0, 0, 0};
 	else if (cubed()->player->pos.teta == PI)
-		p = (t_pos){0, +0.66, 0, 0};
+		plane = (t_pos){0, +0.66, 0, 0};
 	else if (cubed()->player->pos.teta == 0)
-		p = (t_pos){0, -0.66, 0, 0};
-	cubed()->player->plane = p;
+		plane = (t_pos){0, -0.66, 0, 0};
+	cubed()->player->plane = plane;
 }
