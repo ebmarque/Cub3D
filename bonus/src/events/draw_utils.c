@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:35:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/28 21:44:48 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/29 20:06:38 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ void	_draw_square(t_gmap *mini, int x, int y, int factor)
 	int	color;
 
 	if (factor == 2)
-		color = _get_reverseb(cubed()->content->ceiling);
+	{
+		factor = 1;
+		color = 0xFF00FF;
+	}
 	else if (factor == 1)
 		color = _get_reverse(cubed()->content->ceiling);
 	else if (factor == 3)

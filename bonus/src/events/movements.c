@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmoutinh <tmoutinh@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:05:24 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/25 19:44:11 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2024/05/29 19:32:45 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ bool	_is_matrix_wall(float ny, float nx)
 	int	yd;
 	int	xr;
 
-	yu = (int)(ny);
-	yd = (int)(ny + 0.5f);
-	xl = (int)(nx);
-	xr = (int)(nx + 0.5f);
+	yu = (int)(ny - 0.25f);
+	yd = (int)(ny + 0.25f);
+	xl = (int)(nx - 0.25f);
+	xr = (int)(nx + 0.25f);
 	map = cubed()->content->map;
 	if (_wall_char(map[yu][xl]) \
 		|| _wall_char(map[yu][xr]) \

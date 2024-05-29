@@ -6,37 +6,11 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:45:19 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/23 18:46:34 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/29 20:04:50 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
-
-// void	_open_door(t_point p, t_file *t)
-// {
-// 	if (t->map[p.y - 1][p.x] == 1)
-// 		t->map[p.y - 1][p.x] = 2;
-// 	if (t->map[p.y + 1][p.x] == 1)
-// 		t->map[p.y + 1][p.x] = 2;
-// 	if (t->map[p.y][p.x - 1] == 1)
-// 		t->map[p.y][p.x - 1] = 2;
-// 	if (t->map[p.y][p.x + 1] == 1)
-// 		t->map[p.y][p.x + 1] = 2;
-// 	t->map[p.y][p.x] = 'O';
-// }
-
-// void	_close_door(t_point p, t_file *t)
-// {
-// 	if (t->map[p.y - 1][p.x] == 2)
-// 		t->map[p.y - 1][p.x] = 1;
-// 	if (t->map[p.y + 1][p.x] == 2)
-// 		t->map[p.y + 1][p.x] = 1;
-// 	if (t->map[p.y][p.x - 1] == 2)
-// 		t->map[p.y][p.x - 1] = 1;
-// 	if (t->map[p.y][p.x + 1] == 2)
-// 		t->map[p.y][p.x + 1] = 1;
-// 	t->map[p.y][p.x] = 'C';
-// }
 
 void	_look_for_door(t_player *p, t_file *t)
 {

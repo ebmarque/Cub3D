@@ -1,9 +1,9 @@
 
 
-NO ../textures/wood.xpm
-SO ../textures/colorstone.xpm
-EA ../textures/eagle.xpm
-WE ../textures/mossy.xpm
+NO ./textures/wood.xpm
+SO ./textures/colorstone.xpm
+EA ./textures/eagle.xpm
+WE ./textures/mossy.xpm
 F 110,100,255
 C 255,255,255
 

@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/29 00:27:51 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/29 20:26:20 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@
 # define WHITE_BLOCK 0x00FFFFFF
 # define INVISIBLE_BLOCK 0xFF000000
 # define PI 3.1415926
-# define DOOR_PATH "../textures/door.xpm"
+# define DOOR_PATH "./textures/door.xpm"
 # define SHADER_DIST 9.00
 # define NB_SPRITES 3
 # define FRAME_DELAY 100000
-# define SPRITE_1 "../textures/sprite_1.xpm"
-# define SPRITE_2 "../textures/sprite_2.xpm"
-# define SPRITE_3 "../textures/sprite_3.xpm"
+# define SPRITE_1 "./textures/sprite_1.xpm"
+# define SPRITE_2 "./textures/sprite_2.xpm"
+# define SPRITE_3 "./textures/sprite_3.xpm"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -282,5 +282,7 @@ void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void		_black_window(t_img *m, float factor);
 void		_draw_map(t_gmap *mini);
 int			_terminate_cubed(void);
+int			_get_reverseb(t_rgb	color);
+int			_get_reverse(t_rgb	color);
 
 #endif

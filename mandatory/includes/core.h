@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/29 00:25:34 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/29 20:09:54 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,7 +276,8 @@ void		_draw_square(t_gmap *mini, int x, int y, int factor);
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void		_black_window(t_img *m, float factor);
 void		_draw_map(t_gmap *mini);
-
 int			_terminate_cubed(void);
+int			_get_reverseb(t_rgb	color);
+int			_get_reverse(t_rgb	color);
 
 #endif

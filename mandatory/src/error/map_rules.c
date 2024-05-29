@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_rules.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 18:15:27 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/28 20:47:49 by tiago            ###   ########.fr       */
+/*   Updated: 2024/05/29 20:09:18 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	_flood_fill(t_file *t)
 		while (++c.x < size.x)
 		{
 			if (t->map[c.y][c.x] == 0 || t->map[c.y][c.x] == 'C' \
-				|| t->map[c.y][c.x] == 'O')
+				|| t->map[c.y][c.x] == 'O' || _is_player_char(t->map[c.y][c.x]))
 				_fill(t, size, c, t->map[t->begin.y][t->begin.x]);
 		}
 	}
