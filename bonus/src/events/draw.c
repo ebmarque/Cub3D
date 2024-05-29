@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 18:34:20 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/29 20:06:44 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/05/29 20:33:04 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 
 static void	_draw_player_square(t_gmap *mini, int center_x, int center_y)
 {
-	int	size;
-	int	x;
-	int	y;
-	int	i;
-	int	j;
-	int	color;
+	int		size;
+	int		color;
+	t_point	pos;
+	t_point	c;
 
 	size = mini->tile / 2;
-	x = center_x - size / 2;
-	y = center_y - size / 2;
-	i = 0;
+	pos.x = center_x - size / 2;
+	pos.y = center_y - size / 2;
+	c.y = 0;
 	color = _get_reverseb(cubed()->content->ceiling);
-	while (i < size )
+	while (c.y < size)
 	{
-		j = 0;
-		while (j < size)
+		c.x = 0;
+		while (c.x < size)
 		{
 			my_mlx_pixel_put(&cubed()->mx_var->screen_buffer, \
-				x + j, y + i, color);
-			j++;
+				pos.x + c.x, pos.y + c.y, color);
+			c.x++;
 		}
-		i++;
+		c.y++;
 	}
 }
 
