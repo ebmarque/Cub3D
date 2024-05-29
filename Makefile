@@ -1,17 +1,17 @@
-MANDATORY = Cub3D
-BONUS = Cub3D_Bonus
+MANDATORY = cub3D
+BONUS = cub3D_bonus
 
 all : $(MANDATORY)
 
 $(MANDATORY) :
 	@make -s -C ./mandatory
-	@cp mandatory/Cub3D ./Cub3D
+	@cp mandatory/Cub3D ./cub3D
 
 bonus : $(BONUS)
 
 $(BONUS) :
 	@make -s -C ./bonus
-	@cp bonus/Cub3D ./Cub3D_Bonus
+	@cp bonus/Cub3D ./cub3D_bonus
 
 clean :
 	@echo "MANDATORY.."
