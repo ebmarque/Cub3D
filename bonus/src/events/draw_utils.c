@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:35:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/29 20:06:38 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/06/01 19:18:21 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,28 @@ int	_get_reverseb(t_rgb	color)
 	return (0 << 24 | color.r << 16 | (172 - color.g) << 8 | color.b);
 }
 
+
 void	_draw_square(t_gmap *mini, int x, int y, int factor)
 {
 	int	i;
 	int	j;
 	int	color;
 
-	if (factor == 2)
-	{
-		factor = 1;
-		color = 0xFF00FF;
-	}
+	if (factor == 0)
+		color = 0x000000;
 	else if (factor == 1)
-		color = _get_reverse(cubed()->content->ceiling);
+		color = 0x00FF00;
+	else if (factor == 2)
+		color = 0x800080;
 	else if (factor == 3)
-	{
-		factor = 1;
 		color = 0x00FFaF5F;
-	}
+	else
+		color = 0x000000;
 	i = -1;
-	while (++i < mini->tile / factor)
+	while (++i < mini->tile - 1)
 	{
 		j = -1;
-		while (++j < mini->tile / factor)
+		while (++j < mini->tile - 1)
 			my_mlx_pixel_put(&cubed()->mx_var->screen_buffer, \
 			x + j, y + i, color);
 	}

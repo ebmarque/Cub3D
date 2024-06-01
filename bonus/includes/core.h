@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/30 12:14:21 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/06/01 19:27:33 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@
 # define BG_MAGENTA "\033[45m"
 # define BG_CYAN "\033[46m"
 # define BG_WHITE "\033[47m"
-
+# define FOV 60
+# define NUM_RAYS 360
+# define MAX_DISTANCE 1000
 // The width of the game window.
 # define WIDTH 1200
 // The height of the game window.
