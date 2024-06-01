@@ -2,7 +2,6 @@
 
 Welcome to **Cub3D**, an immersive 3D graphics project developed for the 42 school curriculum. This project brings the classic Wolfenstein 3D game to life using the power of raycasting. Prepare yourself for an exciting journey into the world of retro 3D graphics!
 
-![Cub3D Gameplay](Cub3d.gif)
 
 ## Table of Contents
 - [Cub3D](#cub3d)
@@ -20,6 +19,8 @@ Welcome to **Cub3D**, an immersive 3D graphics project developed for the 42 scho
 ## Overview
 
 Cub3D is a raycasting project designed to create a simple yet effective 3D game environment. The game is inspired by the iconic Wolfenstein 3D, showcasing the fundamentals of 3D rendering from a 2D map. The project emphasizes low-level graphics programming, providing a deep dive into the mechanics of game engines and rendering techniques.
+
+![Cub3D Gameplay](Cub3d.gif)
 
 ## Objectives
 
