@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
+/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/06/01 18:43:57 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/06/02 23:12:10 by tiago            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,29 @@ void	raycaster(void)
 	}
 }
 
+void	draw_sprite(void)
+{
+	int			x;
+	int			y;
+	int			color;
+	t_sprite	*sprite;
+
+	sprite = cubed()->sprite;
+	y = -1;
+	while (++y < sprite->sprites[sprite->current_frame]->height)
+	{
+		x = 0;
+		while (x < sprite->sprites[sprite->current_frame]->width)
+		{
+			color = _get_img_pixel(sprite->sprites[sprite->current_frame], \
+			x, y);
+			if (color != -16777216)
+				render_pixel(x + (WIDTH / 2 - sprite->sprites[sprite->current_frame]->width / 2), y, color);
+			x++;
+		}
+	}
+}
+
 void	sprite(void)
 {
 	t_sprite	*sprite;
@@ -43,9 +66,7 @@ void	sprite(void)
 			cubed()->sprite->current_frame = 0;
 		sprite->time = clock();
 	}
-	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, \
-		sprite->sprites[sprite->current_frame]->img, (WIDTH / 2 - \
-		sprite->sprites[sprite->current_frame]->width / 2), 0);
+	draw_sprite();
 }
 
 int	render_screen(void)
@@ -55,7 +76,7 @@ int	render_screen(void)
 	raycaster();
 	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, \
 		cubed()->mx_var->screen_buffer.img, 0, 0);
-	// sprite();
+	sprite();
 	if (cubed()->player->map_view == 1)
 		_draw_map(cubed()->gmap);
 	return (EXIT_SUCCESS);
