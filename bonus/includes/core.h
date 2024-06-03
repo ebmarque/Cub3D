@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:44:52 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/06/01 19:27:33 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:14:49 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@
 # define INVISIBLE_BLOCK 0xFF000000
 # define PI 3.1415926
 # define DOOR_PATH "./textures/door.xpm"
-# define SHADER_DIST 9.00
+# define SHADER_DIST 18.00
 # define NB_SPRITES 3
 # define FRAME_DELAY 100000
 # define SPRITE_1 "./textures/sprite_1.xpm"

@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:22:20 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/06/01 18:43:57 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/06/02 19:46:37 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	render_screen(void)
 	raycaster();
 	mlx_put_image_to_window(cubed()->mx_var->mlx, cubed()->mx_var->win, \
 		cubed()->mx_var->screen_buffer.img, 0, 0);
-	// sprite();
+	sprite();
 	if (cubed()->player->map_view == 1)
 		_draw_map(cubed()->gmap);
 	return (EXIT_SUCCESS);
