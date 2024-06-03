@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:08:55 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/28 21:43:59 by tiago            ###   ########.fr       */
+/*   Updated: 2024/06/03 12:17:29 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
+
+#ifdef __LINUX__
 
 int	_mouse_click(int button, int x, int y, void *data)
 {
@@ -63,3 +65,4 @@ int	_mouse_move(int x, int y, void *data)
 	}
 	return (0);
 }
+#endif

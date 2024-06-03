@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:35:59 by tmoutinh          #+#    #+#             */
-/*   Updated: 2024/05/28 21:47:27 by tiago            ###   ########.fr       */
+/*   Updated: 2024/06/03 12:18:27 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ static void	_game_sequence(void)
 		_key_pressed, cubed()->player);
 	mlx_hook(cubed()->mx_var->win, KEY_RELEASED, 1L << 1, \
 		_key_release, cubed()->player);
+	#ifdef __LINUX__
 	mlx_hook(cubed()->mx_var->win, MOUSE_CLICK, 1L << 2, _mouse_click, NULL);
 	mlx_hook(cubed()->mx_var->win, MOUSE_MOTION, 1L << 6, _mouse_move, NULL);
+	#endif
 	mlx_loop_hook(cubed()->mx_var->mlx, render_screen, NULL);
 	mlx_loop(cubed()->mx_var->mlx);
 }

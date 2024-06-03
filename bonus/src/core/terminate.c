@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   terminate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiago <tiago@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:30:43 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/28 23:42:10 by tiago            ###   ########.fr       */
+/*   Updated: 2024/06/03 12:18:07 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ static void	destroy_game(void)
 		mlx_destroy_window(cubed()->mx_var->mlx, cubed()->mx_var->win);
 	if (cubed()->mx_var->mlx)
 	{
+		#ifdef __LINUX__
 		mlx_destroy_display(cubed()->mx_var->mlx);
+		#endif
 		free(cubed()->mx_var->mlx);
 	}
 	if (cubed()->mx_var)
