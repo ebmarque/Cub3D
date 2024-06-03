@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 18:34:20 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/06/03 12:09:16 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:08:15 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	_draw_line(int x1, int y1, int x2, int y2)
 
 	while (1)
 	{
-		my_mlx_pixel_put(&cubed()->mx_var->screen_buffer, x1, y1, 0x808080);
+		my_mlx_pixel_put(&cubed()->mx_var->screen_buffer, x1, y1, 0x22c6eceb);
 		if (x1 == x2 && y1 == y2)
 			break;
 		e2 = err;

@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:35:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/06/03 12:24:39 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:32:32 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,21 @@ void	_draw_square(t_gmap *mini, int x, int y, int factor)
 	int	color;
 
 	if (factor == 0)
-		color = 0x000000;
+		color = 0x00000000;
 	else if (factor == 1)
-		color = 0x00FF00;
+		color = 0x0000FF00;
 	else if (factor == 2)
-		color = 0x800080;
+		color = 0x00800080;
 	else if (factor == 3)
 		color = 0x00FFaF5F;
 	else
-		color = 0x000000;
+		color = 0x00000000;
 	i = -1;
 	while (++i < mini->tile - 1)
 	{
 		j = -1;
 		while (++j < mini->tile - 1)
-		#ifdef __linux__
-			my_mlx_pixel_put(&cubed()->mx_var->screen_buffer, \
-			x + j, y + i, color);
-		#else
-			my_mlx_pixel_put(&mini->map_img, x + j, y + i, color);
-		#endif
+		my_mlx_pixel_put(&cubed()->mx_var->screen_buffer, \
+		x + j, y + i, color);
 	}
 }
