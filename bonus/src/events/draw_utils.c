@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:35:18 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/06/02 19:42:04 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:24:39 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,11 @@ void	_draw_square(t_gmap *mini, int x, int y, int factor)
 	{
 		j = -1;
 		while (++j < mini->tile - 1)
+		#ifdef __linux__
 			my_mlx_pixel_put(&cubed()->mx_var->screen_buffer, \
 			x + j, y + i, color);
+		#else
+			my_mlx_pixel_put(&mini->map_img, x + j, y + i, color);
+		#endif
 	}
 }

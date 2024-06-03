@@ -6,13 +6,13 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:08:55 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/06/03 12:17:29 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:24:47 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
 
-#ifdef __LINUX__
+#ifdef __linux__
 
 int	_mouse_click(int button, int x, int y, void *data)
 {
