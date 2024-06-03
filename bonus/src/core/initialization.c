@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 17:48:30 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/29 18:59:55 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:28:29 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	_init_gmap(void)
 	mini->player.y = cubed()->player->pos.y * mini->tile;
 	mini->player.is_set = 1;
 	mini->player.teta = 0;
+	_init_img(&mini->map_img);
 	cubed()->gmap = mini;
 	cubed()->player->map_view = 1;
 }
