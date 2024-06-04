@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:32:35 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/05/29 19:18:58 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:05:21 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,20 @@ static void	_find_map_start_line(char *file, int i, int fd, t_file *content)
 	_read_all_file(fd);
 }
 
+static bool	_only_spaces(char *str)
+{
+	char	**split;
+
+	split = ft_split(str, EMPTY_SPACES);
+	if (_get_split_size(split) >= 1)
+	{
+		ft_free_split(split);
+		return (false);
+	}
+	ft_free_split(split);
+	return (true);
+}
+
 /**
  * Checks for empty lines in the map.
  * 
@@ -72,7 +86,7 @@ static void	_check_map_empty_lines(char *file, t_file *content, int i, int fd)
 	}
 	while (line)
 	{
-		if (!ft_strncmp("\n", line, 2) && !empty_line)
+		if (_only_spaces(line) && !empty_line)
 			empty_line = true;
 		if (ft_strlen(line) > 1 && ft_strncmp("\n", line, 2) && empty_line)
 		{

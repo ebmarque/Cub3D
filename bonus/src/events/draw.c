@@ -6,7 +6,7 @@
 /*   By: ebmarque <ebmarque@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 18:34:20 by ebmarque          #+#    #+#             */
-/*   Updated: 2024/06/03 15:08:15 by ebmarque         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:00:34 by ebmarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void _draw_fov(t_player *p)
 
 	angle_s = p->pos.teta - (30 * 0.0174f);
 	angle_e = 0;
-	while (angle_e < 60)
+	double increment = 0.0174f / 6;
+	while (angle_e < 360)
 	{
 		size = 0.9f;
 		double sin_angle_s = sin(angle_s);
@@ -101,7 +102,7 @@ void _draw_fov(t_player *p)
 		}
 		_draw_line(cubed()->gmap->player.x, cubed()->gmap->player.y, \
 			interaction.x, interaction.y);
-		angle_s += (0.0174f);
+		angle_s += increment;
 		angle_e++;
 	}
 }
